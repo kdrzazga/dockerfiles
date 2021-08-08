@@ -7,9 +7,9 @@ import (
 
 func main() {
 	router := NewRouter()
+    port := ":8000"
 
-    log.Println("http://localhost:8000/")
-
-	log.Fatal(http.ListenAndServe(":8000", router))
+    log.Println("http://localhost" + port +"/status")
+	log.Fatal(http.ListenAndServe(port, router))
 }
 
