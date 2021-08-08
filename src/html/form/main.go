@@ -1,50 +1,20 @@
 package main
 
 import (
-    "fmt"
-    "html/template"
     "log"
     "net/http"
-    "strings"
 )
 
-func sayhelloName(w http.ResponseWriter, r *http.Request) {
-    r.ParseForm() //Parse url parameters passed, then parse the response packet for the POST body (request body)
-    // attention: If you do not call ParseForm method, the following data can not be obtained form
-    fmt.Println(r.Form) // print information on server side.
-    fmt.Println("path", r.URL.Path)
-    fmt.Println("scheme", r.URL.Scheme)
-    fmt.Println(r.Form["url_long"])
-    for k, v := range r.Form {
-        fmt.Println("key:", k)
-        fmt.Println("val:", strings.Join(v, ""))
-    }
-    fmt.Fprintf(w, "Hello astaxie!") // write data to response
-}
-
-func login(w http.ResponseWriter, r *http.Request) {
-    fmt.Println("method:", r.Method) //get request method
-    if r.Method == "GET" {
-        t, _ := template.ParseFiles("login.gtpl")
-        t.Execute(w, nil)
-    } else {
-        r.ParseForm()
-        // logic part of log in
-        fmt.Println("username:", r.Form["username"])
-        fmt.Println("password:", r.Form["password"])
-    }
-}
+const host = "http://127.0.0.1"
+const port = ":9090"
 
 func main() {
-    port := ":9090"
-    fmt.Print("Say hello:")
-    fmt.Println("http://127.0.0.1" + port + "/")
-    fmt.Println("")
-    fmt.Print("Login form:")
-    fmt.Println("http://127.0.0.1" + port + "/login")
+    info(host, port)
 
     http.HandleFunc("/", sayhelloName) // setting router rule
     http.HandleFunc("/login", login)
+    http.HandleFunc("/exit", exit)
+    http.HandleFunc("/employees", drawTable)
 
     err := http.ListenAndServe(port, nil) // setting listening port
     if err != nil {
