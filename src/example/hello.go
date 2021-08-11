@@ -14,11 +14,11 @@ func main () {
 		fmt.Println("MOre > 6");
 	}
 	
-	a := [5]int{5, 4, 3, 2, 1}
+	a := [5]int{5, 4, 3, 2, 1} //array
 	fmt.Println(a)
 	
-	b := []int{4, 3, 2, 1}
-	c := append(b, 11)
+	b := []int{4, 3, 2, 1}  //slice
+	c := append(b, 11) // append would not work on b := [4]int{4, 3, 2, 1}
 	
 	fmt.Println(b)
 	fmt.Println(c)
@@ -32,8 +32,7 @@ func main () {
 	
 	delete(vertices, "kwadrat")
 	fmt.Println(vertices)
-	
-	
+
 	for i := 0; i < 5; i++ {
 		fmt.Print(i, " ")
 	}
