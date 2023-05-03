@@ -1,11 +1,8 @@
-# go-tutorial
+# Dockerfiles
+## Set of Dockerfiles based on Alpine Linux
 
-_**anim**_ SDL animations (don't work)
+1 Dockerfile: 
+- Fat Alpine - Linux with all text-based packages I could find, no ui 
 
-_**db**_ Database operations: CR, so far no UD
-
-_**defer-demo**_ How to use command 'defer'
-
-_**basic**_ Very basic features of language
-
-_**walk-tutorial**_ UI layer for Go, not finished
+## Size
+-   Fat Alpine ~ 3.3 GB (the name is no coincidence)

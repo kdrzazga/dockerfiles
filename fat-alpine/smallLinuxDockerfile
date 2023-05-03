@@ -1,0 +1,91 @@
+#docker build -t textlinux -f smallLinuxDockerfile .
+#docker run -it textlinux
+
+FROM alpine:latest
+
+RUN apk update && \
+    apk add --no-cache make mc curl nano wget git maven binutils && \
+	apk add --no-cache gcc python3 py3-pip openjdk11 openjdk17 nasm go && \
+	apk add ghc cabal gcc-gnat dmd dub gfortran libgfortran clisp
+
+
+RUN apk add nethack && \
+    apk add figlet cmatrix lynx mutt sl cmus newsboat ranger alpine dialog elinks fortune && \
+    apk add gnuplot inxi ncdu nyancat sc screen tree units w3m zsh tty-solitaire 
+
+RUN ln -s -f /usr/bin/python3 /usr/bin/python && \
+    ln -s -f /usr/bin/pip3 /usr/bin/pip
+    
+RUN pip install colorama art pipenv	
+	
+RUN addgroup -g 10000 teamX && \
+    adduser -u 10000 -G teamX -s /bin/sh -D userX && \
+	echo 'root:pass' | chpasswd && \
+	echo 'userX:pass' | chpasswd && \
+	chmod u+s /bin/su
+
+RUN mkdir python-stuff && \
+	chmod 777 python-stuff
+	
+RUN mkdir java-stuff && \
+	mkdir java-stuff/11 && \
+	mkdir java-stuff/17 && \
+	mkdir assembler-stuff && \
+	mkdir go-stuff && \
+	mkdir haskell-stuff && \
+	mkdir d-stuff && \
+	mkdir perl-stuff && \
+	mkdir lisp-stuff && \
+	mkdir ada-stuff
+	
+COPY info.py /
+COPY zima.py python-stuff/
+COPY run-buggysrv.sh java-stuff/11/
+COPY asm/* assembler-stuff/
+COPY go/* go-stuff/
+COPY haskell/* haskell-stuff/
+COPY D/* d-stuff/
+COPY perl/* perl-stuff/
+COPY lisp/* lisp-stuff/
+COPY ada/* ada-stuff/
+
+RUN chmod -Rf 777 /java-stuff && \
+	chmod -Rf 777 /assembler-stuff && \
+	chmod -Rf 777 /go-stuff && \
+	chmod -Rf 777 /haskell-stuff && \
+	chmod -Rf 777 /ada-stuff && \
+	chmod -Rf 777 /d-stuff && \
+	chmod -Rf 777 /lisp-stuff && \
+	chmod -Rf 777 /perl-stuff
+
+WORKDIR /assembler-stuff
+RUN nasm -f elf64 HelloAsm.asm -o hello.o
+RUN ld hello.o  -o hello
+
+WORKDIR /d-stuff/trigonometry
+#RUN dub update && \
+#RUN	dub build
+
+WORKDIR /python-stuff
+RUN git clone https://github.com/aelmosalamy/ascii-combat.git
+RUN git clone https://github.com/AdiChops/Ironfortune.git
+RUN git clone https://github.com/kdrzazga/microservices.git
+
+WORKDIR /java-stuff/11
+RUN wget -O buggyservice.jar https://github.com/kdrzazga/buggy-webservice/releases/download/v.0.4.5/buggywebservice-0.4.5-RELEASE.jar
+RUN git clone https://github.com/winterbe/java8-tutorial.git
+
+WORKDIR /java-stuff/17
+RUN git clone https://github.com/kdrzazga/webautomation-tutorial2.git
+WORKDIR /java-stuff/17/webautomation-tutorial2
+RUN mvn clean package -DskipTests
+WORKDIR /java-stuff/17
+# COPY /java-stuff/17/*-jar-with-dependencies.jar /java-stuff/17/webaut.jar
+
+
+WORKDIR /
+
+EXPOSE 8080 8081 8082 8083
+USER userX
+
+CMD ["python", "info.py", "up"]

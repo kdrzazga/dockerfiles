@@ -1,0 +1,12 @@
+{
+        "authors": [
+                "zbychu"
+        ],
+        "copyright": "Copyright © 2023, Zbychu",
+        "dependencies": {
+                "mir-algorithm": "~>3.20.2"
+        },
+        "description": "A minimal D application.",
+        "license": "proprietary",
+        "name": "trigonometry"
+}
