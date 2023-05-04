@@ -2,6 +2,7 @@ import os
 import sys
 import art
 import time
+import subprocess
 from colorama import Fore
 
 text_wall = ("Installed user soft:", 
@@ -36,11 +37,17 @@ text_wall = ("Installed user soft:",
              "python info.py - prints this message")
 
 text_wall_python_programs = ("Some PYTHON games in folder /python-stuff",
-                             "JAVA stuff in directories /java-stuff/11 and /java-stuff/17"
+                             "JAVA stuff in directories /java-stuff/11 and /java-stuff/17",
+                             "And also programs in following languages:",
+                             "Ada, Assembler, D, Go, Haskell, LISP, Perl"
                             )
 
 os.system('clear')
 os.system('uname -a')
+
+output = subprocess.check_output(['cat', '/etc/alpine-release'])
+version = output.decode('utf-8').strip()
+print('Alpine Linux', version)
 
 welcome = art.text2art("welcome !")
 print(f"{Fore.MAGENTA}{welcome}{Fore.RESET}")

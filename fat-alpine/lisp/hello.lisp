@@ -1,1 +1,5 @@
 (write-line "Hello, LISP!")
+(print(setq result (+ 3 2)))
+(let ((a 2) (b 3) (c 1))
+(print(- (* b b) (* 4 a c))))
+(print (format nil "~,2f" (sin 1.4)))
