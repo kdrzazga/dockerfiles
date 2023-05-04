@@ -1,5 +1,7 @@
-#docker build -t textlinux -f smallLinuxDockerfile .
-#docker run -it textlinux
+#docker build -t fat-alpine -f fatAlpineDockerfile .
+#docker run -it fat-alpine
+#docker ps
+#docker exec -it <container-id-or-name> /bin/sh
 
 FROM alpine:latest
 
@@ -39,8 +41,8 @@ RUN mkdir java-stuff && \
 	mkdir ada-stuff
 	
 COPY info.py /
-COPY zima.py python-stuff/
-COPY run-buggysrv.sh java-stuff/11/
+COPY python/* python-stuff/
+COPY java/* java-stuff/11/
 COPY asm/* assembler-stuff/
 COPY go/* go-stuff/
 COPY haskell/* haskell-stuff/
