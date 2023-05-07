@@ -1,0 +1,12 @@
+Basic BIOS interrupts:
+
+1. INT 10h - Video Services
+2. INT 13h - Disk Services
+3. INT 16h - Keyboard Services
+4. INT 1Ah - Time and Date Services
+5. INT 15h - System Services
+6. INT 17h - Printer Services
+7. INT 11h - Equipment Determination
+8. INT 12h - Memory Size
+9. INT 14h - Serial Port Services
+10. INT 1Bh - Set Timer Tick Count

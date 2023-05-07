@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE layout PUBLIC "http://www.cdburnerxp.se/help/data.dtd" "">
+<?xml-stylesheet type='text/xsl' href='http://www.cdburnerxp.se/help/compilation.xsl'?>
+<!--data compilation created by CDBurnerXP 4.5.8.7128 (http://cdburnerxp.se)-->
+<layout type="Data" version="4.5.8.7128" date="2023-05-07 09:52:59">
+  <options>
+    <BootFilePath>E:\docker_scripts\dockerfiles\fat-alpine\asm\bootimg\boot3.img</BootFilePath>
+    <BootPlatform>0</BootPlatform>
+    <LoadSegmentWord>1984</LoadSegmentWord>
+    <MediaTypeEmulation>2</MediaTypeEmulation>
+    <SectorCount>1</SectorCount>
+    <BootableEnabled>1</BootableEnabled>
+    <FileSystemType>0</FileSystemType>
+    <UdfVersion>100</UdfVersion>
+  </options>
+  <VolumeInfo>
+    <ApplicationID>CDBurnerXP</ApplicationID>
+    <PublisherID>
+    </PublisherID>
+  </VolumeInfo>
+  <compilation name="Disc">
+    <dir name="Disc" path="\" realpath="">
+      <file name="BIOS_int.txt" path="E:\docker_scripts\dockerfiles\fat-alpine\asm\bootimg\BIOS_int.txt" hidden="0" date="2023-05-06 23:34:02" />
+    </dir>
+  </compilation>
+</layout>
