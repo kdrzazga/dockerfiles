@@ -8,8 +8,8 @@ FROM alpine:latest
 RUN apk update && \
     apk add --no-cache make mc curl nano wget git maven binutils && \
 	apk add --no-cache gcc python3 py3-pip openjdk11 openjdk17 nasm go && \
-	apk add ghc cabal gcc-gnat dmd dub gfortran libgfortran clisp
-
+	apk add ghc cabal gcc-gnat dmd dub gfortran libgfortran clisp ncurses-dev
+	
 
 RUN apk add nethack && \
     apk add figlet cmatrix lynx mutt sl cmus newsboat ranger alpine dialog elinks fortune && \
@@ -84,6 +84,12 @@ RUN mvn clean package -DskipTests
 WORKDIR /java-stuff/17
 # COPY /java-stuff/17/*-jar-with-dependencies.jar /java-stuff/17/webaut.jar
 
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
+
+RUN apk update && \
+	apk add --no-cache swi-prolog ca-certificates && \
+	update-ca-certificates
 
 WORKDIR /
 
