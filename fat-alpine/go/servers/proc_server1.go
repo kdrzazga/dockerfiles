@@ -13,6 +13,7 @@ import (
 )
 
 var msgServerIP string
+var analyzedInfo map[string]string
 
 func main() {
 
@@ -51,6 +52,7 @@ func main() {
 		fmt.Println("MESSAGE SERVER IP:", msgServerIP)
 		break
 	}
+	
 	http.HandleFunc("/", handleRequest)
 	fmt.Println("Starting server on http://localhost:8082")
 	log.Fatal(http.ListenAndServe(":8082", nil))
@@ -65,8 +67,50 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	resp := getMessage()
+	
+	if (resp.StatusCode == http.StatusNotFound {
+		return
+	}
+	//TODO
+	message = resp.Body
+	analysis = analyze(message)
+
 	w.Header().Set("Content-Type", "text/plain")
 	w.Header().Set("MESSAGE-SERVER", msgServerIP)
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "hello")
+	fmt.Fprintf(w, "Info from")
+}
+
+func getMessage() *http.Response {
+	resp, err := http.Get(msgServerIP)
+	
+	if err != nil {
+		log.Println("Failed to call MSG SERVER:", err)
+		 &http.Response{
+			StatusCode: http.StatusNotFound,
+			Body:       http.NoBody,
+			}
+	}
+	defer resp.Body.Close()
+
+	return resp
+}
+
+func analyze(message string) []byte {
+	data := struct {
+		Service string `json:"service"`
+		Message string `json:"message"`
+	}{
+		Service: "PROC SERVER 1",
+		Message: message,
+	}
+
+	jsonData, err := json.Marshal(data)
+	if err != nil {
+		fmt.Println("Failed to marshal JSON:", err)
+		return nil
+	}
+
+	return jsonData
 }
