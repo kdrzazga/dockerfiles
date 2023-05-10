@@ -1,13 +1,13 @@
 En la época de los antiguos mayas, se contaba la historia de los Héroes Gemelos, Hunahpu (Hunahpú) y Xbalanque (Xbalanqué).
-Estos valientes hermanos emprendieron un peligroso viaje al Inframundo, conocido como Xibalba (Xibalbá).
+Estos valientes hermanos emprendieron un peligroso viaje al Inframundo, conocido como Xibalba (Xibalbá). 
 Buscaban vengar las muertes de su padre y su tío, quienes fueron derrotados por los malvados señores de Xibalba en un traicionero juego de pelota.
 Armados con astucia y poderes mágicos, los Héroes Gemelos enfrentaron una serie de pruebas establecidas por los señores de Xibalba.
 Se encontraron con desafíos mortales, como la Casa de los Murciélagos y la Casa de los Cuchillos. Cada desafío requería su ingenio, agilidad y valentía.
 Mediante su determinación inquebrantable y la ayuda de aliados divinos, los Héroes Gemelos triunfaron sobre los señores de Xibalba
  No solo vencieron a sus adversarios en el juego de pelota, sino que también los superaron en otros desafíos.
 Su victoria trajo justicia a sus familiares caídos y restauró el equilibrio en el mundo.
-La leyenda de los Héroes Gemelos se convirtió en un símbolo de resistencia,
-coraje y el triunfo del bien sobre el mal en la mitología maya.
+La leyenda de los Héroes Gemelos se convirtió en un símbolo de resistencia, 
+coraje y el triunfo del bien sobre el mal en la mitología maya. 
 Enseñó al pueblo maya la importancia de la unidad, la inventiva y el poder de la perseverancia frente a la adversidad.
 [Octavio Paz (1)] Amor, el día en que te despediste
 [Octavio Paz (2)] el mundo se quedó sin mariposas.
@@ -38,3 +38,4 @@ Enseñó al pueblo maya la importancia de la unidad, la inventiva y el poder de 
 [Octavio Paz (22)] la razón de mi existir.
 [Octavio Paz (23)] Y mientras estemos juntos,
 [Octavio Paz (24)] nada nos podrá detener ni destruir.
+

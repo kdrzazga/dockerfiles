@@ -8,16 +8,19 @@ RUN pacman -Syu --noconfirm && \
     nano \
     mc \
     curl \
-	qemu
+	qemu \
+	go
 
 # Set the working directory to /app
-WORKDIR /app
+RUN mkdir /usr/sbin/go-serv
+WORKDIR /usr/sbin/go-serv
 
 # Copy the current directory contents into the container at /app
-COPY . /app
+COPY . /usr/sbin/go-serv
 
 #RUN qemu-img create -f qcow2 boot5.img 5M && \
 #	qemu-system-x86_64 -enable-kvm -cdrom boot5.iso menu=on -drive file=boot5.iso
 
 # Start the container with a command of your choice
 CMD ["/bin/bash"]
+#CMD ["go run /usr/sbin/go-serv/mayas-server/server.go"]

@@ -1,5 +1,5 @@
-// nohup go run server.go > output.log 2>&1 &
-// curl http://localhost:8083
+// nohup go run msg_server1.go > msg_server1.log 2>&1 &
+// curl -i http://localhost:8083
 
 package main
 
@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-var TXT [10]string
+var TXT [5]string
 var mu sync.Mutex
 
 func main() {
@@ -83,7 +83,7 @@ func getRandomLineFromFile(filename string) string {
 	return lines[randomIndex]
 }
 
-func shiftArray(arr [10]string) [10]string {
+func shiftArray(arr [5]string) [5]string {
 	for i := len(arr) - 1; i > 0; i-- {
 		arr[i] = arr[i-1]
 	}
