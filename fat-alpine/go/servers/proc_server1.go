@@ -5,6 +5,7 @@
 package main
 
 import (
+	"time"
 	"fmt"
 	"log"
 	"net/http"
@@ -17,28 +18,39 @@ func main() {
 
 	fmt.Println("PROC SERVER requires ADDRESS BOOK service to keep running")
 
-	resp, err := http.Get("http://localhost:8080/ip/msg_server")
-	if err != nil {
-		log.Fatal("Failed to fetch MESSAGE SERVER IP:", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		log.Fatal("Failed to fetch MESSAGE SERVER IP:", resp.Status)
-	}
+	for {
+		resp, err := http.Get("http://localhost:8080/ip/msg_server")
+		if err != nil {
+			log.Println("Failed to fetch MESSAGE SERVER IP:", err)
+			log.Println("Retrying in 5 seconds ...")
+			time.Sleep(5 * time.Second)
+			continue
+		}
+		defer resp.Body.Close()
 	
-	var responseBody struct {
-		Address string `json:"address"`
-	}	
+		if resp.StatusCode != http.StatusOK {
+			log.Println("Failed to fetch MESSAGE SERVER IP:", resp.Status)
+			log.Println("Retrying in 5 seconds...")
+			time.Sleep(5 * time.Second)
+			continue
+		}
+		
+		var responseBody struct {
+			Address string `json:"address"`
+		}	
+	
+		err = json.NewDecoder(resp.Body).Decode(&responseBody)
+		if err != nil {
+			log.Println("Failed to decode response body:", err)
+			log.Println("Retrying in 5 seconds...")
+			time.Sleep(5 * time.Second)
+			continue
+		}
 
-	err = json.NewDecoder(resp.Body).Decode(&responseBody)
-	if err != nil {
-		log.Fatal("Failed to decode response body:", err)
+		msgServerIP = responseBody.Address
+		fmt.Println("MESSAGE SERVER IP:", msgServerIP)
+		break
 	}
-
-	msgServerIP = responseBody.Address
-	fmt.Println("MESSAGE SERVER IP:", msgServerIP)
-
 	http.HandleFunc("/", handleRequest)
 	fmt.Println("Starting server on http://localhost:8082")
 	log.Fatal(http.ListenAndServe(":8082", nil))
