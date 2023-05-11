@@ -10,6 +10,7 @@ import (
 	"log"
 	"net/http"
 	"encoding/json"
+	"io/ioutil"
 )
 
 var msgServerIP string
@@ -69,17 +70,28 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 
 	resp := getMessage()
 	
-	if (resp.StatusCode == http.StatusNotFound {
+	if (resp.StatusCode == http.StatusNotFound) {
 		return
 	}
+
+	defer resp.Body.Close()
+	
+	
+	body, err :=ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Println("Failed to read response body:", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return	
+	}
+	
 	//TODO
-	message = resp.Body
-	analysis = analyze(message)
+	message := string(body)
+	jsonData := analyze(message)
 
 	w.Header().Set("Content-Type", "text/plain")
 	w.Header().Set("MESSAGE-SERVER", msgServerIP)
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "Info from")
+	fmt.Fprintf(w, "Info: %s", jsonData)
 }
 
 func getMessage() *http.Response {
