@@ -26,8 +26,8 @@ RUN addgroup -g 10000 teamX && \
 	echo 'userX:pass' | chpasswd && \
 	chmod u+s /bin/su
 
-RUN mkdir python-stuff && \
-	chmod 777 python-stuff
+RUN mkdir /usr/python-stuff && \
+	chmod 777 /usr/python-stuff
 	
 RUN mkdir /usr/java-stuff && \
 	mkdir /usr/java-stuff/11 && \
