@@ -35,10 +35,13 @@ RUN mkdir /usr/java-stuff && \
 	mkdir /usr/assembler-stuff && \
 	mkdir /usr/go-stuff && \
 	mkdir /usr/haskell-stuff && \
+	mkdir /usr/c-stuff && \
 	mkdir /usr/d-stuff && \
 	mkdir /usr/perl-stuff && \
 	mkdir /usr/lisp-stuff && \
 	mkdir /usr/nodejs-stuff && \
+	mkdir /usr/fortran-stuff && \
+	mkdir /usr/prolog-stuff && \
 	mkdir /usr/ada-stuff
 	
 COPY info.py /usr/
@@ -47,10 +50,13 @@ COPY java/* /usr/java-stuff/11/
 COPY asm/* /usr/assembler-stuff/
 COPY go/* /usr/go-stuff/
 COPY haskell/* /usr/haskell-stuff/
+COPY c/* /usr/c-stuff/
 COPY D/* /usr/d-stuff/
 COPY perl/* /usr/perl-stuff/
 COPY lisp/* /usr/lisp-stuff/
 COPY nodejs/* /usr/nodejs-stuff/
+COPY fortran/* /usr/fortran-stuff/
+COPY fortran/* /usr/prolog-stuff/
 COPY ada/* /usr/ada-stuff/
 
 RUN chmod -Rf 777 /usr/java-stuff && \
@@ -58,9 +64,12 @@ RUN chmod -Rf 777 /usr/java-stuff && \
 	chmod -Rf 777 /usr/go-stuff && \
 	chmod -Rf 777 /usr/haskell-stuff && \
 	chmod -Rf 777 /usr/ada-stuff && \
+	chmod -Rf 777 /usr/c-stuff && \
 	chmod -Rf 777 /usr/d-stuff && \
 	chmod -Rf 777 /usr/lisp-stuff && \
 	chmod -Rf 777 /usr/nodejs-stuff && \
+	chmod -Rf 777 /usr/fortran-stuff && \
+	chmod -Rf 777 /usr/prolog-stuff && \
 	chmod -Rf 777 /usr/perl-stuff
 
 WORKDIR /usr/assembler-stuff
@@ -69,7 +78,7 @@ RUN ld hello.o  -o hello
 
 WORKDIR /usr/d-stuff/trigonometry
 #RUN dub update && \
-#RUN	dub build
+#RUN dub build
 
 WORKDIR /usr/python-stuff
 RUN git clone https://github.com/aelmosalamy/ascii-combat.git
@@ -93,6 +102,11 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
 RUN apk update && \
 	apk add --no-cache swi-prolog ca-certificates && \
 	update-ca-certificates
+
+WORKDIR /usr/nodejs-stuff/test
+RUN npm init -y
+npm install --save-dev jasmine
+npx jasmine init
 
 WORKDIR /usr/
 
