@@ -1,3 +1,7 @@
+const {
+	shuffle
+} = require('./lib.js');
+
 const TREASURE_TYPE = 'treasure';
 const ACTION_TYPE = 'action';
 const PROPERTY_TYPE = 'property';
@@ -52,28 +56,54 @@ property = {
 }
 
 
-global.deck1 = [];
+global.playerDeck = [];
 global.hand = [];
-global.discard_deck =[];
+global.discardDeck =[];
 global.table = [];
 
 
 function init(){
-global.deck1 = [copper, copper, copper, copper, copper, copper, copper, property, property, property];
+global.playerDeck = [copper, copper, copper, copper, copper, copper, copper, property, property, property];
 global.hand = [];
-global.discard_deck =[];
+global.discardDeck =[];
 global.table = [];	
+global.boardDeck = {
+	copper: 50,
+	militia: 10,
+	moat: 10
+	};
 }
 
 function drawCards(deck, hand, numCards) {
   for (let i = 0; i < numCards; i++) {
     if (deck.length === 0) {
-      console.log('No more cards in the deck.');
-      break;
+      console.log('No more cards in the Deck. Shuffling discard and transfering to the Deck');
+	  transferDiscardToplayerDeck();
     }
     const randomIndex = Math.floor(Math.random() * deck.length);
     const drawnCard = deck.splice(randomIndex, 1)[0];
     hand.push(drawnCard);
+  }
+}
+
+function discardHand(){
+	global.discardDeck.push(...global.hand);
+	global.hand.splice(0);
+}
+
+function transferDiscardToplayerDeck(){
+	global.playerDeck.push(...global.discardDeck);
+	global.discardDeck.splice(0);
+}
+
+function buy(cardName) {
+  if (global.boardDeck.hasOwnProperty(cardName) && global.boardDeck[cardName] > 0) {
+    global.boardDeck[cardName] -= 1;
+    console.log(`Bought ${cardName} card. Remaining quantity: ${boardDeck[cardName]}`);
+	global.discardDeck.push(cardName);
+	
+  } else {
+    console.log(`Cannot buy ${cardName} card. Insufficient quantity.`);
   }
 }
 
@@ -87,10 +117,12 @@ module.exports = {
   DRAW_2_CARDS,
   TREASURE_BONUS,
   gold,
-  deck1,
+  playerDeck,
   hand,
-  discard_deck,
+  discardDeck,
   table,
   init,
-  drawCards
+  drawCards,
+  discardHand,
+  buy
 };

@@ -1,4 +1,5 @@
 const {
+  //constants:
   TREASURE_TYPE,
   ACTION_TYPE,
   PROPERTY_TYPE,
@@ -7,16 +8,36 @@ const {
   DRAW_2_CARDS,
   TREASURE_BONUS,
   gold,
-  deck1,
-  hand,
-  discard_deck,
-  table,
+  
+  //functions:
   init,
-  drawCards
+  drawCards,
+  discardHand,
+  buy
 } = require('./card');
+
+function logStatus(header){
+	console.log('\n');
+	if (header != '')
+		console.log(header);
+	console.log('Your hand:\n' + JSON.stringify(global.hand));
+	console.log('Deck:\n' + JSON.stringify(global.playerDeck));
+	console.log('Discard Deck:\n' + JSON.stringify(global.discardDeck));
+	console.log('Table:\n' + JSON.stringify(global.table));
+	console.log('Board Decks:\n' + JSON.stringify(global.boardDeck));
+}
 
 console.log('Treasure type is: ' + TREASURE_TYPE +'\n');
 console.log('Gold:\n' + JSON.stringify(gold) + '\n');
+
 init();
-drawCards(global.deck1, global.hand, 3);
-console.log('Your hand:\n' + JSON.stringify(global.hand));
+
+drawCards(global.playerDeck, global.hand, 5);
+logStatus('After drawing cards:');
+
+buy(militia);
+buy(moat);
+buy(moat);
+
+discardHand();
+logStatus('After discarding hand:');
