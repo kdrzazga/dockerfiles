@@ -1,4 +1,6 @@
 // nohup go run msg_server1.go > msg_server1.log 2>&1 &
+// 2>&1 => redirect std err (type 2) to the same output as std out (type 1)
+// & => run in the backgound
 // curl -i http://localhost:8083
 
 package main

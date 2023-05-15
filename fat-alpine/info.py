@@ -36,10 +36,10 @@ text_wall = ("Installed user soft:",
              "",
              "python info.py - prints this message")
 
-text_wall_python_programs = ("Some PYTHON games in folder /python-stuff",
-                             "JAVA stuff in directories /java-stuff/11 and /java-stuff/17",
+text_wall_python_programs = ("Some PYTHON games in folder /usr/python-stuff",
+                             "JAVA stuff in directories /usr/java-stuff/11 and /usr/java-stuff/17",
                              "And also programs in following languages:",
-                             "Ada, Assembler, D, Go, Haskell, LISP, Perl"
+                             "Ada, Assembler, c, D, Fortran, Go, Haskell, LISP, NodeJS, Perl, Prolog"
                             )
 
 os.system('clear')
