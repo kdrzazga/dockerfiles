@@ -99,6 +99,7 @@ RUN apk update && \
 	apk add --no-cache fbset fbterm util-linux swi-prolog ca-certificates && \
 	update-ca-certificates
 
+RUN apk add --no-cache antiword deluge qbittorrent aria2
 RUN npm install -g typescript
 
 WORKDIR /usr/nodejs-stuff/test
