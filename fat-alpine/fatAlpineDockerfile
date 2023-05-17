@@ -2,12 +2,13 @@
 #docker run -it fat-alpine
 #docker ps
 #docker exec -it <container-id-or-name> /bin/sh
+#docker run --privileged -v /dev/fb0:/dev/fb0 fat-alpine
 
 FROM alpine:latest
 
 RUN apk update && \
     apk add --no-cache make mc curl nano wget git maven binutils && \
-	apk add --no-cache gcc python3 py3-pip openjdk11 openjdk17 nasm go npm lmdb-tools lmdb-dev && \
+	apk add --no-cache gcc python3 py3-pip openjdk11 openjdk17 nasm go npm lmdb-tools lmdb-dev R && \
 	apk add ghc cabal gcc-gnat dmd dub gfortran libgfortran clisp ncurses-dev
 	
 RUN apk add nethack && \
@@ -44,7 +45,9 @@ RUN mkdir /srv/java-stuff && \
 	mkdir /usr/prolog-stuff && \
 	mkdir /usr/ada-stuff && \
 	mkdir /opt/SQL && \
-	mkdir /opt/db
+	mkdir /opt/db && \
+	mkdir /usr/R  && \
+	mkdir /usr/art
 	
 COPY info.py /usr/
 COPY python/* /usr/python-stuff/
@@ -62,6 +65,8 @@ COPY fortran/* /usr/fortran-stuff/
 COPY fortran/* /usr/prolog-stuff/
 COPY ada/* /usr/ada-stuff/
 COPY SQL/* /opt/SQL/
+COPY R/* /usr/R/&& \
+COPY art /usr/art
 
 WORKDIR /usr/assembler-stuff
 RUN nasm -f elf64 HelloAsm.asm -o hello.o
@@ -91,7 +96,7 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositori
 RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
 
 RUN apk update && \
-	apk add --no-cache swi-prolog ca-certificates && \
+	apk add --no-cache fbset fbterm util-linux swi-prolog ca-certificates && \
 	update-ca-certificates
 
 RUN npm install -g typescript
@@ -120,6 +125,8 @@ RUN chmod -Rf 777 /srv/java-stuff && \
 	chmod -Rf 777 /usr/perl-stuff && \
 	chmod -Rf 777 /opt/SQL && \
 	chmod -Rf 777 /opt/db && \
+	chmod -Rf 777 /usr/R && \
+	chmod -Rf 777 /usr/art && \
 	chown -R userX:teamX /srv/java-stuff && \
 	chown -R userX:teamX /usr/assembler-stuff && \
 	chown -R userX:teamX /usr/go-stuff && \
@@ -134,7 +141,9 @@ RUN chmod -Rf 777 /srv/java-stuff && \
 	chown -R userX:teamX /usr/prolog-stuff && \
 	chown -R userX:teamX /usr/perl-stuff && \
 	chown -R userX:teamX /opt/SQL && \
-	chown -R userX:teamX /opt/db
+	chown -R userX:teamX /opt/db && \
+	chown -R userX:teamX /usr/art && \
+	chown -R userX:teamX /usr/R
 
 #RUN sqlite3 /opt/db/CRYPTO_SE.db < /opt/SQL/seed.sql
 

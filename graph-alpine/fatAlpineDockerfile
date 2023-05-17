@@ -1,0 +1,38 @@
+#docker build -t graph-alpine -f fatAlpineDockerfile .
+#docker run -it fat-alpine
+#docker ps
+#docker exec -it <container-id-or-name> /bin/sh
+#docker run --privileged -v /dev/fb0:/dev/fb0 graph-alpine
+
+FROM alpine:latest
+
+RUN apk update && \
+    apk add --no-cache make mc curl nano wget git  binutils && \
+	apk add ncurses-dev
+	
+RUN addgroup -g 10000 teamX && \
+    adduser -u 10000 -G teamX -s /bin/sh -D userX && \
+	echo 'root:pass' | chpasswd && \
+	echo 'userX:pass' | chpasswd && \
+	chmod u+s /bin/su
+	
+RUN mkdir /usr/art
+COPY art /usr/art
+
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
+
+RUN apk update && \
+	apk add --no-cache fbset fbterm util-linux ca-certificates && \
+	update-ca-certificates
+
+RUN chmod -Rf 777 /usr/art && \
+	chown -R userX:teamX /usr/art
+	
+
+WORKDIR /usr
+
+EXPOSE 8080 8081 8082 8083
+USER userX
+
+CMD ["mc"]
