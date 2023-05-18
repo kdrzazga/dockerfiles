@@ -42,8 +42,20 @@ function readAscii(name) {
   }
 }
 
+function log(message) {
+  console.log(`Appending message to file: ${message}`);
+  const logEntry = `${message}\n`;
+
+  try {
+    fs.appendFileSync('log1', logEntry, 'utf8');
+  } catch (err) {
+    console.error('Error appending to log file:', err);
+    throw err;
+  }
+}
 
 module.exports = {
   info,
-  readAscii
+  readAscii,
+  log
 };
