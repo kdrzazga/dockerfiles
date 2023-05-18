@@ -128,6 +128,7 @@ RUN chmod -Rf 777 /srv/java-stuff && \
 	chmod -Rf 777 /opt/db && \
 	chmod -Rf 777 /usr/R && \
 	chmod -Rf 777 /usr/art && \
+	chmod -Rf 777 /var/log && \
 	chown -R userX:teamX /srv/java-stuff && \
 	chown -R userX:teamX /usr/assembler-stuff && \
 	chown -R userX:teamX /usr/go-stuff && \

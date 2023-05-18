@@ -1,7 +1,13 @@
+//curl -X GET -u "admin:admin" http://localhost:3000
+//curl http://localhost:3000/pic/panda
+//curl http://localhost:3000
+//curl -X POST -u "admin:admin" http://localhost:3000/stop
+
 const http = require('http');
 
 const {
-	info
+	info,
+	readAscii
 } = require('./lib.js');
 
 // Function to stop the server
@@ -11,14 +17,22 @@ function stopServer() {
 }
 
 const server = http.createServer((req, res) => {
+	
   if (req.method === 'GET' && req.url === '/') {
-    console.log('Server is running');
-    console.log('Sample requests:');
-    console.log('GET / => displays this help');
-    console.log('POST /stop => exit server (credentials required)');
+	info().forEach(line => console.log(line));
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
-    res.end('Server is running');
+    res.end('Server is running'); //body
+	
+  } else if (req.method === 'GET' && req.url.startsWith('/pic/')) {
+    const dynamicPart = req.url.slice('/pic/'.length);
+    const filename = dynamicPart.split('/')[0];
+    const asciiContent = readAscii(filename);
+
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end(asciiContent);
+	
   } else if (req.method === 'POST' && req.url === '/stop') {
     const auth = req.headers.authorization;
 
