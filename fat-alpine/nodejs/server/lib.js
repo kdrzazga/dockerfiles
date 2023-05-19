@@ -54,7 +54,14 @@ function log(message) {
   }
 }
 
+// Function to stop the server
+function stopServer() {
+  console.log('Server has been stopped.');
+  process.exit(0);
+}
+
 module.exports = {
+  stopServer,
   info,
   readAscii,
   log

@@ -10,14 +10,9 @@ const http = require('http');
 const {
 	log,
 	info,
-	readAscii
+	readAscii,
+	stopServer
 } = require('./lib.js');
-
-// Function to stop the server
-function stopServer() {
-  console.log('Server has been stopped.');
-  process.exit(0);
-}
 
 const server = http.createServer((req, res) => {
 	
@@ -86,8 +81,6 @@ const server = http.createServer((req, res) => {
     res.end('Not found');
   }
 });
-
-//PROGRAM
 
 const logo = 'server 2';
 
