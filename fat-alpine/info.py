@@ -29,7 +29,10 @@ text_wall = ("Installed user soft:",
              "tree - A program for displaying directory structures in a tree format", 
              "units - A program for converting between different units of measurement", 
              "w3m - A text-based web browser with support for images and tables", 
-             "wget - A command-line program for downloading files from the internet", 
+             "wget - A command-line program for downloading files from the internet",
+             "deluge qbittorrent - torrent clients",
+             "antiword - displays doc files",
+             "aria2 - downloader",
              "zhs", 
              "curl", 
              "git",
@@ -37,9 +40,9 @@ text_wall = ("Installed user soft:",
              "python info.py - prints this message")
 
 text_wall_python_programs = ("Some PYTHON games in folder /usr/python-stuff",
-                             "JAVA stuff in directories /usr/java-stuff/11 and /usr/java-stuff/17",
+                             "JAVA stuff in directories /srv/java-stuff/11 and /srv/java-stuff/17",
                              "And also programs in following languages:",
-                             "Ada, Assembler, c, D, Fortran, Go, Haskell, LISP, NodeJS, Perl, Prolog"
+                             "Ada, Assembler, c, D, Fortran, Go, Haskell, LISP, NodeJS, Perl, Prolog, R"
                             )
 
 os.system('clear')

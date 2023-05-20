@@ -2,15 +2,15 @@
 #docker run -it fat-alpine
 #docker ps
 #docker exec -it <container-id-or-name> /bin/sh
+#docker run --privileged -v /dev/fb0:/dev/fb0 fat-alpine
 
 FROM alpine:latest
 
 RUN apk update && \
-    apk add --no-cache make mc curl nano wget git maven binutils && \
-	apk add --no-cache gcc python3 py3-pip openjdk11 openjdk17 nasm go npm && \
-	apk add ghc cabal gcc-gnat dmd dub gfortran libgfortran clisp ncurses-dev
+    apk add --no-cache make mc curl nano wget git maven binutils bison && \
+	apk add --no-cache gcc python3 py3-pip openjdk11 openjdk17 nasm go npm lmdb-tools lmdb-dev R && \
+	apk add ghc cabal gcc-gnat dmd dub gfortran libgfortran clisp ncurses-dev fpc yabasic
 	
-
 RUN apk add nethack && \
     apk add figlet cmatrix lynx mutt sl cmus newsboat ranger alpine dialog elinks fortune && \
     apk add gnuplot inxi ncdu nyancat sc screen tree units w3m zsh tty-solitaire 
@@ -29,9 +29,9 @@ RUN addgroup -g 10000 teamX && \
 RUN mkdir /usr/python-stuff && \
 	chmod 777 /usr/python-stuff
 	
-RUN mkdir /usr/java-stuff && \
-	mkdir /usr/java-stuff/11 && \
-	mkdir /usr/java-stuff/17 && \
+RUN mkdir /srv/java-stuff && \
+	mkdir /srv/java-stuff/11 && \
+	mkdir /srv/java-stuff/17 && \
 	mkdir /usr/assembler-stuff && \
 	mkdir /usr/go-stuff && \
 	mkdir /usr/haskell-stuff && \
@@ -40,13 +40,18 @@ RUN mkdir /usr/java-stuff && \
 	mkdir /usr/perl-stuff && \
 	mkdir /usr/lisp-stuff && \
 	mkdir /usr/nodejs-stuff && \
+	mkdir /usr/typescript-stuff && \
 	mkdir /usr/fortran-stuff && \
 	mkdir /usr/prolog-stuff && \
-	mkdir /usr/ada-stuff
+	mkdir /usr/ada-stuff && \
+	mkdir /opt/SQL && \
+	mkdir /opt/db && \
+	mkdir /usr/R  && \
+	mkdir /usr/art
 	
 COPY info.py /usr/
 COPY python/* /usr/python-stuff/
-COPY java/* /usr/java-stuff/11/
+COPY java/* /srv/java-stuff/11/
 COPY asm/* /usr/assembler-stuff/
 COPY go/* /usr/go-stuff/
 COPY haskell/* /usr/haskell-stuff/
@@ -55,22 +60,13 @@ COPY D/* /usr/d-stuff/
 COPY perl/* /usr/perl-stuff/
 COPY lisp/* /usr/lisp-stuff/
 COPY nodejs/* /usr/nodejs-stuff/
+COPY typescript/* /usr/typescript-stuff/
 COPY fortran/* /usr/fortran-stuff/
 COPY fortran/* /usr/prolog-stuff/
 COPY ada/* /usr/ada-stuff/
-
-RUN chmod -Rf 777 /usr/java-stuff && \
-	chmod -Rf 777 /usr/assembler-stuff && \
-	chmod -Rf 777 /usr/go-stuff && \
-	chmod -Rf 777 /usr/haskell-stuff && \
-	chmod -Rf 777 /usr/ada-stuff && \
-	chmod -Rf 777 /usr/c-stuff && \
-	chmod -Rf 777 /usr/d-stuff && \
-	chmod -Rf 777 /usr/lisp-stuff && \
-	chmod -Rf 777 /usr/nodejs-stuff && \
-	chmod -Rf 777 /usr/fortran-stuff && \
-	chmod -Rf 777 /usr/prolog-stuff && \
-	chmod -Rf 777 /usr/perl-stuff
+COPY SQL/* /opt/SQL/
+COPY R/* /usr/R/&& \
+COPY art /usr/art
 
 WORKDIR /usr/assembler-stuff
 RUN nasm -f elf64 HelloAsm.asm -o hello.o
@@ -81,32 +77,77 @@ WORKDIR /usr/d-stuff/trigonometry
 #RUN dub build
 
 WORKDIR /usr/python-stuff
-RUN git clone https://github.com/aelmosalamy/ascii-combat.git
-RUN git clone https://github.com/AdiChops/Ironfortune.git
-RUN git clone https://github.com/kdrzazga/microservices.git
+RUN git clone https://github.com/aelmosalamy/ascii-combat.git  ||  true
+RUN git clone https://github.com/AdiChops/Ironfortune.git  || true
+RUN git clone https://github.com/kdrzazga/microservices.git || true
 
-WORKDIR /usr/java-stuff/11
-RUN wget -O buggyservice.jar https://github.com/kdrzazga/buggy-webservice/releases/download/v.0.4.5/buggywebservice-0.4.5-RELEASE.jar
-RUN git clone https://github.com/winterbe/java8-tutorial.git
+WORKDIR /srv/java-stuff/11
+RUN wget -O buggyservice.jar https://github.com/kdrzazga/buggy-webservice/releases/download/v.0.4.5/buggywebservice-0.4.5-RELEASE.jar || true
+RUN git clone https://github.com/winterbe/java8-tutorial.git || true
 
-WORKDIR /usr/java-stuff/17
+WORKDIR /srv/java-stuff/17
 RUN git clone https://github.com/kdrzazga/webautomation-tutorial2.git
-WORKDIR /usr/java-stuff/17/webautomation-tutorial2
+WORKDIR /srv/java-stuff/17/webautomation-tutorial2
 RUN mvn clean package -DskipTests
-WORKDIR /usr/java-stuff/17
-# COPY /usr/java-stuff/17/*-jar-with-dependencies.jar /usr/java-stuff/17/webaut.jar
+WORKDIR /srv/java-stuff/17
+# COPY /srv/java-stuff/17/*-jar-with-dependencies.jar /usr/java-stuff/17/webaut.jar
 
 RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories
 RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
 
 RUN apk update && \
-	apk add --no-cache swi-prolog ca-certificates && \
+	apk add --no-cache fbset fbterm util-linux swi-prolog ca-certificates && \
 	update-ca-certificates
+
+RUN apk add --no-cache antiword deluge qbittorrent aria2
+RUN npm install -g typescript crypto-js figlet
 
 WORKDIR /usr/nodejs-stuff/test
 RUN npm init -y
-npm install --save-dev jasmine
-npx jasmine init
+RUN npm install --save-dev jasmine
+RUN npx jasmine init
+
+WORKDIR /usr/nodejs-stuff/anim
+RUN npm init -y
+RUN npm i chalk chalk-animation gradient-string inquirer nanospinner
+
+RUN chmod -Rf 777 /srv/java-stuff && \
+	chmod -Rf 777 /usr/assembler-stuff && \
+	chmod -Rf 777 /usr/go-stuff && \
+	chmod -Rf 777 /usr/haskell-stuff && \
+	chmod -Rf 777 /usr/ada-stuff && \
+	chmod -Rf 777 /usr/c-stuff && \
+	chmod -Rf 777 /usr/d-stuff && \
+	chmod -Rf 777 /usr/lisp-stuff && \
+	chmod -Rf 777 /usr/nodejs-stuff && \
+	chmod -Rf 777 /usr/typescript-stuff && \
+	chmod -Rf 777 /usr/fortran-stuff && \
+	chmod -Rf 777 /usr/prolog-stuff && \
+	chmod -Rf 777 /usr/perl-stuff && \
+	chmod -Rf 777 /opt/SQL && \
+	chmod -Rf 777 /opt/db && \
+	chmod -Rf 777 /usr/R && \
+	chmod -Rf 777 /usr/art && \
+	chmod -Rf 777 /var/log && \
+	chown -R userX:teamX /srv/java-stuff && \
+	chown -R userX:teamX /usr/assembler-stuff && \
+	chown -R userX:teamX /usr/go-stuff && \
+	chown -R userX:teamX /usr/haskell-stuff && \
+	chown -R userX:teamX /usr/ada-stuff && \
+	chown -R userX:teamX /usr/c-stuff && \
+	chown -R userX:teamX /usr/d-stuff && \
+	chown -R userX:teamX /usr/lisp-stuff && \
+	chown -R userX:teamX /usr/nodejs-stuff && \
+	chown -R userX:teamX /usr/typescript-stuff && \
+	chown -R userX:teamX /usr/fortran-stuff && \
+	chown -R userX:teamX /usr/prolog-stuff && \
+	chown -R userX:teamX /usr/perl-stuff && \
+	chown -R userX:teamX /opt/SQL && \
+	chown -R userX:teamX /opt/db && \
+	chown -R userX:teamX /usr/art && \
+	chown -R userX:teamX /usr/R
+
+#RUN sqlite3 /opt/db/CRYPTO_SE.db < /opt/SQL/seed.sql
 
 WORKDIR /usr/
 
