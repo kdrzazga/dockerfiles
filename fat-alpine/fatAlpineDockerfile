@@ -7,9 +7,9 @@
 FROM alpine:latest
 
 RUN apk update && \
-    apk add --no-cache make mc curl nano wget git maven binutils && \
+    apk add --no-cache make mc curl nano wget git maven binutils bison && \
 	apk add --no-cache gcc python3 py3-pip openjdk11 openjdk17 nasm go npm lmdb-tools lmdb-dev R && \
-	apk add ghc cabal gcc-gnat dmd dub gfortran libgfortran clisp ncurses-dev
+	apk add ghc cabal gcc-gnat dmd dub gfortran libgfortran clisp ncurses-dev fpc yabasic
 	
 RUN apk add nethack && \
     apk add figlet cmatrix lynx mutt sl cmus newsboat ranger alpine dialog elinks fortune && \
@@ -77,13 +77,13 @@ WORKDIR /usr/d-stuff/trigonometry
 #RUN dub build
 
 WORKDIR /usr/python-stuff
-RUN git clone https://github.com/aelmosalamy/ascii-combat.git
-RUN git clone https://github.com/AdiChops/Ironfortune.git
-RUN git clone https://github.com/kdrzazga/microservices.git
+RUN git clone https://github.com/aelmosalamy/ascii-combat.git  ||  true
+RUN git clone https://github.com/AdiChops/Ironfortune.git  || true
+RUN git clone https://github.com/kdrzazga/microservices.git || true
 
 WORKDIR /srv/java-stuff/11
-RUN wget -O buggyservice.jar https://github.com/kdrzazga/buggy-webservice/releases/download/v.0.4.5/buggywebservice-0.4.5-RELEASE.jar
-RUN git clone https://github.com/winterbe/java8-tutorial.git
+RUN wget -O buggyservice.jar https://github.com/kdrzazga/buggy-webservice/releases/download/v.0.4.5/buggywebservice-0.4.5-RELEASE.jar || true
+RUN git clone https://github.com/winterbe/java8-tutorial.git || true
 
 WORKDIR /srv/java-stuff/17
 RUN git clone https://github.com/kdrzazga/webautomation-tutorial2.git

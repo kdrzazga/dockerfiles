@@ -1,27 +1,26 @@
 const figlet = require('figlet');
 
-function info(){
-	return [
-		'Rules are simple and well-known'
-	];	
-	
+function info() {
+  return [
+    'Rules of TicTacToe game are simple and well-known',
+	'Sample requests:',
+	'http://localhost:{
+  ];
 }
 
-function welcome(){
-	
-	const logo = 'Tic Tac Toe';
-	
-	figlet(logo, function(err, data) {
-	if (err) {
-		console.log('Something went wrong...');
-		console.dir(err);
-    return;
-	}
-	return data;
-	});	
+function welcome() {
+  const logo = 'Tic Tac Toe';
+
+  try {
+    const asciiArt = figlet.textSync(logo);
+    return asciiArt;
+  } catch (error) {
+    console.error('>LOG: Error generating ASCII art:', error);
+    return '';
+  }
 }
 
 module.exports = {
-	info,
-	welcome	
+  info,
+  welcome
 };
