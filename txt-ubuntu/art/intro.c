@@ -28,6 +28,13 @@ void displayFile(const char *filename) {
     fflush(stdout);
 }
 
+void printInfo(){
+	
+	printf("Installed compilers:\n");
+	printf("Brainfuck, Elixir\n");
+	printf("Sample programs avaiable under \\opt\\programming\\");
+}
+
 int main() {
     displayFile("c.ansi.txt");
     sleep(2);
@@ -36,6 +43,9 @@ int main() {
     displayFile("linguin.ansi.txt");
     sleep(2);
     clearScreen();
+	
+	printInfo();
+	sleep(3);
 
     system("mc");
 
