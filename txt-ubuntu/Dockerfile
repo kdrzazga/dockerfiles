@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Update package repositories and install necessary packages
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        curl wget nano fbset fbterm mc gcc ncurses-dev
+        curl wget nano fbset fbterm mc gcc ncurses-dev bf
 
 RUN mkdir /usr/art
 COPY art/* /usr/art
