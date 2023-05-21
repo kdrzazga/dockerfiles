@@ -1,10 +1,13 @@
 const figlet = require('figlet');
 
+global.port = 3000 + Math.floor(Math.random() * (150 + 1));
+
 function info() {
   return [
     'Rules of TicTacToe game are simple and well-known',
 	'Sample requests:',
-	'http://localhost:{
+	'http://localhost:' + global.port + ' => displays help',
+	'http://localhost:' + global.port + 'welcome'
   ];
 }
 
@@ -22,5 +25,6 @@ function welcome() {
 
 module.exports = {
   info,
-  welcome
+  welcome,
+  port
 };

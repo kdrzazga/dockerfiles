@@ -1,9 +1,7 @@
 const http = require('http');
 const figlet = require('figlet');
-
 const { read } = require('./model.js');
-
-const { info, welcome } = require('./info.js');
+const { info, welcome, port } = require('./info.js');
 
 console.log('\n' + welcome() + '\n');
 
@@ -31,19 +29,7 @@ const server = http.createServer((req, res) => {
   }
 });
 
-const port = 3000 + Math.floor(Math.random() * (150 + 1));
-
-// Getter function for port
-function getPort() {
-  return port;
-}
-
-// Create a property for the getPort function
-Object.defineProperty(server, 'port', {
-  get: getPort
-});
-
 server.listen(server.port, 'localhost', () => {
-  console.log('>LOG: Server running at http://localhost:' + server.port + '/');
+  console.log('>LOG: Server running at http://localhost:' + port + '/');
 });
 
