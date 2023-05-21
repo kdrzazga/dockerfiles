@@ -4,7 +4,8 @@ function info() {
   return [
     'Rules of TicTacToe game are simple and well-known',
 	'Sample requests:',
-	'http://localhost:{
+	'http://localhost:3000/ => displays this message',
+	'http://localhost:3000/ => displays this message & logo'
   ];
 }
 
@@ -13,7 +14,7 @@ function welcome() {
 
   try {
     const asciiArt = figlet.textSync(logo);
-    return asciiArt;
+    return '\n' + asciiArt + '\n';
   } catch (error) {
     console.error('>LOG: Error generating ASCII art:', error);
     return '';
