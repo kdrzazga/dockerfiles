@@ -1,0 +1,5 @@
+x2,y2,distance,speed,time,initial_velocity,final_velocity,acceleration,mass,velocity,height,k
+30,40,50,0.07935,0.23,,,3,,,
+3,4,5,115200,240,3,4,4,2.5,,
+3,4,5,0,0.5,,-3.8,0,,2
+3,4,5,75,5,,,6,,0.4,
