@@ -8,5 +8,5 @@
 
 ## Size
 -   Fat Alpine ~ 3.3 GB (the name is no coincidence)
--	txt-ubuntu ~ 330 MB
+-	txt-ubuntu ~ 1.45 GB
 -   Tools Arch ~ 1GB

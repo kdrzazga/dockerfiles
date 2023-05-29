@@ -32,7 +32,8 @@ void printInfo(){
 	
 	printf("Installed compilers:\n");
 	printf("Brainfuck, Elixir\n");
-	printf("Sample programs avaiable under \\opt\\programming\\");
+	printf("Sample programs avaiable under \\opt\\programming\\\n");
+	printf("Some stories and ASCIIart under /usr/art and /usr/stories\n");
 }
 
 int main() {

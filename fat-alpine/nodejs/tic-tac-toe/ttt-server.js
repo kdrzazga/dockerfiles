@@ -31,7 +31,7 @@ const server = http.createServer((req, res) => {
   }
 });
 
-const port = 3000 + Math.floor(Math.random() * (150 + 1));
+const port = 3000;// + Math.floor(Math.random() * (150 + 1));
 
 // Getter function for port
 function getPort() {

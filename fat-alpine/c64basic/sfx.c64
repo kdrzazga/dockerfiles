@@ -1,0 +1,16 @@
+1 rem shooting sound, c64 handbook, page 97
+10 v=54296: w=54276: a=54277: h=54273: l=54272
+20 for lp = 1 to 8
+30 poke v,15: poke w,65: poke a, 15
+40 for x = 20 to 5 step -2: poke h, 40: poke l,x: next
+50 for x = 15 to 5 step -2: poke h, 40: poke l,x: next
+60 poke w, 0: poke a, 0
+70 for dl = 0 to 40 : next dl
+80 next lp
+
+101 rem punch sound
+110 for lp = 1 to 10
+120 for x=15 to 0 step -1: poke v,x: poke w,129: poke a,15: poke h,40: poke l,200: next
+130 poke w,0: poke a,0
+140 for dl = 0 to 50: next
+150 next lp

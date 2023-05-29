@@ -1,0 +1,12 @@
+10 v=53248: pokev+21,255: for t =12288 to 12350: poket,255: next
+15 poke v+16,0
+20 for t=0to7: poke v+39+t,1: poke 2040+t,192: next
+25 x=24: y=150: gosub 100
+30 poke v+sx, x
+35 x=x+28: sx=sx+2: if sx > 10 then 45
+40 goto 30
+45 poke v+16, peek(v+16) or 192
+50 poke v+12,0: pokev+14, 28
+99 end
+100 for t=0 to 15 step2: poke v+1+t,y: next
+110 return

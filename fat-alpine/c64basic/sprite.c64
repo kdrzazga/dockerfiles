@@ -1,0 +1,17 @@
+0 rem program from commodore & amiga(11) nov 1992
+1 rem (c) mariusz ferdyn & piotr liszewski
+2 rem petcat -w2 -o sprite.prg sprite.c64
+200 for x=704 to 704+62:read a: poke x, a: next
+210 poke 2040,11:rem wskaznik na obszar od adresu 704
+220 poke 53287,1: rem sprite color=bialy
+230 poke 53248, 100: rem x
+240 poke 53249, 100: rem y
+250 poke 53269,1 : rem sprite on
+270 data 001,255,128,015,255,240,063,255
+280 data 252,063,255,252,127,255,254,127
+290 data 255,254,120,126,030,111,153,246
+300 data 120,126,030,112,060,014,048,060
+310 data 012,024,126,024,015,231,240,011
+320 data 195,208,007,153,224,007,255,224
+330 data 002,211,064,002,211,064,001,255
+340 data 128,000,231,000,000,000,000,0

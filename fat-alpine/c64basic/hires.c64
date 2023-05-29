@@ -1,0 +1,91 @@
+ 10 rem *** funcplot
+ 11 rem https://paulnotebook.net/2019/06/08/
+ 20 rem plotting-a-function-in-hi-res-graphics-mode-on-a-commodore-64/
+ 30 pi = 3.141592653
+ 40 yu = 2.2 : yd = -2.2
+ 50 xu = 6*pi : xd = -6*pi
+ 60 xr = xu - xd : yr = yu - yd
+ 70 xs = xr/320 : ys = yr/200
+ 80 def fn f(x) = sin(x) + sin(1.5*x + pi/2)
+ 100 rem set vic address
+ 110 v = 53248
+ 120 rem set graphic ram address
+ 130 ga = 8192
+ 140 rem set video ram address
+ 150 vr = 1024
+ 160 rem set border to black
+ 170 poke v+32,0
+ 500 gosub 20000 : rem turn on hires
+ 510 gosub 21000 : rem graphic ram area
+ 520 gosub 22000 : rem set color ram
+ 530 gosub 23000 : rem clr graphic ram
+ 1000 rem draw x axis
+ 1005 y=0 : yc=int(200-(y-yd)*(200/yr)) 
+ 1010 for xc = 0 to 319 
+ 1020 gosub 30000 : rem set (xc,yc) 
+ 1030 next xc 
+ 1100 rem draw y axis
+ 1110 x = 0
+ 1120 for yc = 1 to 200
+ 1130 xc = int((x-xd)*(320/xr))
+ 1140 gosub 30000 : rem set (xc,yc)
+ 1150 next yc
+ 1300 rem plot function
+ 1310 for x = xd to xu step xs
+ 1320 y = fn f(x)
+ 1330 xc = int((x-xd)*(320/xr))
+ 1340 yc = int(200-(y-yd)*(200/yr))
+ 1350 gosub 30000 : rem set (xc,yc)
+ 1360 next x
+ 1400 poke 198,0 : wait 198,1
+ 1450 gosub 24000
+ 1500 end
+ 20000 rem turn on hi res graphics
+ 20010 rem   1. set bits 5/6 of v+17
+ 20020 rem   2. clr bit 4 of v+22
+ 20030 poke v+17,peek(v+17) or (11*16)
+ 20040 poke v+22,peek(v+22) and (255-16)
+ 20050 return
+ 21000 rem set graphic ram area
+ 21010 rem   1. set bit 3 of v+24
+ 21020 poke v+24, peek(v+24) or 8
+ 21030 return
+ 22000 rem set color ram
+ 22010 rem   1. color ram is 1024-2023
+ 22020 rem   2. set background 1 - white
+ 22030 rem   3. set foreground 0 - black
+ 22040 co = 0*16 + 1
+ 22050 for i = vr to vr+1000
+ 22060 poke i,co
+ 22070 next i
+ 22080 return
+ 23000 rem clear graphic ram
+ 23010 rem   1. graphic ram is ga to
+ 23020 rem        ga + 8000
+ 23030 for i = ga to ga +8000
+ 23040 poke i,0
+ 23050 next i
+ 23060 return
+ 24000 rem turn graphics off
+ 24010 rem   1. clr bits 5/6 of v+17
+ 24020 rem   2. clr bit 4 of v+22
+ 24030 rem   3. clr bit 3 of v+24
+ 24040 poke v+17,peek(v+17) and (255-96)
+ 24050 poke v+22,peek(v+22) and (255-16)
+ 24060 poke v+24,peek(v+24) and (255-8)
+ 24070 return
+ 30000 rem set pixel
+ 30010 ra = 320*int(yc/8)+(yc and 7)
+ 30020 ba = 8*int(xc/8)
+ 30030 ma = 2^(7-(xc and 7))
+ 30040 ad = ga + ra + ba
+ 30050 poke ad,peek(ad) or  ma
+ 30060 return
+ 31000 rem clr pixel
+ 31010 ra = 320*int(yc/8)+(yc and 7)
+ 31020 ba = 8*int(xc/8)
+ 31030 ma = 255-2^(7-(xc and 7))
+ 31040 ad = ga + ra + ba
+ 31050 poke ad,peek(ad) or  ma
+ 31060 return
+ 
