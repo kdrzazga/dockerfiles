@@ -9,7 +9,7 @@ FROM alpine:latest
 RUN apk update && \
     apk add --no-cache make mc curl nano wget git maven binutils bison && \
 	apk add --no-cache gcc python3 py3-pip openjdk11 openjdk17 nasm go npm lmdb-tools lmdb-dev R && \
-	apk add ghc cabal gcc-gnat dmd dub gfortran libgfortran clisp ncurses-dev fpc yabasic
+	apk add ghc cabal gcc-gnat dmd dub gfortran libgfortran clisp ncurses-dev
 	
 RUN apk add nethack && \
     apk add figlet cmatrix lynx mutt sl cmus newsboat ranger alpine dialog elinks fortune && \
@@ -47,7 +47,8 @@ RUN mkdir /srv/java-stuff && \
 	mkdir /opt/SQL && \
 	mkdir /opt/db && \
 	mkdir /usr/R  && \
-	mkdir /usr/art
+	mkdir /usr/art && \
+	mkdir /usr/kickass
 	
 COPY info.py /usr/
 COPY python/* /usr/python-stuff/
@@ -65,8 +66,9 @@ COPY fortran/* /usr/fortran-stuff/
 COPY fortran/* /usr/prolog-stuff/
 COPY ada/* /usr/ada-stuff/
 COPY SQL/* /opt/SQL/
-COPY R/* /usr/R/&& \
-COPY art /usr/art
+COPY R/* /usr/R/
+COPY art/* /usr/art/
+COPY kickass/* /usr/kickass/
 
 WORKDIR /usr/assembler-stuff
 RUN nasm -f elf64 HelloAsm.asm -o hello.o
@@ -97,9 +99,10 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
 
 RUN apk update && \
 	apk add --no-cache fbset fbterm util-linux swi-prolog ca-certificates && \
-	update-ca-certificates
+	update-ca-certificates || true
 
 RUN apk add --no-cache antiword deluge qbittorrent aria2
+RUN apk add fpc yabasic
 RUN npm install -g typescript crypto-js figlet
 
 WORKDIR /usr/nodejs-stuff/test

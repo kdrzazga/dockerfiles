@@ -1,4 +1,6 @@
 #docker build -t txt-ubuntu -f Dockerfile .
+#docker run -it txt-ubuntu /bin/bash
+#docker run txt-ubuntu
 
 FROM ubuntu:latest
 
@@ -25,22 +27,19 @@ COPY elixir/* /opt/programming/elixir
 COPY playwright/* /opt/programming/playwright 
 
 WORKDIR /opt/programming/playwright
-RUN npm install -g playwright
+#RUN npm install -g playwright
 #RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash  #already copied
 
-RUN source ~/.bashrc
-RUN nvm install --lts
-RUN npx playwright install
-RUN npx playwright install-deps
+#RUN source ~/.bashrc
+#RUN npm install --lts
+#RUN npx playwright install
+#RUN npx playwright install-deps
 #RUN npm init playwright@latest -y
 
-WORKDIR /opt
-ln -s art /usr/art
-
-WORKDIR /opt/programming
+WORKDIR /usr/art
 RUN gcc intro.c -o intro -lncurses
 
-#CMD ["./intro"]
+CMD ["./intro"]
 CMD ["./bin/bash"]
 
 #RUN fbset -fb /dev/fb0 -g 320 200 320 200 8
