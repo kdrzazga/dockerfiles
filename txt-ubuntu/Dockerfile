@@ -8,19 +8,36 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Update package repositories and install necessary packages
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        curl wget nano fbset fbterm mc gcc ncurses-dev bf elixir
+        curl wget nano fbset fbterm mc gcc ncurses-dev bf elixir npm
 
 RUN mkdir /usr/art
-COPY art/* /usr/art
+RUN mkdir /usr/stories
+COPY txt/art/* /usr/art
+COPY txt/stories/* /usr/stories
 
 RUN mkdir opt/programming
 RUN mkdir opt/programming/brainfuck
 RUN mkdir opt/programming/elixir
+RUN mkdir opt/programming/playwright
 
 COPY brainfuck/* /opt/programming/brainfuck 
 COPY elixir/* /opt/programming/elixir 
+COPY playwright/* /opt/programming/playwright 
 
-WORKDIR /usr/art
+WORKDIR /opt/programming/playwright
+RUN npm install -g playwright
+#RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash  #already copied
+
+RUN source ~/.bashrc
+RUN nvm install --lts
+RUN npx playwright install
+RUN npx playwright install-deps
+#RUN npm init playwright@latest -y
+
+WORKDIR /opt
+ln -s art /usr/art
+
+WORKDIR /opt/programming
 RUN gcc intro.c -o intro -lncurses
 
 #CMD ["./intro"]
