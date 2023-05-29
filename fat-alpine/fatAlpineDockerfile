@@ -14,6 +14,8 @@ RUN apk update && \
 RUN apk add nethack && \
     apk add figlet cmatrix lynx mutt sl cmus newsboat ranger alpine dialog elinks fortune && \
     apk add gnuplot inxi ncdu nyancat sc screen tree units w3m zsh tty-solitaire 
+	
+RUN apk add vice || true
 
 RUN ln -s -f /usr/bin/python3 /usr/bin/python && \
     ln -s -f /usr/bin/pip3 /usr/bin/pip
@@ -48,6 +50,7 @@ RUN mkdir /srv/java-stuff && \
 	mkdir /opt/db && \
 	mkdir /usr/R  && \
 	mkdir /usr/art && \
+	mkdir /usr/c64basic-stuff && \
 	mkdir /usr/kickass
 	
 COPY info.py /usr/
@@ -68,6 +71,7 @@ COPY ada/* /usr/ada-stuff/
 COPY SQL/* /opt/SQL/
 COPY R/* /usr/R/
 COPY art/* /usr/art/
+COPY c64basic/* /usr/c64basic-stuff
 COPY kickass/* /usr/kickass/
 
 WORKDIR /usr/assembler-stuff
