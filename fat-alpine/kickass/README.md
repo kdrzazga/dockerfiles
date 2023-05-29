@@ -1,3 +1,3 @@
 usage:
 
-java -jar interrupt.asm
+java -jar KickAss.jar interrupt.asm
