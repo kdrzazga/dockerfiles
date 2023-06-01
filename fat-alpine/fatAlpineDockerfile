@@ -51,7 +51,8 @@ RUN mkdir /srv/java-stuff && \
 	mkdir /usr/R  && \
 	mkdir /usr/art && \
 	mkdir /usr/c64basic-stuff && \
-	mkdir /usr/kickass
+	mkdir /usr/hodgepodge && \
+	mkdir /usr/c64kickass
 	
 COPY info.py /usr/
 COPY python/* /usr/python-stuff/
@@ -72,7 +73,8 @@ COPY SQL/* /opt/SQL/
 COPY R/* /usr/R/
 COPY art/* /usr/art/
 COPY c64basic/* /usr/c64basic-stuff
-COPY kickass/* /usr/kickass/
+COPY c64kickass/* /usr/c64kickass/
+COPY hodgepodge/* /usr/hodgepodge/
 
 WORKDIR /usr/assembler-stuff
 RUN nasm -f elf64 HelloAsm.asm -o hello.o
@@ -131,6 +133,9 @@ RUN chmod -Rf 777 /srv/java-stuff && \
 	chmod -Rf 777 /usr/fortran-stuff && \
 	chmod -Rf 777 /usr/prolog-stuff && \
 	chmod -Rf 777 /usr/perl-stuff && \
+	chmod -Rf 777 /usr/c64basic-stuff && \
+	chmod -Rf 777 /usr/c64kickass && \
+	chmod -Rf 777 /usr/hodgepodge && \
 	chmod -Rf 777 /opt/SQL && \
 	chmod -Rf 777 /opt/db && \
 	chmod -Rf 777 /usr/R && \
@@ -149,6 +154,9 @@ RUN chmod -Rf 777 /srv/java-stuff && \
 	chown -R userX:teamX /usr/fortran-stuff && \
 	chown -R userX:teamX /usr/prolog-stuff && \
 	chown -R userX:teamX /usr/perl-stuff && \
+	chown -R userX:teamX /usr/c64basic-stuff && \
+	chown -R userX:teamX /usr/c64kickass && \
+	chown -R userX:teamX /usr/hodgepodge && \
 	chown -R userX:teamX /opt/SQL && \
 	chown -R userX:teamX /opt/db && \
 	chown -R userX:teamX /usr/art && \
