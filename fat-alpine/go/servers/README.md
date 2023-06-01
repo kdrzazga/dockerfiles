@@ -17,3 +17,6 @@ ADDRESS BOOK contains IP:port of all services. MSG SERVER reads random lines fro
        |
    script.txt
 ```
+
+Usage:
+go run address_book.go

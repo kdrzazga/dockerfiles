@@ -1,0 +1,32 @@
+' Check the number of arguments
+IF COUNT(argv$) <> 3 THEN
+    PRINT "3 arguments required"
+    END
+ENDIF
+
+' Coefficients
+a = VAL(argv$(1))
+b = VAL(argv$(2))
+c = VAL(argv$(3))
+
+' Compute the discriminant
+discriminant = b * b - 4 * a * c
+
+' Check the discriminant and compute the roots accordingly
+IF discriminant > 0 THEN
+' Two real and distinct roots
+    root1 = (-b + SQR(discriminant)) / (2 * a)
+    root2 = (-b - SQR(discriminant)) / (2 * a)
+    PRINT "Root 1:", root1
+    PRINT "Root 2:", root2
+ELSEIF discriminant = 0 THEN
+' One real and repeated root
+    root = -b / (2 * a)
+    PRINT "Root:", root
+ELSE
+' Two complex roots
+    realPart = -b / (2 * a)
+    imaginaryPart = SQR(ABS(discriminant)) / (2 * a)
+    PRINT "Root 1:", realPart, "+", imaginaryPart, "i"
+    PRINT "Root 2:", realPart, "-", imaginaryPart, "i"
+ENDIF
