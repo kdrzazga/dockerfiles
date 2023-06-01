@@ -3,7 +3,7 @@
 │  SERVER      +--<-GET-----+ queryman │
 │    GO        │            │     JS   │
 └────+──────+──┘            └+───────+─┘
-	 |		|				 |       |
+     |      |                |       |
 ┌────+───┐┌─+───────┐┌───────+──┐┌───+──────┐
 │generate││loggen.pl││mickiewicz││ stub.py  │
 │  LISP  │|  PERL   ||   LISP   ||  python  |
