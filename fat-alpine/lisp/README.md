@@ -11,3 +11,10 @@ or
 
 
 (exit)
+
+---------------------------------
+or simple 
+
+clisp hello.lisp
+
+without any arguments
