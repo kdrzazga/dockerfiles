@@ -21,7 +21,7 @@ txt_loop:
 	lda message, x
 	sta $0400 + 11*40, x
 	inx
-	cpx #235
+	cpx #237
 	bne txt_loop
 	
 	ldx #$00	
@@ -29,16 +29,16 @@ txt_loop2:
 	lda message2, x
 	sta $0400 + 18*40, x
 	inx
-	cpx #40
+	cpx #(124-8)
 	bne txt_loop2	
 	
 	rts
 
 message:
-.text "irq is used to display van animation and the caption on the top. van is sprite 0, so you can change its color, eg. with poke 53287,5 or double its size with    poke 53271,127 and poke 53277,127. re-run the pogram to reset those changes." 
+.text "irq is used to display van animation and the caption on the top. van is sprite 0, so you can change its color, eg. with poke 53287,5 or double its size with    poke 53271,127 and poke 53277,127. disable/re-enable sprite: poke 53269,0/1." 
 
 message2:
-.text "sys 2090 - displays this info at anytime"
+.text "poke 2040,128/129 - change sprite. re-run the pogram to reset those changes sys 2090 - displays this info at anytime"
 
 //------------------------
 set_sprite_colors:
@@ -58,8 +58,8 @@ sprite_colors:
 enable_sprite:
     // set sprite pointer index this, multiplied by $40, is the address
     // in this case, the address is $2000 80 * $40 = $2000
-    lda #$80
-    sta $07f8
+    lda #128
+    sta 2040
 	
 	lda #1
     sta $d015
@@ -94,7 +94,7 @@ loop2:
 	
 go_right_return:        
 	inx
-	cpx #26
+	cpx #27
 	bne loop2
 	jmp $ea31
 
@@ -106,7 +106,7 @@ go_right:
     sty $d000	
 	jmp go_right_return
        
-tekst:	.text "animation within interrupt"
+tekst:	.text "animation within interrupt "
 
 position: .byte $00
 counter:  .byte $00
@@ -121,3 +121,14 @@ sprite_van:
 .byte $04,$04,$40,$04,$02,$4c,$04,$62
 .byte $52,$fe,$96,$12,$00,$90,$0c,$00
 .byte $60,$00,$00,$00,$00,$00,$00,$01
+
+*=$2000 + 8*8
+sprite_rocket:
+.byte $00,$00,$00,$00,$00,$00,$00,$00
+.byte $00,$78,$00,$00,$7e,$00,$00,$7f
+.byte $00,$00,$7f,$ff,$00,$a0,$00,$60
+.byte $20,$00,$10,$20,$c3,$0c,$50,$92
+.byte $41,$10,$92,$40,$d0,$61,$83,$10
+.byte $00,$0c,$10,$00,$30,$1f,$ff,$c0
+.byte $1f,$c0,$00,$1f,$80,$00,$1e,$00
+.byte $00,$00,$00,$00,$00,$00,$00,$3f,$01
