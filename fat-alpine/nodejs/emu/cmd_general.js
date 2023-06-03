@@ -7,6 +7,10 @@ function help(){
 	console.log('load x 40');
 	console.log('load y 255');
 	console.log('clear c   clear z   clear all - clears flags');
+	console.log('add x 20');
+	console.log('sub y 10');
+	console.log('inc x');
+	console.log('dec y');
 	console.log('help');
 }
 

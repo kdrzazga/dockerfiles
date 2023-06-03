@@ -9,6 +9,11 @@ const {
 const{
 	loadx,
 	loady,
+	addx,
+	addy,
+	nop,
+	inc,
+	dec,
 	clearFlag
 	
 } = require('./cmd_mnemonics');
@@ -54,6 +59,8 @@ function interpretCommand(command) {
 		exit();
     } else if (word1.toLowerCase() === 'status') {
 		status();
+    } else if (word1.toLowerCase() === 'nop') {
+		nop();
     } else {
       console.log('Invalid command');
     }
@@ -63,6 +70,18 @@ function interpretCommand(command) {
 
 	if (word1.toLowerCase() === 'clear') {
       clearFlag(word2);
+    } 
+	else if (word1.toLowerCase() === 'inc' && word2.toLowerCase() === 'x') {
+      inc('x');
+    } 	 
+	else if (word1.toLowerCase() === 'inc' && word2.toLowerCase() === 'y') {
+      inc('y');
+    } 	
+	else if (word1.toLowerCase() === 'dec' && word2.toLowerCase() === 'x') {
+      dec('x');
+    } 	 
+	else if (word1.toLowerCase() === 'dec' && word2.toLowerCase() === 'y') {
+      dec('y');
     } 	
 	else {
       console.log('Invalid command');
@@ -75,6 +94,10 @@ function interpretCommand(command) {
        loadx(word3);
     } else if (word1 === 'load' && word2 === 'y') {
        loady(word3);
+    } else if (word1 === 'add' && word2 === 'x') {
+       addx(word3);
+    } else if (word1 === 'add' && word2 === 'y') {
+       addy(word3);
     } else {
       console.log('Invalid command');
     }
