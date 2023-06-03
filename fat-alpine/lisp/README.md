@@ -2,14 +2,17 @@ clisp
 
 inside interpreter:
 
-(load "hello.lisp")
+1. (load "hello.lisp")
 
 or 
-
+2. 
 (load "trigonometry.lisp")
 (calculate-trig-functions 1.0)
 
-
+or
+3.
+(load "even-odd.lisp")
+(even-odd 3)
 (exit)
 
 ---------------------------------
