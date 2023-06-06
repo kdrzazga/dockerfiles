@@ -1,10 +1,22 @@
 //BasicUpstart2(start) //*=$080d
-*=$0800
-.byte $00,$0c,$08,$0a ,$00,$9e,$32,$33 ,$30,$34,$3a,$80 ,$00,$17,$08,$14 //10 sys2304:end
-.byte $00,$9e,$32,$33 ,$34,$35,$00,$25 ,$08,$1e,$00,$97 ,$32,$30,$34,$30 //20 sys2345
-.byte $2c,$31,$32,$38 //30 poke2040,128
+*=$0801
+.byte $0d,$08 //$080d - address of line of code
+.byte $0a //end
+.byte $00,$9e //sys
+.byte $32,$33,$30,$34 //'2304'
+.byte $3a // :   (10 sys2304:end)
+.byte $80,$00,$17
+.byte $08,$14 //$0814 - address of new line of code
+.byte $00,$9e //sys
+.byte $32,$33,$34,$35 //'2345'  (20 sys 2345)
+.byte $00,$25 
+.byte $08,$1e //$081e - address of new line of code
+.byte $00,$97 //poke 
+.byte $32,$30,$34,$30 //'2040'
+.byte $2c // ,
+.byte $31,$32,$38 // 128  (30 poke 2040,128)
 
-*=$0900
+*=2304
 start:
 	jsr print_info
 	jsr set_sprite_colors
