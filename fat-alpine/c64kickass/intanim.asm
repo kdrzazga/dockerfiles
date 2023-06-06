@@ -1,5 +1,10 @@
-BasicUpstart2(start)
-	*=$080d
+//BasicUpstart2(start) //*=$080d
+*=$0800
+.byte $00,$0c,$08,$0a ,$00,$9e,$32,$33 ,$30,$34,$3a,$80 ,$00,$17,$08,$14 //10 sys2304:end
+.byte $00,$9e,$32,$33 ,$34,$35,$00,$25 ,$08,$1e,$00,$97 ,$32,$30,$34,$30 //20 sys2345
+.byte $2c,$31,$32,$38 //30 poke2040,128
+
+*=$0900
 start:
 	jsr print_info
 	jsr set_sprite_colors
@@ -14,7 +19,7 @@ start:
 	rts
 
 //------------------------
-*=2090
+*=2345
 print_info:
 	ldx #$00
 txt_loop:	
@@ -38,7 +43,7 @@ message:
 .text "irq is used to display van animation and the caption on the top. van is sprite 0, so you can change its color, eg. with poke 53287,5 or double its size with    poke 53271,127 and poke 53277,127. disable/re-enable sprite: poke 53269,0/1." 
 
 message2:
-.text "poke 2040,128/129 - change sprite. re-run the pogram to reset those changes sys 2090 - displays this info at anytime"
+.text "poke 2040,128/129 - change sprite. re-run the pogram to reset those changes sys 2345 - displays this info at anytime"
 
 //------------------------
 set_sprite_colors:
