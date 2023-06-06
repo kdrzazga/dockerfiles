@@ -1,20 +1,33 @@
-//BasicUpstart2(start) //*=$080d
 *=$0801
-.byte $0d,$08 //$080d - address of line of code
-.byte $0a //end
+.byte $0d,$08 //signature
+.byte 10 // (line number 10)
 .byte $00,$9e //sys
-.byte $32,$33,$30,$34 //'2304'
-.byte $3a // :   (10 sys2304:end)
-.byte $80,$00,$17
-.byte $08,$14 //$0814 - address of new line of code
+.text "2304:"//   (10 sys2304:end)
+.byte $80
+.byte $00,$19
+.byte $08,20 //$0814 - address of new line of code (line number 20)
 .byte $00,$9e //sys
-.byte $32,$33,$34,$35 //'2345'  (20 sys 2345)
-.byte $00,$25 
-.byte $08,$1e //$081e - address of new line of code
+.text "2345:"
+.byte $8f //rem
+.byte $00,$19 + 16 
+.byte $08,30 //$081e - address of new line of code (line 30)
 .byte $00,$97 //poke 
-.byte $32,$30,$34,$30 //'2040'
-.byte $2c // ,
-.byte $31,$32,$38 // 128  (30 poke 2040,128)
+.text "2040,129:" //  (30 poke 2040,129)
+.byte $8f //rem
+.byte $00,$19 + 16 + 15
+.byte $08,40 //line 40
+.byte $00,$97 //poke 
+.text "53287,5:" //  (40 poke 53287,5)
+.byte $8f //rem
+.byte $00,$19 + 16 + 15 +34 // = $5a 
+.byte $08,50 //line 50
+.byte $00,$97 //poke 
+.text "53271,127:"
+.byte $97 //poke 
+.text " 53277,127:"
+.byte $8f //rem
+.byte $20,$53,$49,$5a,$45
+.byte $00, $00, $00, $ff, $ff, 0,0,0, $ff,$ff,$ff, 0,0,0, $ff,$ff,$ff
 
 *=2304
 start:
