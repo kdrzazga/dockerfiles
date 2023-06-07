@@ -1,5 +1,35 @@
-BasicUpstart2(start)
-	*=$080d
+*=$0801
+.byte $0d,$08 //signature
+.byte 10 // (line number 10)
+.byte $00,$9e //sys
+.text "2304:"//   (10 sys2304:end)
+.byte $80
+.byte $00,$19
+.byte $08,20 //$0814 - address of new line of code (line number 20)
+.byte $00,$9e //sys
+.text "2345:"
+.byte $8f //rem
+.byte $00,$19 + 16 
+.byte $08,30 //$081e - address of new line of code (line 30)
+.byte $00,$97 //poke 
+.text "2040,129:" //  (30 poke 2040,129)
+.byte $8f //rem
+.byte $00,$19 + 16 + 15
+.byte $08,40 //line 40
+.byte $00,$97 //poke 
+.text "53287,5:" //  (40 poke 53287,5)
+.byte $8f //rem
+.byte $00,$19 + 16 + 15 +34 // = $5a 
+.byte $08,50 //line 50
+.byte $00,$97 //poke 
+.text "53271,127:"
+.byte $97 //poke 
+.text " 53277,127:"
+.byte $8f //rem
+.byte $20,$53,$49,$5a,$45
+.byte $00, $00, $00, $ff, $ff, 0,0,0, $ff,$ff,$ff, 0,0,0, $ff,$ff,$ff
+
+*=2304
 start:
 	jsr print_info
 	jsr set_sprite_colors
@@ -14,7 +44,7 @@ start:
 	rts
 
 //------------------------
-*=2090
+*=2345
 print_info:
 	ldx #$00
 txt_loop:	
@@ -38,7 +68,7 @@ message:
 .text "irq is used to display van animation and the caption on the top. van is sprite 0, so you can change its color, eg. with poke 53287,5 or double its size with    poke 53271,127 and poke 53277,127. disable/re-enable sprite: poke 53269,0/1." 
 
 message2:
-.text "poke 2040,128/129 - change sprite. re-run the pogram to reset those changes sys 2090 - displays this info at anytime"
+.text "poke 2040,128/129 - change sprite. re-run the pogram to reset those changes sys 2345 - displays this info at anytime"
 
 //------------------------
 set_sprite_colors:
