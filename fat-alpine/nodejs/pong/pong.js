@@ -1,4 +1,11 @@
 const clearScreen = require("clear-screen");
+const readline = require('readline');
+
+class Bat {
+  constructor() {
+	this.y = 5;  
+  }
+}
 
 class Ball {
   constructor() {
@@ -10,10 +17,15 @@ class Ball {
 }
 
 class Board{
-  constructor(ball){
-    this.sizeX = 31;
-    this.sizeY = 7;
+  constructor(ball, bat){
+    this.sizeX = 70;
+    this.sizeY = 15;
     this.ball = ball;
+	this.bat = bat;
+  }
+
+  moveBat(){
+	  this.bat.y = this.ball.y;
   }
 
   moveBall(){
@@ -55,11 +67,22 @@ class Drawer {
     console.log('#'.repeat(board.sizeX));
 
     for (var y = 0; y < board.sizeY; y++){
+
+	  var line = '#' + ' '.repeat(board.sizeX - 2) + '#';//default line  
+	  	  
+	  if ( (y === board.bat.y - 1) || (y === board.bat.y + 1))
+		 line = '|' + ' '.repeat(board.sizeX - 2) + '|';
+	  
       if (y === board.ball.y){
 		const repetition = Math.max(0, board.sizeX - board.ball.x - 3);
-        console.log('#' + ' '.repeat(board.ball.x) + 'o' + ' '.repeat(repetition) + '#');
+		
+		if (y === board.bat.y)
+			line = '|' + ' '.repeat(board.ball.x) + 'o' + ' '.repeat(repetition) + '|';
+		else
+			line = '#' + ' '.repeat(board.ball.x) + 'o' + ' '.repeat(repetition) + '#';
 	  }
-      else console.log('#' + ' '.repeat(board.sizeX - 2) + '#');  
+      
+	  console.log(line);  
     }
 
     console.log('#'.repeat(board.sizeX));
@@ -68,15 +91,22 @@ class Drawer {
   }
 }
 
-const board = new Board(new Ball());
+const board = new Board(new Ball(), new Bat());
 const drawer = new Drawer();
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+process.stdin.setRawMode(true);
 
 function main() {
   setInterval(() => {
     clearScreen();
     drawer.draw(board);
     board.moveBall();  
-  }, 300);
+	board.moveBat();
+  }, 120);
 }
 
 main();
