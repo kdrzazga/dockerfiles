@@ -47,3 +47,6 @@ server.listen(server.port, 'localhost', () => {
   console.log('>LOG: Server running at http://localhost:' + server.port + '/');
 });
 
+module.exports = {
+  getPort
+};

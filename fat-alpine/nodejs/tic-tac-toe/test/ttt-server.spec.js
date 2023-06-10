@@ -1,12 +1,13 @@
-//npm i figlet mocha assert 
 //mocha info.spec.js
 
-const {info} = require('../info.js');
+const { getPort } = require('../ttt-server.js');
 const assert = require('assert');
 
-describe ('info tests', () => {
+describe ('ttt-server tests', () => {
 
-  it('should info return 4 captions', () =>{
-    assert.strictEqual(info().length, 4);
+  it('should getPort return port number', () =>{
+    const port = getPort();
+    assert.strictEqual(typeof port, 'number');
+    assert.ok(port > 0);
   });
 });
