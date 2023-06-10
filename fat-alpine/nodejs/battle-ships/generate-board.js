@@ -5,6 +5,8 @@ const HORIZONTAL = 'horizontal';
 const VERTICAL = 'vertical';
 const RESERVED = 'r';
 
+const board = Array.from({ length: WIDTH }, () => Array(HEIGHT).fill('')); // Create a WIDTHxHEIGHT board
+
 function getRandomDirection() {
   return Math.random() < 0.5 ? HORIZONTAL : VERTICAL;
 }
@@ -107,10 +109,20 @@ function drawBoard(board) {
   }
 }
 
-console.log('This program generates a board for BATTLE SHIPS game. ');
+function main(){
+  console.log('This program generates a board for BATTLE SHIPS game. ');
 
-const board = Array.from({ length: WIDTH }, () => Array(HEIGHT).fill('')); // Create a WIDTHxHEIGHT board
-const shipLength = 4;
-placeShip(board, shipLength);
-reserveAdjacentTiles(board);
-drawBoard(board);
+  const shipLength = 4;
+  placeShip(board, shipLength);
+  reserveAdjacentTiles(board);
+  drawBoard(board);
+}
+
+main();
+
+module.exports = {
+  board,
+  drawBoard,
+  placeShip,
+  reserveAdjacentTiles
+};
