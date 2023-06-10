@@ -1,4 +1,4 @@
-export class Block {
+class Block {
   constructor(type) {
     const typeFieldsJson = {
       'tetris': [
@@ -22,13 +22,17 @@ export class Block {
     };
 
     if (type) {
+      this.type = type;
       this.fields = typeFieldsJson[type];
     } else {
       const types = ['tetris', 'block2x2', 'blockT'];
       const rndTypeIndex = Math.floor(Math.random() * types.length);
-      this.fields = typeFieldsJson[types[rndTypeIndex]];
+      const type = types[rndTypeIndex];
+      this.type = type;
+      this.fields = typeFieldsJson[type];
     }
   }
+
 
   rotate() {
     const rotatedBlock = [];
@@ -44,8 +48,6 @@ export class Block {
 
     this.fields = rotatedBlock;
   }
-}
-
-module.exports = {
-	Block
 };
+
+module.exports = Block;
