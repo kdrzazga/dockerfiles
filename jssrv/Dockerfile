@@ -1,4 +1,4 @@
-#docker build -t njs-server  .
+#docker build -t njs-server .
 #docker run -p 8080:8080 njs-server
 FROM node:14
 
@@ -11,11 +11,12 @@ RUN npm install -g http-server
 
 # Copy the application code
 COPY /pages/* .
+COPY /BE/* .
+COPY index.html .
 
 # Expose the port the application listens on
 EXPOSE 8080
 
 RUN echo "http://localhost:8080/index.html"
-RUN echo "http://localhost:8080/p.html"
 
 CMD ["http-server"]

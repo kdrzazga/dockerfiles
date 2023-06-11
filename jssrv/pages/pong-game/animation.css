@@ -1,0 +1,26 @@
+#board {
+    width: 900px;
+    height: 400px;
+    position: relative;
+    background: aliceblue;
+}
+
+#bat {
+    width: 7px;
+    height: 50px;
+    position: relative;
+    background: darkred;
+}
+
+#ball {
+    background: #090909;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+#displayArea{
+    font-family: "Comic Sans MS", cursive;
+    font-size: xx-small;
+}
