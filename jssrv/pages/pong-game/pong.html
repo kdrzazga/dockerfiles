@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pong</title>
+    <link rel="stylesheet" type="text/css" href="animation.css">
+</head>
+
+<body onload="init();">
+<div id="board" onmousemove="getMousePos(event)" onmouseout="stopTrackingMouse()">
+    <div id="ball"></div>
+</div>
+<div id = "displayArea"></div>
+
+<script src="classes/velocityVector.js"></script>
+<script src="classes/ball.js"></script>
+<script src="classes/board.js"></script>
+<script src="pong.js"></script>
+<script src="key-listener.js"></script>
+<script src="animation.js"></script>
+<script src="../common/lib.js"></script>
+</body>
+</html>

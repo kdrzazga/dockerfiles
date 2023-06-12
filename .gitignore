@@ -1,5 +1,7 @@
 solaris/*
 gui/*
+jsff/*
+
 # Binaries for programs and plugins
 *.exe
 *.exe~

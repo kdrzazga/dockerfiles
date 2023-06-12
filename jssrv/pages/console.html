@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Textboxes Example</title>
+</head>
+<body>
+  <table>
+  <tr>
+	<td>
+		<textarea id="output" rows="5" cols="30" readonly></textarea><br>
+	</td>
+	<td>
+		<textarea id="maze" rows="5" cols="5" readonly></textarea>
+	</td>
+  </tr>
+  <tr>
+	<td colspan="2">
+		<input type="text" id="input" />
+	</td>
+  </tr>
+  
+  </table>
+  
+  <script>
+    // Get references to the textboxes
+    const outputTextbox = document.getElementById("output");
+    const inputTextbox = document.getElementById("input");
+
+    // Add event listener to input textbox
+    inputTextbox.addEventListener("keydown", function(event) {
+      // Check if the Enter key is pressed
+      if (event.key === "Enter") {
+        event.preventDefault(); // Prevent line break in the input textbox
+
+        // Append the new message to the existing content in the output textbox
+        outputTextbox.value += '> ' + inputTextbox.value + "\n";
+
+        // Clear the input textbox after appending the message
+        inputTextbox.value = "";
+      }
+    });
+  </script>
+</body>
+</html>
