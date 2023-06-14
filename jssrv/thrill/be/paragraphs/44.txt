@@ -1,0 +1,4 @@
+You are walking east. You see a big door in front of you. You're trying to open them. They are not moving.
+
+A) You stop trying (75)
+B) You want to force open them (105)
