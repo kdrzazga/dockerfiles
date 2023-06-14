@@ -2,6 +2,6 @@ function info(){
 	return "webapp2";
 }
 
-module exports={
+module.exports={
 	info
 };

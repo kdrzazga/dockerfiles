@@ -25,15 +25,12 @@ const webapp4Process = startProcess('node webapp4/be/controller.js > /var/webapp
 const webapp5Process = startProcess('node webapp5/be/controller.js > /var/webapp5.log 2>&1 &');
 const webapp6Process = startProcess('node webapp6/be/controller.js > /var/webapp6.log 2>&1 &');
 
-// Gracefully stop t processes on program termination
+// Gracefully stop the processes on program termination
 process.on('SIGINT', () => {
-  serverProcess.kill();
-  
-  webapp2Process.kill();
-  webapp3Process.kill();
-  webapp4Process.kill();
-  webapp5Process.kill();
-  webapp6Process.kill();
-  
+  const processes = [serverProcess, webapp2Process, webapp3Process, webapp4Process, webapp5Process, webapp6Process];
+
+  processes.forEach(app => app.kill());
+
   process.exit();
 });
+
