@@ -3,6 +3,9 @@
 FROM node:14
 
 WORKDIR /app
+RUN mkdir thrill
+RUN mkdir thrill/be
+RUN mkdir thrill/fe
 RUN mkdir webapp2
 RUN mkdir webapp2/be
 RUN mkdir webapp2/fe
@@ -30,6 +33,7 @@ COPY /BE/* .
 COPY index.html .
 
 COPY welcome.js .
+
 COPY webapp2/be/* ./webapp2/be/
 COPY webapp3/be/* ./webapp3/be/
 COPY webapp4/be/* ./webapp4/be/
