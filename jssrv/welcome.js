@@ -19,6 +19,7 @@ function startProcess(command) {
 }
 
 const serverProcess = startProcess('http-server');
+const thrillProcess = startProcess('node thrill/be/controller.js > /var/thrill.log 2>&1 &');
 const webapp2Process = startProcess('node webapp2/be/controller.js > /var/webapp2.log 2>&1 &');
 const webapp3Process = startProcess('node webapp3/be/controller.js > /var/webapp3.log 2>&1 &');
 const webapp4Process = startProcess('node webapp4/be/controller.js > /var/webapp4.log 2>&1 &');
@@ -27,7 +28,7 @@ const webapp6Process = startProcess('node webapp6/be/controller.js > /var/webapp
 
 // Gracefully stop the processes on program termination
 process.on('SIGINT', () => {
-  const processes = [serverProcess, webapp2Process, webapp3Process, webapp4Process, webapp5Process, webapp6Process];
+  const processes = [serverProcess, thrillProcess, webapp2Process, webapp3Process, webapp4Process, webapp5Process, webapp6Process];
 
   processes.forEach(app => app.kill());
 
