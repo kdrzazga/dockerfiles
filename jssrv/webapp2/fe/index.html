@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WEB app 2</title>
+</head>
+<body onload="sendRequest()">
+  <p id="dataContainer"></p>
+  <script>
+    function sendRequest() {
+      fetch('http://localhost:8091/')
+        .then(response => response.json())
+        .then(data => {
+          // Handle the response data
+          const dataContainer = document.getElementById('dataContainer');
+          dataContainer.textContent = data; // Update the text content of the <p> element
+        })
+        .catch(error => {
+          // Handle any errors
+          console.error(error);
+        });
+    }
+  </script>
+</body>
+</html>
