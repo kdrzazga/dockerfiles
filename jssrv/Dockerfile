@@ -34,6 +34,7 @@ COPY index.html .
 
 COPY welcome.js .
 
+COPY thrill/ ./thrill
 COPY webapp2/be/* ./webapp2/be/
 COPY webapp3/be/* ./webapp3/be/
 COPY webapp4/be/* ./webapp4/be/

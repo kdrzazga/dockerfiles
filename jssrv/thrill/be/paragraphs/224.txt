@@ -1,0 +1,1 @@
+After several steps the corridor turns east. You keep walking. In the southern wall you notice a door. If they are open (180), closed (301).

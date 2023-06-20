@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 function info(){
-	return "info";
+	return "THRILL game - a paraghraph adventure/RPG game";
 }
 
 function start(){
