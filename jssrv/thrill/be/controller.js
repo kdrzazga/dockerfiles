@@ -1,12 +1,26 @@
 const http = require('http');
-const { info, start } = require('./logic.js');
+const { info, start, readParagraph } = require('./logic.js');
 
 const server = http.createServer((req, res) => {
 	
-	if (req.method === 'GET' && '/' === req.url) {
-			res.statusCode = 200;
-			res.setHeader('Content-Type', 'text/plain');
+	if (req.method === 'GET') {
+		
+		res.setHeader('Content-Type', 'text/plain');
+		if( '/' === req.url){
+			res.statusCode = 200;	
 			res.end(info());
+		}
+		
+		else if ('/start' === req.url) {
+			res.statusCode = 200;	
+			res.end(start());			
+		}
+		
+		else if (req.url.startsWith('/par/')){
+			const parId = req.url.substring(5);
+			res.statusCode = 200;
+			res.end(readParagraph(parId));
+		}
 	} 
 	
 });

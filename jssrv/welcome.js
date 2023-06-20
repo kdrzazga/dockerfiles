@@ -3,7 +3,7 @@ const { exec } = require('child_process');
 
 console.log('\x1B[2J\x1B[0f'); //clear screen
 console.log('HTTP SERVER\n');
-console.log('Exposed ports: 8000, 8090, 8091, 8092, 8093, 8094, 8095');
+console.log('Exposed ports: 8080, 8090, 8091, 8092, 8093, 8094, 8095');
 console.log('\nTry: curl http://localhost:8090');
 console.log('To kill all webapps, use the command');
 console.log('node killjs.js');
