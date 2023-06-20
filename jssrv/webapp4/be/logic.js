@@ -1,5 +1,5 @@
 function info(){
-	return "webapp2";
+	return "webapp4";
 }
 
 module.exports={

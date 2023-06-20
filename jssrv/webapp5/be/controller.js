@@ -1,5 +1,5 @@
 const http = require('http');
-const info = require('./logic.js');
+const { info } = require('./logic.js');
 
 const server = http.createServer((req, res) => {
 	

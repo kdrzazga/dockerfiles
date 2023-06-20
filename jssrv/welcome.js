@@ -3,6 +3,7 @@ const { exec } = require('child_process');
 
 console.log('HTTP SERVER\n');
 console.log('Exposed ports: 8000, 8090, 8091, 8092, 8093, 8094, 8095');
+console.log('\n curl http://localhost:8090');
 
 function startProcess(command) {
   const process = exec(command);
