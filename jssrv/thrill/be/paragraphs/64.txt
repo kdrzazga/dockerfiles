@@ -1,0 +1,6 @@
+You are approaching the crossroads. You can caontinue your walk in one of four directions.
+
+West (296)
+North (264)
+East (284)
+South (224)

@@ -1,9 +1,14 @@
 const http = require('http');
 const { exec } = require('child_process');
 
+console.log('\x1B[2J\x1B[0f'); //clear screen
 console.log('HTTP SERVER\n');
 console.log('Exposed ports: 8000, 8090, 8091, 8092, 8093, 8094, 8095');
-console.log('\n curl http://localhost:8090');
+console.log('\nTry: curl http://localhost:8090');
+console.log('To kill all webapps, use the command');
+console.log('node killjs.js');
+console.log('and start again concrete apps with:');
+console.log('node webapp2/be/controller.js > wa2.log 2>&1 &');
 
 function startProcess(command) {
   const process = exec(command);
