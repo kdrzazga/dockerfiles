@@ -1,0 +1,5 @@
+You are on a wide pavement. It leads north, and later turns east. After several steps you approach a heavy door. Have you already been here?
+
+Yes (322)
+No (299)
+ 

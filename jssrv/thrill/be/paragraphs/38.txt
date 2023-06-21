@@ -1,0 +1,5 @@
+In the beginning, the corridor leads north, then it becomes curvy and leads to the east. It is getting wider and at the end of it there are stairs, leading down.
+You are standing before a decorated door. Have you already been behind that door?
+
+Yes (167)
+No (328)
