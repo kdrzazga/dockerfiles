@@ -7,3 +7,9 @@ curl http://localhost:8092/ #webapp3
 curl http://localhost:8093/ #webapp4
 curl http://localhost:8094/ #webapp5
 curl http://localhost:8095/ #webapp6
+
+curl -X PUT -d "klucz" http://localhost:8090/inv
+curl http://localhost:8090/inv
+curl http://localhost:8090/inv-check/sword
+curl -X DELETE -d "sword" http://localhost:8090/inv
+

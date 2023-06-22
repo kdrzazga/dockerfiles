@@ -1,5 +1,5 @@
 const http = require('http');
-const { info, start, readParagraph, readInventory, addToInventory} = require('./logic.js');
+const { info, start, readParagraph, readInventory, addToInventory, checkInventory, removeFromInventory} = require('./logic.js');
 
 const server = http.createServer((req, res) => {
 	
@@ -24,6 +24,12 @@ const server = http.createServer((req, res) => {
 			const inv = readInventory();
 			res.setHeader('Content-Type', 'application/json');
 			res.end(JSON.stringify(inv));
+		}		
+		else if (req.url.startsWith('/inv-check/')){
+			const item = req.url.substring(11);
+			let presence = checkInventory(item);
+			res.setHeader('Content-Type', 'application/json');
+			res.end(JSON.stringify(presence));
 		}
 		
 		else {
@@ -43,7 +49,14 @@ const server = http.createServer((req, res) => {
 			
 			req.on('end', () => {
 				const item = requestBody.trim();
-				res.end(addToInventory(item));
+				let success = addToInventory(item);
+				const msg2 = success ? '' : 'UN';
+				const msg = 'Insert ' + msg2 + 'SUCCESSFUL'
+				if (!success){
+					res.statusCode = 500;
+				}
+				
+				res.end(msg);
 			});
 		} else {
 			res.statusCode = 404;
@@ -54,7 +67,23 @@ const server = http.createServer((req, res) => {
 		res.statusCode = 200;
 		
 		if('/inv' === req.url){
-			res.end('DELETE - remove from inventory');
+			let requestBody  = '';
+			
+			req.on('data', chunk => {
+				requestBody += chunk;
+			});
+			
+			req.on('end', () => {
+				const item = requestBody.trim();
+				let success = removeFromInventory(item);
+				const msg2 = success ? '' : 'UN';
+				const msg = 'Removal of ' + msg2 + 'SUCCESSFUL'
+				if (!success){
+					res.statusCode = 500;
+				}
+				
+				res.end(msg);
+			});
 		}
 		else {
 			res.statusCode = 404;

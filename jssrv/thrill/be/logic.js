@@ -1,9 +1,9 @@
 const fs = require('fs');
 
-global.inventory = ['sword'];
+inventory = ['sword'];
 
 function info(){
-	return "THRILL game - a paraghraph adventure/RPG game";
+	return "THRILL game - a paragraph adventure/RPG game";
 }
 
 function start(){
@@ -30,6 +30,24 @@ function addToInventory(item){
 	}
 }
 
+function checkInventory(item){
+	console.log(`Checking presence of ${item} in the directory.`);
+	const included = inventory.includes(item);
+	return included;
+}
+
+function removeFromInventory(item){
+	if (inventory.includes(item)) {
+		const index = inventory.indexOf(item);
+		inventory.splice(index, 1);
+		console.log(`Item ${item} removed from inventory.`);
+		return true;
+	} else {
+		console.log(`No element ${item} in the directory.`);
+		return false;
+	}
+}
+
 function readDataFile(filename) {
   try {
     const data = fs.readFileSync('paragraphs/' + filename + '.txt', 'utf8');
@@ -46,5 +64,7 @@ module.exports={
 	start,
 	readParagraph,
 	readInventory,
-	addToInventory
+	addToInventory,
+	checkInventory,
+	removeFromInventory
 };
