@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 inventory = ['sword'];
+visitedChambers = [];
 
 function info(){
 	return "THRILL game - a paragraph adventure/RPG game";
@@ -48,6 +49,18 @@ function removeFromInventory(item){
 	}
 }
 
+function markChamberVisited(id){
+	if(visitedChambers.includes(id)){
+		console.log(`You have already been in chamber ${id}`);
+	}
+	else 
+		visitedChambers.push(id);
+}
+
+function getVisited(){
+	return visitedChambers;
+}
+
 function readDataFile(filename) {
   try {
     const data = fs.readFileSync('paragraphs/' + filename + '.txt', 'utf8');
@@ -66,5 +79,7 @@ module.exports={
 	readInventory,
 	addToInventory,
 	checkInventory,
-	removeFromInventory
+	removeFromInventory,
+	markChamberVisited,
+	getVisited
 };

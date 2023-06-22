@@ -1,5 +1,5 @@
 const http = require('http');
-const { info, start, readParagraph, readInventory, addToInventory, checkInventory, removeFromInventory} = require('./logic.js');
+const { info, start, readParagraph, readInventory, addToInventory, checkInventory, removeFromInventory, markChamberVisited, getVisited} = require('./logic.js');
 
 const server = http.createServer((req, res) => {
 	
@@ -17,19 +17,28 @@ const server = http.createServer((req, res) => {
 		
 		else if (req.url.startsWith('/par/')){
 			const parId = req.url.substring(5);
-			res.end(readParagraph(parId));
+			markChamberVisited(parId);
+			const result = readParagraph(parId);
+			res.end(result);
 		}
 		
 		else if ('/inv' === req.url){
 			const inv = readInventory();
 			res.setHeader('Content-Type', 'application/json');
 			res.end(JSON.stringify(inv));
-		}		
+		}
+		
 		else if (req.url.startsWith('/inv-check/')){
 			const item = req.url.substring(11);
 			let presence = checkInventory(item);
 			res.setHeader('Content-Type', 'application/json');
 			res.end(JSON.stringify(presence));
+		}
+		
+		else if ('/visited' === req.url){
+			const visited = getVisited();			
+			res.setHeader('Content-Type', 'application/json');
+			res.end(JSON.stringify(visited));
 		}
 		
 		else {
@@ -63,6 +72,7 @@ const server = http.createServer((req, res) => {
 			res.end('unsupported PUT request');
 		}
 	}
+				
 	else if ('DELETE' === req.method){
 		res.statusCode = 200;
 		
