@@ -24,13 +24,13 @@ function startProcess(command) {
   return process;
 }
 
-const serverProcess = startProcess('http-server');
 const thrillProcess = startProcess('node thrill/be/controller.js > /var/thrill.log 2>&1 &');
 const webapp2Process = startProcess('node webapp2/be/controller.js > /var/webapp2.log 2>&1 &');
 const webapp3Process = startProcess('node webapp3/be/controller.js > /var/webapp3.log 2>&1 &');
 const webapp4Process = startProcess('node webapp4/be/controller.js > /var/webapp4.log 2>&1 &');
 const webapp5Process = startProcess('node webapp5/be/controller.js > /var/webapp5.log 2>&1 &');
 const webapp6Process = startProcess('node webapp6/be/controller.js > /var/webapp6.log 2>&1 &');
+const serverProcess = startProcess('http-server');
 
 // Gracefully stop the processes on program termination
 process.on('SIGINT', () => {
