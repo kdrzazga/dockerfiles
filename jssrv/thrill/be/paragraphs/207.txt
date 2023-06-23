@@ -1,0 +1,45 @@
+(207)
+
+One leg, another one, deep breath ...  and you made it through. Out of a narrow hole, you are falling on a flat, sone floor. All you weapons and equipment is falling on you. 
+Oh! Great Almanhagor!!! If you could only see this...  This cave could fit your whole castle! Altogether with turrets!
+Everything is purple and shiny. There are stalactites hanging from a ceiling and casting shadows on a shiny surface of the floor. You are feeling like an ant, crushed by a hedgehog.
+
+I can see all of that... How is that even possible? My latern can shine only a small distance. For the sake of Zagranna, my goddess! It's hellfire! A mirror-shining floor is getting split and a deep ditch appears. It's glowing red. 
+
+You are crawling quietly, your hands are sweating. You are covering your eyes with our hand and among your fingers, you are looking into the abyss.
+
+The ground is burning.
+
+Haruum, my father, how naive I was, thinking that a strall with sword and few slices of dried bread in a backpack is enough to learn the Great Secret of the Underground !
+
+You are returning to the wall of the cave.
+
+<Drink the magic water (if you have it) +3 HP, +3 Agility>
+
+You are looking around the cave. You need to go to the other side of this crack. It's the only way. You spot some hammer on the opposite side of the cave. It gives you hope.
+
+You're standing up. Once again, you are approaching the crack. Now, when you are standing next to it, it seems not so wide as before. It's interesting - it's  so bright around and so ... quiet.
+
+But wait!
+
+Have you heard singing? Somewhere from the end of the cave a low voice is comming. From behind a rock a thick body appears. Green-yello stripes, red crest along the back.
+
+DRAGON !
+
+Have you heard already a story about a crazy dragon, told by some inhabitants of the Underground? That's him!
+
+You are appoaching the dragon bravely. He is just placing a wooden post with a table.
+
+"The Dragon. Transport over the crack. Pleasant service - if only you have 10 gold coins"
+
+He's looking at you. It seems he often meets similar warriors.
+
+What are you doing?
+
+Pay for the ride (35)
+
+Try to jump over the crack (110)
+
+(if you have rope) - Try to toss a rope over the crack (269)
+
+Try to walk over the bridge (74) You know it's risky.
