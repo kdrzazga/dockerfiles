@@ -13,4 +13,3 @@ curl -X PUT -d "klucz" http://localhost:8090/inv
 curl http://localhost:8090/inv
 curl http://localhost:8090/inv-check/sword
 curl -X DELETE -d "sword" http://localhost:8090/inv
-
