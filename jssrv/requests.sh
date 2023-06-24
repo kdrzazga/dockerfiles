@@ -15,4 +15,5 @@ curl http://localhost:8090/inv-check/sword
 curl -X DELETE -d "sword" http://localhost:8090/inv
 
 curl -X POST -d "5,3" http://localhost:8091/start
+curl -X POST -d "2,1" http://localhost:8091/click
 curl http://localhost:8091/history

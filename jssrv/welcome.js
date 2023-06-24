@@ -8,7 +8,7 @@ console.log('\nTry: curl http://localhost:8090');
 console.log('To kill all webapps, use the command');
 console.log('node killjs.js');
 console.log('and start again concrete apps with:');
-console.log('node webapp2/be/controller.js > wa2.log 2>&1 &');
+console.log('node boardclicker/be/controller.js > bc2.log 2>&1 &');
 
 function startProcess(command) {
   const process = exec(command);
@@ -25,7 +25,7 @@ function startProcess(command) {
 }
 
 const thrillProcess = startProcess('node thrill/be/controller.js > /var/thrill.log 2>&1 &');
-const webapp2Process = startProcess('node webapp2/be/controller.js > /var/webapp2.log 2>&1 &');
+const webapp2Process = startProcess('node boardclicker/be/controller.js > /var/boardclicker.log 2>&1 &');
 const webapp3Process = startProcess('node webapp3/be/controller.js > /var/webapp3.log 2>&1 &');
 const webapp4Process = startProcess('node webapp4/be/controller.js > /var/webapp4.log 2>&1 &');
 const webapp5Process = startProcess('node webapp5/be/controller.js > /var/webapp5.log 2>&1 &');
