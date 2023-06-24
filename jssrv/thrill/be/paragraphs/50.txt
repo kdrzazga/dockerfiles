@@ -1,0 +1,4 @@
+You are approaching a crossroads. You can travel:
+North (310)
+East (130)
+West (64)

@@ -1,0 +1,5 @@
+You are reaching quite a big square. Tunnels lead in four directions. Choose one:
+West (287)
+North (38)
+Easy (82)
+South (336)

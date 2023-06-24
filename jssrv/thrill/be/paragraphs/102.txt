@@ -1,0 +1,5 @@
+You are approaching a crossroads. Corridors lead in every direction. Where do you want to go?
+West (123)
+North (268)
+East (374)
+South (351)
