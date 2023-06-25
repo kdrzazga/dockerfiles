@@ -50,6 +50,7 @@ RUN mkdir /srv/java-stuff && \
 	mkdir /opt/db && \
 	mkdir /usr/R  && \
 	mkdir /usr/art && \
+	mkdir /usr/basic && \
 	mkdir /usr/c64basic-stuff && \
 	mkdir /usr/hodgepodge && \
 	mkdir /usr/c64kickass
@@ -72,6 +73,7 @@ COPY ada/* /usr/ada-stuff/
 COPY SQL/* /opt/SQL/
 COPY R/* /usr/R/
 COPY art/* /usr/art/
+COPY basic/* /usr/basic/
 COPY c64basic/* /usr/c64basic-stuff
 COPY c64kickass/* /usr/c64kickass/
 COPY hodgepodge/* /usr/hodgepodge/
