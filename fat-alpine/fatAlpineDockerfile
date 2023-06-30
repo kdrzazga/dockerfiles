@@ -117,6 +117,7 @@ RUN npm install -g typescript crypto-js figlet
 
 WORKDIR /usr/nodejs-stuff/test
 RUN npm init -y
+RUN npm install -D jest supertest
 RUN npm install --save-dev jasmine
 RUN npx jasmine init
 

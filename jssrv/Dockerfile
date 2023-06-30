@@ -23,7 +23,7 @@ RUN mkdir webapp6/be
 RUN mkdir webapp6/fe
 
 RUN npm install -g http-server && \
-	npm install -g newman webpack babel figlet
+	npm install -g newman webpack babel figlet mocha chai
 
 RUN npm install -g express react vue angular typescript
 	
