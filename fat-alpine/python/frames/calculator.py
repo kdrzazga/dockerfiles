@@ -1,22 +1,6 @@
 import curses
 
-def setup_screen(stdscr):
-    curses.curs_set(0)
-    stdscr.nodelay(1)
-    stdscr.timeout(100)
-    
-    curses.start_color()
-    curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
-    curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK)  
-    curses.init_pair(3, curses.COLOR_CYAN, curses.COLOR_BLACK)      
-
-
-def _draw_frame(stdscr, left, top, right, bottom, color):
-    stdscr.addstr(top, left, "+" + "-" * (right - left - 1) + "+", curses.color_pair(color))
-    for row in range(top + 1, bottom):
-        stdscr.addstr(row, left, "|", curses.color_pair(color))
-        stdscr.addstr(row, right, "|", curses.color_pair(color))
-    stdscr.addstr(bottom, left, "+" + "-" * (right - left - 1) + "+", curses.color_pair(color))
+from frame_lib import Frame
 
 
 def display_calculator(stdscr, expression, result):
@@ -30,11 +14,11 @@ def display_calculator(stdscr, expression, result):
     stdscr.addstr(7, 1, "   7     8       9     +   ")
     stdscr.addstr(8, 1, "   .     0       AC    -   ")
     
-    _draw_frame(stdscr, 0, 0, 28, 2, 1)
-    _draw_frame(stdscr, 0, 2, 28, 4, 1)
-    _draw_frame(stdscr, 0, 4, 28, 9, 1)
-    
+    frame_expression.draw()
+    frame_result.draw()
+    frame_keyboard.draw()
 
+    
 def calculate(expression):
     try:
         result = eval(expression)
@@ -49,7 +33,14 @@ def display_info(stdscr):
 
 
 def main(stdscr):
-    setup_screen(stdscr)
+    global frame_expression
+    global frame_result
+    global frame_keyboard
+
+    frame_expression = Frame(stdscr, 0, 0, 28, 2, 1)
+    frame_result = Frame(stdscr, 0, 2, 28, 4, 1)
+    frame_keyboard = Frame(stdscr, 0, 4, 28, 9, 1)
+
     expression = ""
     result = ""
 
@@ -80,6 +71,7 @@ def main(stdscr):
             expression += chr(key)
 
         display_calculator(stdscr, expression, result)
+
 
 if __name__ == '__main__':
     curses.wrapper(main)
