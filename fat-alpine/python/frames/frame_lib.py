@@ -8,6 +8,7 @@ class Frame:
         self.right = right
         self.bottom = bottom
         self.color = color
+        self.cursor_x, self.cursor_y = 0, 0
         self._setup_screen()
 
     def _setup_screen(self):
@@ -27,3 +28,24 @@ class Frame:
             stdscr.addstr(row, left, "|", curses.color_pair(color))
             stdscr.addstr(row, right, "|", curses.color_pair(color))
         stdscr.addstr(bottom, left, "+" + "-" * (right - left - 1) + "+", curses.color_pair(color))
+
+    def add_text(self, text):
+        x = self.left + self.cursor_x
+        y = self.top + self.cursor_y
+        
+        if x >= self.right or y >= self.bottom:
+            return
+        
+        self.stdscr.addstr(y + 1, x + 1, self._truncate_string(text, self.right - x - 1))
+    
+    def add_text_xy(self, x, y, text):
+        self.cursor_x = x
+        self.cursor_y = y
+        self.add_text(text)
+        
+    def _truncate_string(self, string, length):
+        if len(string) <= length:
+            return string
+        else:
+            return string[:length]
+    
