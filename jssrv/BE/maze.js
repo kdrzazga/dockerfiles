@@ -65,3 +65,7 @@ console.log('maze');
 
 // Print the maze
 maze.forEach(row => console.log(row.join(' ')));
+
+module.exports = {
+	generateMaze	
+};
