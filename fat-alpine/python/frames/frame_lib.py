@@ -45,6 +45,12 @@ class Frame:
         self.cursor_y = y
         self.add_text(text)
         
+    def clear(self):
+        for y in range(0, self.bottom - self.top - 1):
+            self.add_text_xy(0, y, self.right * " ");
+        
+        self.cursor_x, self.cursor_y = 0, 0
+        
     def _truncate_string(self, string, length):
         if len(string) <= length:
             return string
