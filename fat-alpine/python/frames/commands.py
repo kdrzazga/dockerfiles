@@ -9,36 +9,40 @@ def analyze_command(stdscr, command, mainFrame, commandFrame, infoFrame):
     if command != '':
         logging.info(f"Command: %s", command)
     
-    if command == "clear" or command == "cls":
-        clear(mainFrame)
-
-    elif command == "exit" or command == "quit":
-        exit_app(mainFrame)
+    try:
+        if command == "clear" or command == "cls":
+            clear(mainFrame)
     
-    elif command == "help":
-        help(stdscr, mainFrame)
+        elif command == "exit" or command == "quit":
+            exit_app(mainFrame)
         
-    elif command == "time":
-        time(mainFrame) 
-        
-    elif command == "date":
-        date(mainFrame)
-        
-    elif command.startswith("load "):
-        argument = command[command.index(' ') + 1: len(command)]
-        load(argument, mainFrame, infoFrame)
-        
-    elif command.startswith("printz "):
-        argument = command[command.index(' ') + 1: len(command)]
-        printz(low_mem, int(argument), mainFrame, infoFrame)
-        
-    elif command.startswith("poke ") or command.startswith("mov "):
-        argument1 = command[command.index(' ') + 1: command.index(',')]
-        argument2 = command[command.index(',') + 1: len(command)]
-        poke(low_mem, int(argument1), int(argument2), mainFrame, infoFrame)
-        
-    elif command == "mem" or command == "memory":
-        print_memory(low_mem, mainFrame)
+        elif command == "help":
+            help(stdscr, mainFrame)
+            
+        elif command == "time":
+            time(mainFrame) 
+            
+        elif command == "date":
+            date(mainFrame)
+            
+        elif command.startswith("load "):
+            argument = command[command.index(' ') + 1: len(command)]
+            load(argument, mainFrame, infoFrame)
+            
+        elif command.startswith("printz "):
+            argument = command[command.index(' ') + 1: len(command)]
+            printz(low_mem, int(argument), mainFrame, infoFrame)
+            
+        elif command.startswith("poke ") or command.startswith("mov "):
+            argument1 = command[command.index(' ') + 1: command.index(',')]
+            argument2 = command[command.index(',') + 1: len(command)]
+            poke(low_mem, int(argument1), int(argument2), mainFrame, infoFrame)
+            
+        elif command == "mem" or command == "memory":
+            print_memory(low_mem, mainFrame)
+    
+    except Exception as e:
+        logging.error(f"Error occured: {str(e)}")
     
 
 def clear(mainFrame):
@@ -104,7 +108,6 @@ def printz(mem_bank, argument, mainFrame, infoFrame):
     logging.info(f"Start address: %s", argument)
      
     while mem_bank[argument] != 0 and argument < len(mem_bank):
-        logging.error(f"{argument}")
         char_tab.append(chr(mem_bank[argument]))
         argument += 1        
     
