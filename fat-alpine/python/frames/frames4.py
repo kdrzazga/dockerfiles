@@ -1,11 +1,9 @@
-import curses, logging
+import curses
 
 from frame_lib import Frame
-from commands import analyze_command
 
 def main(stdscr):
-    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-    
+   
     init(stdscr)
         
     expression = ""
@@ -19,7 +17,7 @@ def main(stdscr):
         if key == 10:
             commandFrame.clear()
             mainFrame.add_text(expression)            
-            analyze_command(stdscr, command, mainFrame, commandFrame, infoFrame)
+            #mainFrame.fill_with_list(history)
             command = ""
         
         elif key == 27 or key == ord('/'):

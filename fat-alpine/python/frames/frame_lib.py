@@ -42,7 +42,7 @@ class Frame:
     
     def add_text_xy(self, x, y, text):
         self.cursor_x = x
-        self.cursor_y = y
+        self.cursor_y = y if y >=0 else self.bottom + y - 2
         self.add_text(text)
         
     def clear(self):
