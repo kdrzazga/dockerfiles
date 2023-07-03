@@ -55,16 +55,6 @@ class Frame:
         self.cursor_x = 0
         self.cursor_y = self.cursor_y + 1 if self.cursor_y < self.bottom - self.top - 2 else self.cursor_y
     
-    def fill_with_list(self, lst):
-        self.clear()
-        frame_lines = self.bottom - self.top
-        if frame_lines < len(lst):
-            for index, item in enumerate(lst[-frame_lines:]):#, start=self.top):
-                self.add_text_xy(0, index, item)
-        else:
-            for index, item in enumerate(lst[-frame_lines:]):#, start=self.top):
-                self.add_text_xy(0, index, item)
-    
     def _truncate_string(self, string, length):
         if len(string) <= length:
             return string

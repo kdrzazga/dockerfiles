@@ -59,6 +59,7 @@ def init(stdscr):
     infoFrame.add_text_xy(0, 0, "Press Q or E")
     infoFrame.add_text_xy(0, 1, "(capital)")
     infoFrame.add_text_xy(0, 2, "to exit")
+
     
 if __name__ == '__main__':
     curses.wrapper(main)
