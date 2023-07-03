@@ -31,5 +31,5 @@ def print_memory(mem_bank, frame):
             verse += 2
             frame.newline()
     frame.add_text_xy(0, verse, "".join(line1))
-    logging.info("<>" + "".join(line1))
+    logging.info("<  >" + "".join(line1))
     frame.add_text_xy(0, verse +1, "".join(line2))            

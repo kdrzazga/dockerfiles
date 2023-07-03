@@ -26,7 +26,11 @@ def analyze_command(stdscr, command, mainFrame, commandFrame, infoFrame):
         
     elif command.startswith("load "):
         argument = command[command.index(' ') + 1: len(command)]
-        load(argument, mainFrame, infoFrame) 
+        load(argument, mainFrame, infoFrame)
+        
+    elif command.startswith("printz "):
+        argument = command[command.index(' ') + 1: len(command)]
+        printz(low_mem, int(argument), mainFrame, infoFrame)
         
     elif command.startswith("poke ") or command.startswith("mov "):
         argument1 = command[command.index(' ') + 1: command.index(',')]
@@ -48,6 +52,8 @@ def help(stdscr, mainFrame):
     mainFrame.add_text_xy(0, 2, "help, time, date, clear/cls, mem/memory, exit/quit")
     mainFrame.add_text_xy(0, 3, "load sword/jail")
     mainFrame.add_text_xy(0, 4, "poke/mov 1,255")
+    mainFrame.add_text_xy(0, 5, "printz 30 - prints chars according to their ASCII code, starting from")
+    mainFrame.add_text_xy(0, 6, " address 30, till meeting value 0 (zero-terminated string)")
     mainFrame.add_text_xy(0, -1, "Press any key to continue ...    ")
     stdscr.getch()
     mainFrame.clear()
@@ -90,4 +96,24 @@ def _write_date_time(mainFrame, current_time):
     formatted_time = f"{current_time}    "
     mainFrame.newline()
     mainFrame.add_text(formatted_time)
+    
+    
+def printz(mem_bank, argument, mainFrame, infoFrame):
+    char_tab = []
+    
+    logging.info(f"Start address: %s", argument)
+     
+    while mem_bank[argument] != 0 and argument < len(mem_bank):
+        logging.error(f"{argument}")
+        char_tab.append(chr(mem_bank[argument]))
+        argument += 1        
+    
+    caption = "".join(char_tab)
+    
+    if len(caption) > 0:
+        mainFrame.newline
+        mainFrame.add_text(caption)
+        
+    logging.info(f"End address: %s", argument)
+    logging.info(f"Read string %s", )
     
