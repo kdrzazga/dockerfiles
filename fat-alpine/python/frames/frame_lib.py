@@ -42,9 +42,19 @@ class Frame:
     
     def add_text_xy(self, x, y, text):
         self.cursor_x = x
-        self.cursor_y = y
+        self.cursor_y = y if y >=0 else self.bottom + y - 2
         self.add_text(text)
         
+    def clear(self):
+        for y in range(0, self.bottom - self.top - 1):
+            self.add_text_xy(0, y, self.right * " ");
+        
+        self.cursor_x, self.cursor_y = 0, 0
+
+    def newline(self):
+        self.cursor_x = 0
+        self.cursor_y = self.cursor_y + 1 if self.cursor_y < self.bottom - self.top - 2 else self.cursor_y
+    
     def _truncate_string(self, string, length):
         if len(string) <= length:
             return string

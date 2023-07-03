@@ -3,7 +3,44 @@ import curses
 from frame_lib import Frame
 
 def main(stdscr):
+   
+    init(stdscr)
+        
+    expression = ""
+    history = []
+    command = ""
+        
+    while True:
+
+        key = stdscr.getch()
+
+        if key == 10:
+            commandFrame.clear()
+            mainFrame.add_text(expression)            
+            #mainFrame.fill_with_list(history)
+            command = ""
+        
+        elif key == 27 or key == ord('/'):
+            mainFrame.newline()
+            history.append(expression)
+            command = ""
+            expression = ""
+
+        elif key == ord('E') or key == ord('Q'):
+            break
+
+        elif ord('a') <= key <= ord('z') or key == 32: 
+            command += chr(key)
+            expression += chr(key)
+            commandFrame.clear()
+            commandFrame.add_text(command)
+
+
+def init(stdscr):
     global mainFrame
+    global commandFrame
+    global infoFrame
+    
     color_set = 10
     
     stdscr.clear()
@@ -17,32 +54,9 @@ def main(stdscr):
     commandFrame.draw()
     infoFrame.draw()
     
-    commandFrame.add_text("L1tw0 Ojc2y2No. moj@")
-    mainFrame.add_text("12345689012345678901234567890")
-    key = stdscr.getch()
-    
-    mainFrame.add_text_xy(2, 1, "abcdefghojklmnopqrstuvw123455678")
-    mainFrame.add_text_xy(6, 3, "23455678")
     infoFrame.add_text_xy(0, 0, "Press Q or E")
     infoFrame.add_text_xy(0, 1, "(capital)")
     infoFrame.add_text_xy(0, 2, "to exit")
-    
-    expression = ""
-    result = ""
-    
-    while True:
-
-        key = stdscr.getch()
-
-        if key == 10:
-            mainFrame.add_text(expression)
-
-        elif key == ord('E') or key == ord('Q'):
-            break
-
-        elif 48 <= key <= 90: 
-            expression += chr(key)
-            
     
 if __name__ == '__main__':
     curses.wrapper(main)

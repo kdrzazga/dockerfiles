@@ -5,6 +5,16 @@ import time
 import subprocess
 from colorama import Fore
 
+def start_microservices():
+    directory = "/usr/python-stuff/microservices"
+    scripts = ["service1.py", "service2.py", "service3.py", "service4.py", "service5.py"]
+
+    for script in scripts:
+        script_path = os.path.join(directory, script)
+        print("\nStarting Python service" + script)
+        subprocess.Popen(["python", script_path], cwd=directory, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+
 text_wall = ("Installed user soft:", 
              "nethack - A classic roguelike game with procedurally generated dungeons", 
              "ranger", 
@@ -73,6 +83,8 @@ for text in text_wall_python_programs:
     
 
 if len(sys.argv) > 1 and sys.argv[1] == "up":
+    start_microservices()
+    
     print("\nCURRENT USER: ")
     os.system('whoami')
     os.system('mc')
