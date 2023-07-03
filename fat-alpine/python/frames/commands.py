@@ -1,6 +1,8 @@
 import curses, sys, time, logging
 
 from datetime import datetime
+from memory import poke, print_memory, low_mem, hi_mem
+
 
 def analyze_command(stdscr, command, mainFrame, commandFrame, infoFrame):
     
@@ -24,7 +26,15 @@ def analyze_command(stdscr, command, mainFrame, commandFrame, infoFrame):
         
     elif command.startswith("load "):
         argument = command[command.index(' ') + 1: len(command)]
-        load(argument, mainFrame, infoFrame)
+        load(argument, mainFrame, infoFrame) 
+        
+    elif command.startswith("poke ") or command.startswith("mov "):
+        argument1 = command[command.index(' ') + 1: command.index(',')]
+        argument2 = command[command.index(',') + 1: len(command)]
+        poke(low_mem, int(argument1), int(argument2), mainFrame, infoFrame)
+        
+    elif command == "mem" or command == "memory":
+        print_memory(low_mem, mainFrame)
     
 
 def clear(mainFrame):
@@ -35,8 +45,9 @@ def help(stdscr, mainFrame):
     mainFrame.clear()
     mainFrame.add_text("HELP:")
     mainFrame.add_text_xy(0, 1, "Commands:")
-    mainFrame.add_text_xy(0, 2, "help, time, date, clear/cls, exit/quit")
+    mainFrame.add_text_xy(0, 2, "help, time, date, clear/cls, mem/memory, exit/quit")
     mainFrame.add_text_xy(0, 3, "load sword/jail")
+    mainFrame.add_text_xy(0, 4, "poke/mov 1,255")
     mainFrame.add_text_xy(0, -1, "Press any key to continue ...    ")
     stdscr.getch()
     mainFrame.clear()

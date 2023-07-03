@@ -31,7 +31,7 @@ def main(stdscr):
         elif key == ord('E') or key == ord('Q'):
             break
 
-        elif ord('a') <= key <= ord('z') or key == 32: 
+        elif ord('a') <= key <= ord('z') or key == 32 or ord('*') <= key <= ord('?'): 
             command += chr(key)
             expression += chr(key)
             commandFrame.clear()
