@@ -1,6 +1,7 @@
 solaris/*
 gui/*
 jsff/*
+fat-alpine/python/log.json
 
 # Binaries for programs and plugins
 *.exe
