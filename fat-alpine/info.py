@@ -5,14 +5,23 @@ import time
 import subprocess
 from colorama import Fore
 
+def start_server(script_path):
+    subprocess.call(['python', script_path])
+
 def start_microservices():
     directory = "/usr/python-stuff/microservices"
     scripts = ["service1.py", "service2.py", "service3.py", "service4.py", "service5.py"]
+    processes = []
 
     for script in scripts:
         script_path = os.path.join(directory, script)
-        print("\nStarting Python service" + script)
-        subprocess.Popen(["python", script_path], cwd=directory, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        process = multiprocessing.Process(target=start_server, args=(script_path,))
+        process.start()
+        processes.append(process)
+        print("Started microservice: " + script)
+
+    for process in processes:
+        process.join()
 
 
 text_wall = ("Installed user soft:", 
@@ -62,11 +71,16 @@ output = subprocess.check_output(['cat', '/etc/alpine-release'])
 version = output.decode('utf-8').strip()
 print('Alpine Linux', version)
 
+if len(sys.argv) > 1 and sys.argv[1] == "up":
+    start_microservices()
+
+time.sleep(2)
+
 welcome = art.text2art("welcome !")
 print(f"{Fore.MAGENTA}{welcome}{Fore.RESET}")
 
-time.sleep(2)             
-             
+time.sleep(2)
+ 
 for text in text_wall:
     parts = text.split(" - ")
 
@@ -80,11 +94,9 @@ time.sleep(2)
 
 for text in text_wall_python_programs:
     print(text)
-    
+
 
 if len(sys.argv) > 1 and sys.argv[1] == "up":
-    start_microservices()
-    
     print("\nCURRENT USER: ")
     os.system('whoami')
     os.system('mc')
