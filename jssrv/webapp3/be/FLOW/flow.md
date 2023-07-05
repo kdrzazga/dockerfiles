@@ -1,18 +1,30 @@
 ```
 ┌──────────────┐      ┌───────────┐ 	 ┌──────────────┐      ┌──────────┐ 
-│   CREATE     +--1->-+ AGREEMENT +--2->-+ AGREEMENT    +--3->-+ AGREEMENT+---4->-
-│NEW COMMITMENT│      │INITIALIZED│   	 │DRAFT APPROVED│      │GENERATED │  	
-└──────────────┘      └───────────┘      └──────────────┘      └──────────┘ 
-	   														   
-┌──────────────┐      ┌───────────┐ 	 ┌──────────────┐      ┌──────────┐ 
-│  COMMITMENT  |      |   OPEN    +-<-7--+ 	   PLAN     +-<-6--+ PENDING  +--<-5--
-│    CLOSED    │      │COMMITMENT │   	 │ IN PROGRESS  │      | PAYMENT  │ 
-└──────+───────┘      └────+──────┘      └──────────────┘      └──────────┘ 
-
-
-                      ┌────+──────┐      ┌──────────────┐
-       +----<--9------+ COMMITMENT+-10->-+  COMMITMENT  +---------11-->-----------
-                      |  PENDING  |      |    PENDING   |
-                      |  CLOSURE  |      |    RENEWAL   |
+│   CREATE     +──1─>─+ AGREEMENT +──2─>─+ AGREEMENT    +──3─>─+ AGREEMENT+──4─>───────+
+│NEW COMMITMENT│      │INITIALIZED│   	 │DRAFT APPROVED│      │GENERATED │            │  	
+└──────────────┘      └───────────┘      └──────────────┘      └──────────┘            V
+                                                                                       │									   
+┌──────────────┐      ┌───────────┐ 	 ┌──────────────┐      ┌──────────┐       ┌────+─────────┐ 
+│  COMMITMENT  │      │   OPEN    +─<─7──+ 	   PLAN     +─<─6──+ PENDING  +──<─5──+  AGREEMENT   │
+│    CLOSED    │      │COMMITMENT │   	 │ IN PROGRESS  │      │ PAYMENT  │       │SENT TO CLIENT│ 
+└──────+───────┘      └────+──────┘      └──────────────┘      └──────────┘       └────+─────────┘      
+       │                   │8                                                          │
+       ^                   V                                                           ^
+       │              ┌────+──────┐      ┌──────────────┐                              │
+       +────<──9──────+ COMMITMENT+─10─>─+  COMMITMENT  +────────────────────11─>──────+    
+                      │  PENDING  │      │    PENDING   │
+                      │  CLOSURE  │      │    RENEWAL   │
                       └───────────┘      └──────────────┘                       
 ```
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
