@@ -1,5 +1,6 @@
 import multiprocessing
 import subprocess
+import logging
 import os
 
 
@@ -14,9 +15,13 @@ def start_ui():
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
     server_process = multiprocessing.Process(target=start_server)
+    
+    logging.info("Starting server...")
     server_process.start()
 
+    logging.info("Starting UI...")
     start_ui()
 
     server_process.join()

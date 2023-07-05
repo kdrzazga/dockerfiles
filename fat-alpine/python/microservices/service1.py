@@ -1,10 +1,11 @@
+import logging
 from flask import Flask
 
-from service1files.logic import generate_entries
+from service1files.logic_log import generate_entries
 
 
 app = Flask(__name__)
-
+# curl http://localhost:9981/
 @app.route('/', methods=['GET'])
 def get_info():
     return 'service1'
@@ -19,5 +20,5 @@ def generate_entries_srv(count):
 
 
 if __name__ == '__main__':
-    print("starting service on 9981")
+    logging.info("starting service on 9981")
     app.run(port=9981)
