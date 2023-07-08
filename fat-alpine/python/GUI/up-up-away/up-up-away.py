@@ -1,5 +1,5 @@
 import pygame
-from PIL import Image
+from PIL import Image, ImageFont, ImageDraw
 
 pygame.init()
 
@@ -15,6 +15,12 @@ gif_data = pygame.image.fromstring(gif_image.tobytes(), gif_image.size, gif_imag
 objects = [
     {"x": 100, "y": 100, "velocity_x": 1, "velocity_y": 1}
 ]
+
+caption_font = ImageFont.truetype("C64_Pro_Mono-STYLE.ttf", 8)
+caption_text = "    **** COMMODORE 64 BASIC V2 ****\n 64K RAM SYSTEM  38911 BASIC BYTES FREE\n\nREADY"
+caption_text_color = (0, 136, 255)
+caption_text_background = (51, 43, 204)
+caption_text_height = 20
 
 running = True
 clock = pygame.time.Clock()
@@ -35,9 +41,16 @@ while running:
 
     window.fill((51, 43, 204))
 
+    caption_image = Image.new("RGB", (window_width, caption_text_height), caption_text_background)
+    draw = ImageDraw.Draw(caption_image)
+    draw.text((0, 0), caption_text, font=caption_font, fill=caption_text_color)
+
+    caption_surface = pygame.image.fromstring(caption_image.tobytes(), caption_image.size, caption_image.mode)
+    window.blit(caption_surface, (0, 0))
+    
     for obj in objects:
         window.blit(gif_data, (obj["x"], obj["y"]))
-
+        
     pygame.display.update()
 
     clock.tick(60)
