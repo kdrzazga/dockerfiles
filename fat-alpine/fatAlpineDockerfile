@@ -123,7 +123,7 @@ RUN npx jasmine init
 
 WORKDIR /usr/nodejs-stuff/anim
 RUN npm init -y
-RUN npm i chalk chalk-animation gradient-string inquirer nanospinner
+RUN npm i chalk chalk-animation gradient-string inquirer nanospinner koa koa-router koa-bodyparser winston passport passport-local express-session chai chai-http mocha faker csv-parser fs
 
 RUN chmod -Rf 777 /usr/ada-stuff
 
