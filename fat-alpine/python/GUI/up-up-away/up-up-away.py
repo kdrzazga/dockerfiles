@@ -1,11 +1,16 @@
 import pygame
+import ast
 from PIL import Image, ImageFont, ImageDraw
+from c64colors import get_color
 
 pygame.init()
 
+LIGHT_BLUE = ast.literal_eval(get_color("light blue")['rgb'])
+BLUE = ast.literal_eval(get_color("blue")['rgb'])
+
 window_width, window_height = 320, 200
 window = pygame.display.set_mode((window_width, window_height))
-pygame.display.set_caption("Commodore 64 UP UP AWAY")
+pygame.display.set_caption("UP UP AWAY - C64")
 
 gif_image = Image.open("uua.gif")
 gif_image = gif_image.convert("RGB")
@@ -17,10 +22,10 @@ objects = [
 ]
 
 caption_font = ImageFont.truetype("C64_Pro_Mono-STYLE.ttf", 8)
-caption_text = "    **** COMMODORE 64 BASIC V2 ****\n 64K RAM SYSTEM  38911 BASIC BYTES FREE\n\nREADY"
-caption_text_color = (0, 136, 255)
-caption_text_background = (51, 43, 204)
-caption_text_height = 20
+caption_text = "\n    **** COMMODORE 64 BASIC V2 ****\n\n 64K RAM SYSTEM  38911 BASIC BYTES FREE\n\nREADY"
+caption_text_color = LIGHT_BLUE
+caption_text_background = BLUE
+caption_text_height = 64
 
 running = True
 clock = pygame.time.Clock()
@@ -39,7 +44,7 @@ while running:
             obj["y"] = 0
         
 
-    window.fill((51, 43, 204))
+    window.fill(BLUE)
 
     caption_image = Image.new("RGB", (window_width, caption_text_height), caption_text_background)
     draw = ImageDraw.Draw(caption_image)
