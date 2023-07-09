@@ -1,6 +1,12 @@
 import pygame
 import ast
+import sys
+import os
 from PIL import Image, ImageFont, ImageDraw
+
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.append(parent_dir)
+
 from c64colors import get_color
 
 LIGHT_BLUE = ast.literal_eval(get_color("light blue")['rgb'])
@@ -17,7 +23,8 @@ def load_hot_air_baloon():
     return gif_image_width, gif_image_height, pygame.image.fromstring(gif_image.tobytes(), gif_image.size, gif_image.mode)    
 
 def write_out_banner(window):
-    caption_font = ImageFont.truetype("C64_Pro_Mono-STYLE.ttf", 8)
+    font_path = os.path.join("..", "C64_Pro_Mono-STYLE.ttf")
+    caption_font = ImageFont.truetype(font_path, 8)
     caption_text = "\n    **** COMMODORE 64 BASIC V2 ****\n\n 64K RAM SYSTEM  38911 BASIC BYTES FREE\n\nREADY"
     caption_text_color = LIGHT_BLUE
     caption_text_background = BLUE
