@@ -83,6 +83,75 @@ rand.Seed(time.Now().UnixNano())
 	return board
 }
 
+func MovePlayer(board *Board, direction string) {
+	player := board.Player
+	x, y := player.X, player.Y
+
+	switch direction {
+	case "up":
+		if y > 0 && board.Fields[y-1][x] != Wall {
+			if board.Fields[y-1][x] == Crate {
+				if y > 1 && board.Fields[y-2][x] == Empty {
+					board.Fields[y][x] = Empty
+					board.Fields[y-1][x] = PlayerField
+					board.Fields[y-2][x] = Crate
+					player.Y--
+				}
+			} else {
+				board.Fields[y][x] = Empty
+				board.Fields[y-1][x] = PlayerField
+				player.Y--
+			}
+		}
+	case "down":
+		if y < len(board.Fields)-1 && board.Fields[y+1][x] != Wall {
+			if board.Fields[y+1][x] == Crate {
+				if y < len(board.Fields)-2 && board.Fields[y+2][x] == Empty {
+					board.Fields[y][x] = Empty
+					board.Fields[y+1][x] = PlayerField
+					board.Fields[y+2][x] = Crate
+					player.Y++
+				}
+			} else {
+				board.Fields[y][x] = Empty
+				board.Fields[y+1][x] = PlayerField
+				player.Y++
+			}
+		}
+	case "left":
+		if x > 0 && board.Fields[y][x-1] != Wall {
+			if board.Fields[y][x-1] == Crate {
+				if x > 1 && board.Fields[y][x-2] == Empty {
+					board.Fields[y][x] = Empty
+					board.Fields[y][x-1] = PlayerField
+					board.Fields[y][x-2] = Crate
+					player.X--
+				}
+			} else {
+				board.Fields[y][x] = Empty
+				board.Fields[y][x-1] = PlayerField
+				player.X--
+			}
+		}
+	case "right":
+		if x < len(board.Fields[0])-1 && board.Fields[y][x+1] != Wall {
+			if board.Fields[y][x+1] == Crate {
+				if x < len(board.Fields[0])-2 && board.Fields[y][x+2] == Empty {
+					board.Fields[y][x] = Empty
+					board.Fields[y][x+1] = PlayerField
+					board.Fields[y][x+2] = Crate
+					player.X++
+				}
+			} else {
+				board.Fields[y][x] = Empty
+				board.Fields[y][x+1] = PlayerField
+				player.X++
+			}
+		}
+	}
+}
+
+
 func PrintBoard(board *Board) {
 	for _, row := range board.Fields {
 		for _, field := range row {
