@@ -2,7 +2,8 @@ import logging
 import msvcrt
 import os
 
-from map import generate_map, get_map
+from gamemap import generate_map, get_map
+from game import move, help, found_city
 from drawer import draw
 from player import Player
 
@@ -14,33 +15,11 @@ def clear_screen():
     else:
         _ = os.system('clear')
 
-
-def move(new_x, new_y):
-    logging.info('Move to (%d, %d)', new_x, new_y)
-    
-    try:
-        if get_map()[new_x][new_y] != 'sea' and new_x >=0 and new_y >=0:
-            player.x, player.y = new_x, new_y
-        else:
-            logging.warning("Water or edge of area")
-    except Exception:
-        logging.error("Wrong move")  
-
-
-def help():
-    return "PYVILIZATION - Civilization in Python\n\nq - quit game\nh - displays this help\n" \
-        + "\n\nPress any key to continue"
-    
-
 def process_move(new_x, new_y):
     clear_screen()
-    move(new_x, new_y)    
+    move(player, new_x, new_y)    
     draw(get_map(), player)
-
-
-def found_city(name):
-    pass
-    
+   
     
 def main():  
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')

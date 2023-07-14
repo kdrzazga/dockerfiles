@@ -82,7 +82,3 @@ def island(map, x, y, sizeX, sizeY):
 
 def get_map():
     return map
-
-
-generate_map()
-get_map()
