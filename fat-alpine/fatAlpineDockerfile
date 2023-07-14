@@ -14,6 +14,8 @@ RUN apk update && \
 RUN apk add nethack && \
     apk add figlet cmatrix lynx mutt sl cmus newsboat ranger alpine dialog elinks fortune && \
     apk add gnuplot inxi ncdu nyancat sc screen tree units w3m zsh tty-solitaire 
+
+RUN apk add moon-buggy nsnake zangband
 	
 RUN apk add vice || true
 

@@ -2,7 +2,7 @@ import random
 
 tiles = ["meadow", "mountain", "desert", "snow", "river", "sea", "city"]
 sizeX = 70
-sizeY = 50
+sizeY = 47
 map = [["sea" for _ in range(sizeX)] for _ in range(sizeY)]
 
 def generate_map():
@@ -82,7 +82,3 @@ def island(map, x, y, sizeX, sizeY):
 
 def get_map():
     return map
-
-
-generate_map()
-get_map()
