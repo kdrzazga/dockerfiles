@@ -1,0 +1,275 @@
+{
+	"info": {
+		"_postman_id": "7932aef4-b7bf-4166-b544-afdc7d8b386a",
+		"name": "sokoban",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28117271",
+		"_collection_link": "https://www.postman.com/botebotebote/workspace/1/collection/28117271-7932aef4-b7bf-4166-b544-afdc7d8b386a?action=share&creator=28117271&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8999/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "board",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8999/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "game-status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8999/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "start-game",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8999/start-game",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"start-game"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "quit",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8999/start-game",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"start-game"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "move-up",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8999/start-game",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"start-game"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "move-down",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8999/move/down",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"move",
+						"down"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "move-left",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8999/move/left",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"move",
+						"left"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "move-right",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8999/move/right",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"move",
+						"right"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

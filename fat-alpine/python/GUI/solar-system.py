@@ -47,12 +47,13 @@ mars_angle = 0
 mars_speed = 0.006
 
 # Moons for Mars
-moon1_radius = 3
+moon1_radius = 1
+
 moon1_distance = 30
 moon1_angle = 0
 moon1_speed = 0.15
 
-moon2_radius = 4
+moon2_radius = 2
 moon2_distance = 50
 moon2_angle = 0
 moon2_speed = 0.08

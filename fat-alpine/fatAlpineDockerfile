@@ -20,8 +20,9 @@ RUN apk add vice || true
 RUN ln -s -f /usr/bin/python3 /usr/bin/python && \
     ln -s -f /usr/bin/pip3 /usr/bin/pip
     
-RUN pip install colorama art pipenv	flask gunicorn tinydb keyboard pygame
-	
+RUN pip install colorama art pipenv	flask gunicorn tinydb keyboard pygame pillow
+RUN pip install numpy || true
+
 RUN addgroup -g 10000 teamX && \
     adduser -u 10000 -G teamX -s /bin/sh -D userX && \
 	echo 'root:pass' | chpasswd && \
@@ -42,7 +43,7 @@ RUN mkdir /usr/ada-stuff && \
 	mkdir /usr/fortran-stuff && \
 	mkdir /usr/go-stuff && \
 	mkdir /usr/haskell-stuff && \
-	mkdir /usr/hodgepodge && \
+	mkdir /usr/other && \
 	mkdir /srv/java-stuff && \
 	mkdir /srv/java-stuff/11 && \
 	mkdir /srv/java-stuff/17 && \
@@ -70,7 +71,7 @@ COPY D/* /usr/d-stuff/
 COPY fortran/* /usr/prolog-stuff/
 COPY go/* /usr/go-stuff/
 COPY haskell/* /usr/haskell-stuff/
-COPY hodgepodge/* /usr/hodgepodge/
+COPY other/* /usr/other/
 COPY java/* /srv/java-stuff/11/
 COPY lisp/* /usr/lisp-stuff/
 COPY nodejs/* /usr/nodejs-stuff/
