@@ -1,7 +1,7 @@
 import colorama
 from colorama import Fore, Style
 
-def draw(map):
+def draw(map, player):
     colorama.init()
     
     symbols = {
@@ -14,8 +14,12 @@ def draw(map):
         "city": Fore.RED + "C"
     }
     
-    for row in map:
-        for tile in row:
-            print(symbols[tile], end=" ")
+    for x in range(len(map)):
+        for y in range(len(map[x])):
+            if x == player.x and y == player.y:
+                print('X', end=" ")
+            else:
+                tile = map[x][y]
+                print(symbols[tile], end=" ")
         print(Style.RESET_ALL)
 
