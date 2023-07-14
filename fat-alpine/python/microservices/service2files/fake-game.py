@@ -15,19 +15,31 @@ def clear_screen():
         _ = os.system('clear')
 
 
-def process_move(new_x, new_y):
+def move(new_x, new_y):
     logging.info('Move to (%d, %d)', new_x, new_y)
     
     try:
-        if get_map()[new_x][new_y] != 'sea':
+        if get_map()[new_x][new_y] != 'sea' and new_x >=0 and new_y >=0:
             player.x, player.y = new_x, new_y
         else:
-            logging.warning("You cannot swim")
+            logging.warning("Water or edge of area")
     except Exception:
-        logging.error("Wrong move")
+        logging.error("Wrong move")  
+
+
+def help():
+    return "PYVILIZATION - Civilization in Python\n\nq - quit game\nh - displays this help\n" \
+        + "\n\nPress any key to continue"
     
+
+def process_move(new_x, new_y):
     clear_screen()
+    move(new_x, new_y)    
     draw(get_map(), player)
+
+
+def found_city(name):
+    pass
     
     
 def main():  
@@ -44,28 +56,38 @@ def main():
         if key == b'7':
             process_move(player.x - 1, player.y - 1)
     
-        elif key == b'8' or key == b'w':
+        elif key == b'4' or key == b'a':
             process_move(player.x, player.y - 1)
     
-        elif key == b'9':
+        elif key == b'1':
             process_move(player.x + 1, player.y - 1)
     
-        elif key == b'4' or key == b'a':
+        elif key == b'8' or key == b'w':
             process_move(player.x - 1, player.y)
     
-        elif key == b'6' or key == b'd':
+        elif key == b'2' or key == b's':
             process_move(player.x + 1, player.y)
     
-        elif key == b'1':
+        elif key == b'9':
             process_move(player.x - 1, player.y + 1)
     
-        elif key == b'2' or key == b's':
+        elif key == b'6' or key == b'd':
             process_move(player.x, player.y + 1)
     
         elif key == b'3':
             process_move(player.x + 1, player.y + 1)
             
+        elif key == b'h':
+            clear_screen()
+            print(help())
+            msvcrt.getch()
+            clear_screen()
+            draw(get_map(), player)
+        
+        elif key == b'f':
+            found_city('Pythonville')
+            
 
 if __name__ == '__main__':
     main()
-  
+    
