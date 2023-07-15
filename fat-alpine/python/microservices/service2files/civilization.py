@@ -26,7 +26,15 @@ def start_game_endpoint():
 
 
 @app.route('/move', methods=['POST'])
-def move_endpoint():
+def move_endpoint():    
+    data = request.get_json()
+    newX = data.get('newX')
+    newY = data.get('newY')
+    
+    #TODO - implement movement
+    
+    logging.info("[{newX}, {newY}]")
+    
     new_position = None
     status = 200 if new_position is not None else 500
     message = json.dumps(new_position) if map is not None else 'No move'
