@@ -2,7 +2,7 @@ import logging
 import msvcrt
 import os
 
-from gamemap import generate_map, get_map
+from gamemap import get_map
 from drawer import draw
 from player import Player
 

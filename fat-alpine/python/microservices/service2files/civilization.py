@@ -37,7 +37,7 @@ def move_endpoint():
     
     new_position = [game.player.x, game.player.y]
     status = 200 if success else 500
-    message_result =  'done' if success else 'move invalid'
+    message_result =  'Done' if success else 'Invalid move attempt'
     message = json.dumps(new_position)
     
     response = {'result' : message_result, 'position' : message}
@@ -62,7 +62,7 @@ def exit_endpoint():
 
 @app.route('/help', methods=['GET'])
 def help_endpoint():
-    response = {'message' : help()}
+    response = {'message' : game.help()}
     return jsonify(response), 200
 
 
