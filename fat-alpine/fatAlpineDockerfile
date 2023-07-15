@@ -14,14 +14,17 @@ RUN apk update && \
 RUN apk add nethack && \
     apk add figlet cmatrix lynx mutt sl cmus newsboat ranger alpine dialog elinks fortune && \
     apk add gnuplot inxi ncdu nyancat sc screen tree units w3m zsh tty-solitaire 
+
+RUN apk add moon-buggy nsnake zangband
 	
 RUN apk add vice || true
 
 RUN ln -s -f /usr/bin/python3 /usr/bin/python && \
     ln -s -f /usr/bin/pip3 /usr/bin/pip
     
-RUN pip install colorama art pipenv	flask gunicorn tinydb
-	
+RUN pip install colorama art pipenv	flask gunicorn tinydb keyboard pygame pillow
+RUN pip install numpy || true
+
 RUN addgroup -g 10000 teamX && \
     adduser -u 10000 -G teamX -s /bin/sh -D userX && \
 	echo 'root:pass' | chpasswd && \
@@ -42,7 +45,7 @@ RUN mkdir /usr/ada-stuff && \
 	mkdir /usr/fortran-stuff && \
 	mkdir /usr/go-stuff && \
 	mkdir /usr/haskell-stuff && \
-	mkdir /usr/hodgepodge && \
+	mkdir /usr/other && \
 	mkdir /srv/java-stuff && \
 	mkdir /srv/java-stuff/11 && \
 	mkdir /srv/java-stuff/17 && \
@@ -70,7 +73,7 @@ COPY D/* /usr/d-stuff/
 COPY fortran/* /usr/prolog-stuff/
 COPY go/* /usr/go-stuff/
 COPY haskell/* /usr/haskell-stuff/
-COPY hodgepodge/* /usr/hodgepodge/
+COPY other/* /usr/other/
 COPY java/* /srv/java-stuff/11/
 COPY lisp/* /usr/lisp-stuff/
 COPY nodejs/* /usr/nodejs-stuff/
@@ -123,7 +126,8 @@ RUN npx jasmine init
 
 WORKDIR /usr/nodejs-stuff/anim
 RUN npm init -y
-RUN npm i chalk chalk-animation gradient-string inquirer nanospinner koa koa-router koa-bodyparser winston passport passport-local express-session chai chai-http mocha faker csv-parser fs
+
+RUN npm i chalk chalk-animation gradient-string inquirer nanospinner koa koa-router koa-bodyparser winston passport passport-local express-session chai chai-http mocha faker csv-parser fs  express
 
 RUN chmod -Rf 777 /usr/ada-stuff
 

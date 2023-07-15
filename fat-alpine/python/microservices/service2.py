@@ -1,11 +1,9 @@
-from flask import Flask
+import subprocess
 
-app = Flask(__name__)
+directory = 'service2files'
 
-@app.route('/', methods=['GET'])
-def get_info():
-    return 'service2'
+script_name = 'civilization.py'
 
-if __name__ == '__main__':
-    print("starting service on 9982")
-    app.run(port=9982)
+command = f'python {directory}/{script_name}'
+
+subprocess.run(command, shell=True)

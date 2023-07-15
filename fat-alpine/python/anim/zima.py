@@ -1,6 +1,7 @@
 import random
 import os
 import time
+import platform
 
 # Set up the screen size and the number of trees
 SCREEN_WIDTH = 80
@@ -17,6 +18,12 @@ SNOWFLAKES = ["\033[37m*\033[0m", "\033[37m.\033[0m", "\033[37m+\033[0m", "\033[
 
 # Define the ASCII art for the snowman
 SNOWMAN = "\033[36m_===_\n( o o )\n(  >  )\n'--'--'\033[0m"
+
+def clear_screen():
+    os_name = platform.system()
+    command = 'cls' if os_name == "Windows" else 'clear'
+    os.system(command)
+    
 
 # Define a class for each falling snowflake
 class Snowflake:
@@ -64,8 +71,8 @@ def display_snowman():
     y = SCREEN_HEIGHT-7
     print("\033[{};{}H{}".format(y, x, SNOWMAN))
 
-# Clear the screen
-os.system('clear')
+
+clear_screen()
 
 # Create the trees and the snowflakes
 trees = create_trees()
@@ -81,6 +88,7 @@ try:
         # Display the trees
         display_trees(trees)
         
+        time.sleep(0.05)
         # Display the snowman
        
 except:
