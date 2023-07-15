@@ -1,13 +1,14 @@
-from flask import Flask, jsonify
-from game import move, help, found_city
+from flask import Flask, request, jsonify
+from game import Game
 from drawer import draw
 import sys
 import json
+import logging
 
 from gamemap import generate_map, get_map
 
 app = Flask(__name__)
-
+game = Game()
 
 @app.route('/', methods=['GET'])
 def get_info_endpoint():
@@ -31,15 +32,15 @@ def move_endpoint():
     newX = data.get('newX')
     newY = data.get('newY')
     
-    #TODO - implement movement
-    
     logging.info("[{newX}, {newY}]")
+    success = game.move(newX, newY)
     
-    new_position = None
-    status = 200 if new_position is not None else 500
-    message = json.dumps(new_position) if map is not None else 'No move'
+    new_position = [game.player.x, game.player.y]
+    status = 200 if success else 500
+    message_result =  'done' if success else 'move invalid'
+    message = json.dumps(new_position)
     
-    response = {'move' : message}
+    response = {'result' : message_result, 'position' : message}
     return jsonify(response), status
 
 
