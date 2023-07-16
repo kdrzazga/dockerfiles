@@ -1,0 +1,60 @@
+start:
+    time: 0
+    new-units: warrior
+    new-buildings: 
+    next-tech: horseback-riding, alphabet 
+    
+horseback-riding:
+    time: 5
+    new-units: calvary
+    new-buildings: none
+    next-tech: chilvary
+    
+chilvary:
+    time: 3
+    new-units: knight
+    new-buildings: none
+    next-tech: none
+    
+alphabet:
+    time: 7
+    new-units: none
+    new-buildings: none
+    next-tech: code-of-laws, map-making, writing
+
+code-of-laws:
+    time: 4
+    new-units: none
+    new-buildings: courthouse
+    next-tech: monarchy, republic
+  
+map-making:
+    time: 4
+    new-units: trieme
+    new-buildings: lighthouse
+    next-tech: none
+    
+writing:
+    time: 4
+    new-units: diplomat
+    new-buildings: library
+    next-tech: literacy 
+    
+literacy:
+    time: 2
+    new-units: none
+    new-buildings: none
+    next-tech: none
+    
+monarchy:
+    time: 2
+    new-units: none
+    new-buildings: none
+    next-tech: none
+    
+republic:
+    time: 3
+    new-units: none
+    new-buildings: none
+    next-tech: none
+    

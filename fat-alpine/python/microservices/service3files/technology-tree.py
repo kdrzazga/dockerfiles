@@ -1,0 +1,63 @@
+import logging
+import yaml
+
+def load_technology_tree(file_path):
+    with open(file_path, 'r') as file:
+        technology_tree = yaml.safe_load(file)
+    return technology_tree
+
+class TechnologyTree:
+
+    def __init__(self, file_path):
+        self.technology_tree = load_technology_tree(file_path)
+        self.current_tech = None
+        self.progress_path = []
+        self.progress = 0
+        self.done = False
+
+    def start_tech_develop(self, technology_name):
+        self.progress_path = [technology_name]
+        self.progress = 0
+        
+        current_node = self.technology_tree[technology_name]
+        while current_node != 'start':
+            for tech_name, tech_data in self.technology_tree.items():
+                if 'next-tech' in tech_data and technology_name in tech_data['next-tech'].split(', '):
+                    current_node = tech_data
+                    technology_name = tech_name
+                    self.progress_path.append(tech_name)
+                    
+                    if tech_name == 'start':
+                        self.progress_path.reverse()
+                        return
+                    
+                    break
+
+    def proceed_tech_develop(self):
+        if self.done == True:
+            logging.warning("Goal already achieved")
+            return False
+            
+        self.progress += 1
+        
+    def get_current_tech(self):
+        if self.current_tech is not None:
+            return self.current_tech
+        else:
+            return None
+    
+    def print_progress_path(self):
+        for i, tech in enumerate(self.progress_path):
+            print(str(i) + ': ' + tech)
+
+
+file_path = 'tech-tree.yml'
+tech_tree = TechnologyTree(file_path)
+
+tech_tree.start_tech_develop('republic')
+tech_tree.print_progress_path()
+#print(tech_tree.calculate_total_duration())
+#while tech_tree.current_tech is not None:
+#    tech_tree.proceed_tech_develop()
+#    current_tech = tech_tree.get_current_tech()
+#    print(current_tech)
