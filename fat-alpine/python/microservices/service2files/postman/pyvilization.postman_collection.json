@@ -65,6 +65,26 @@
 			"response": []
 		},
 		{
+			"name": "city",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9982/city/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9982",
+					"path": [
+						"city",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "map",
 			"request": {
 				"method": "GET",

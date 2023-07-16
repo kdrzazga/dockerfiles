@@ -32,9 +32,19 @@ class Game:
             + "\n\nPress any key to continue"    
     
     def found_city(self, name):
-        new_city = City(name, self.player, self.player.x, self.player.y)
-        self.cities.append(new_city)
+        if self._checkCell(self.player.x, self.player.y):
+            new_city = City(name, self.player, self.player.x, self.player.y)
+            self.cities.append(new_city)
         
     def get_cities(self):
         return self.cities
     
+    def _checkCell(self, x, y):
+        cell = get_map()[x][y]
+        logging.info('Terrain is {cell}')
+        for city in self.cities:
+            if city.x == x and city.y == y:
+                logging.warning('Cell ({x},{y}) already occupied by a city.')
+                return False
+                
+        return cell != 'mountain' and cell != 'sea'
