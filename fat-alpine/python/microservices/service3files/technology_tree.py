@@ -73,8 +73,3 @@ tech_tree = TechnologyTree(file_path)
 tech_tree.start_tech_develop('republic')
 tech_tree.print_progress_path()
 tech_tree.get_flatten_progress_path()
-#print(tech_tree.calculate_total_duration())
-#while tech_tree.current_tech is not None:
-#    tech_tree.proceed_tech_develop()
-#    current_tech = tech_tree.get_current_tech()
-#    print(current_tech)
