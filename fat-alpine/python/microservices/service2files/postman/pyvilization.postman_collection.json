@@ -46,6 +46,25 @@
 			"response": []
 		},
 		{
+			"name": "cities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9982/cities",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9982",
+					"path": [
+						"cities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "map",
 			"request": {
 				"method": "GET",
@@ -116,6 +135,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"city-name\": \"Pythonville\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:9982/found",
 					"protocol": "http",

@@ -12,6 +12,7 @@ game = Game()
 
 @app.route('/', methods=['GET'])
 def get_info_endpoint():
+    logging.info('INFO')
     return 'pyvilization - a Civilization-like game in python'
 
 
@@ -23,6 +24,8 @@ def start_game_endpoint():
     message = 'Done' if map is not None else 'Map generation failed'
     
     response = {'message': message}
+    logging.info(message)
+    
     return jsonify(response), status
 
 
@@ -46,11 +49,19 @@ def move_endpoint():
 
 @app.route('/found', methods=['POST'])
 def found_city_endpoint():
-    city = None
-    status = 200 if city is not None else 500
-    message = json.dumps(city) if map is not None else 'City not founded'
+    old_cities_count = len(game.cities)
+    data = request.get_json()
     
-    response = {'city' : message}
+    city_name = data.get('city-name')
+    
+    game.found_city(city_name)
+    
+    logging.info("Foundation of city: {city_name}")
+    
+    status = 200 if len(game.cities) == old_cities_count + 1 else 500
+    success = '' if status == 200 else 'not ' 
+    
+    response = {'city' : 'City ' + city_name + ' ' + success + 'founded.'}
     return jsonify(response), status
 
 
@@ -59,6 +70,12 @@ def found_city_endpoint():
 def exit_endpoint():
     sys.exit(0)
 
+
+@app.route('/cities', methods=['GET'])
+def cities_endpoint():
+    response = {'List of cities:' : ' '.join(city.name for city in game.get_cities())}
+    return jsonify(response), 200
+    
 
 @app.route('/help', methods=['GET'])
 def help_endpoint():
