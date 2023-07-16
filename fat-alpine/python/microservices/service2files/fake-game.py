@@ -3,11 +3,11 @@ import msvcrt
 import os
 
 from gamemap import generate_map, get_map
-from game import move, help, found_city
+from game import Game
 from drawer import draw
 from player import Player
 
-player = Player(35, 25)
+game = Game()
 
 def clear_screen():
     if os.name == 'nt':
@@ -17,15 +17,15 @@ def clear_screen():
 
 def process_move(new_x, new_y):
     clear_screen()
-    move(player, new_x, new_y)    
-    draw(get_map(), player)
+    game.move(new_x, new_y)    
+    draw(get_map(), game.player)
 
     
 def main():  
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
     
     generate_map()
-    draw(get_map(), player)
+    draw(get_map(), game.player)
     
     key = b''
     
@@ -33,28 +33,28 @@ def main():
         key = msvcrt.getch()
     
         if key == b'7':
-            process_move(player.x - 1, player.y - 1)
+            process_move(game.player.x - 1, game.player.y - 1)
     
         elif key == b'4' or key == b'a':
-            process_move(player.x, player.y - 1)
+            process_move(game.player.x, game.player.y - 1)
     
         elif key == b'1':
-            process_move(player.x + 1, player.y - 1)
+            process_move(game.player.x + 1, game.player.y - 1)
     
         elif key == b'8' or key == b'w':
-            process_move(player.x - 1, player.y)
+            process_move(game.player.x - 1, game.player.y)
     
         elif key == b'2' or key == b's':
-            process_move(player.x + 1, player.y)
+            process_move(game.player.x + 1, game.player.y)
     
         elif key == b'9':
-            process_move(player.x - 1, player.y + 1)
+            process_move(game.player.x - 1, game.player.y + 1)
     
         elif key == b'6' or key == b'd':
-            process_move(player.x, player.y + 1)
+            process_move(game.player.x, game.player.y + 1)
     
         elif key == b'3':
-            process_move(player.x + 1, player.y + 1)
+            process_move(game.player.x + 1, game.player.y + 1)
             
         elif key == b'h':
             clear_screen()

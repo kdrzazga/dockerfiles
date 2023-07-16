@@ -13,14 +13,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9982/help",
+					"raw": "http://localhost:9982/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "9982",
 					"path": [
-						"help"
+						""
 					]
 				}
 			},
@@ -40,6 +40,45 @@
 					"port": "9982",
 					"path": [
 						"help"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9982/cities",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9982",
+					"path": [
+						"cities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "city",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9982/city/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9982",
+					"path": [
+						"city",
+						"1"
 					]
 				}
 			},
@@ -88,6 +127,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"newX\" : 34,\r\n    \"newY\" : 24\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:9982/move",
 					"protocol": "http",
@@ -107,6 +155,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"city-name\": \"Pythonville\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:9982/found",
 					"protocol": "http",
@@ -116,6 +173,44 @@
 					"port": "9982",
 					"path": [
 						"found"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "exit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9982/exit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9982",
+					"path": [
+						"exit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "quit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9982/quit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9982",
+					"path": [
+						"quit"
 					]
 				}
 			},
