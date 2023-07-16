@@ -29,8 +29,7 @@ class Game:
     
     def help(self):
         return "PYVILIZATION - Civilization in Python\n\nq - quit game\nh - displays this help\n" \
-            + "\n\nPress any key to continue"
-        
+            + "\n\nPress any key to continue"    
     
     def found_city(self, name):
         new_city = City(name, self.player, self.player.x, self.player.y)

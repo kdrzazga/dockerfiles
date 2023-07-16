@@ -71,6 +71,12 @@ def exit_endpoint():
     sys.exit(0)
 
 
+@app.route('/city/<int:id>', methods=['GET'])
+def city_endpoint(id):
+    response = {'city ' + str(id) : game.get_cities()[id].to_string()}
+    return jsonify(response), 200
+    
+    
 @app.route('/cities', methods=['GET'])
 def cities_endpoint():
     response = {'List of cities:' : ' '.join(city.name for city in game.get_cities())}
