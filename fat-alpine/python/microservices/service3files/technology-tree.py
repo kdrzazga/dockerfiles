@@ -37,9 +37,25 @@ class TechnologyTree:
         if self.done == True:
             logging.warning("Goal already achieved")
             return False
-            
-        self.progress += 1
         
+        flatten_path = get_flatten_progress_path()
+        self.progress += 1
+        if self.progress >= len(flatten_path):
+            self.done = True
+            return True
+        else:
+            print("Currently working on " + flatten_path[self.progress])
+            return True
+        
+    def get_flatten_progress_path(self):
+        flat_progress_path = []
+        for path in self.progress_path:
+            count = int(self.technology_tree[path]['time'])
+            for i in range(count):
+                flat_progress_path.append(path)
+                
+        return flat_progress_path        
+    
     def get_current_tech(self):
         if self.current_tech is not None:
             return self.current_tech
@@ -56,6 +72,7 @@ tech_tree = TechnologyTree(file_path)
 
 tech_tree.start_tech_develop('republic')
 tech_tree.print_progress_path()
+tech_tree.get_flatten_progress_path()
 #print(tech_tree.calculate_total_duration())
 #while tech_tree.current_tech is not None:
 #    tech_tree.proceed_tech_develop()
