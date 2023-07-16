@@ -10,6 +10,7 @@ from city import City
 class Game:
     
     def __init__(self):
+        self.turn = 1
         self.player = Player(35, 25)
         self.cities = []
     
@@ -25,11 +26,9 @@ class Game:
         except Exception:
             logging.error("Wrong move")  
         return False
-        
     
-    def help(self):
-        return "PYVILIZATION - Civilization in Python\n\nq - quit game\nh - displays this help\n" \
-            + "\n\nPress any key to continue"    
+    def end_turn(self):
+        self.turn += 1
     
     def found_city(self, name):
         if self._checkCell(self.player.x, self.player.y):
@@ -38,6 +37,13 @@ class Game:
         
     def get_cities(self):
         return self.cities
+        
+    def get_player_cities(self, player_name):
+        return [city for city in self.cities if city.owner.name == player_name]
+    
+    def help(self):
+        return "PYVILIZATION - Civilization in Python\n\nq - quit game\nh - displays this help\n" \
+            + "\n\nPress any key to continue"    
     
     def _checkCell(self, x, y):
         cell = get_map()[x][y]

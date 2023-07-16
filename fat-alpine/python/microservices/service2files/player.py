@@ -1,5 +1,3 @@
-from city import City
-
 class Player:
     
     def __init__(self, x, y):
@@ -7,6 +5,4 @@ class Player:
         self.nation = "France"
         self.x = x
         self.y = y
-        self.cities = []
-    
-    
+

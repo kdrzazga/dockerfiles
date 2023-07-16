@@ -79,9 +79,19 @@ def city_endpoint(id):
     
 @app.route('/cities', methods=['GET'])
 def cities_endpoint():
-    response = {'List of cities:' : ' '.join(city.name for city in game.get_cities())}
-    return jsonify(response), 200
+    cities = game.get_cities()
+
+    response = {'List of cities:' : ' '.join(city.name for city in cities)}
+    return jsonify(response), 200    
+
     
+@app.route('/cities/<string:player_name>', methods=['GET'])
+def player_cities_endpoint(player_name):
+    cities = game.get_player_cities(player_name)
+
+    response = {'List of cities:' : ' '.join(city.name for city in cities)}
+    return jsonify(response), 200
+
 
 @app.route('/help', methods=['GET'])
 def help_endpoint():
