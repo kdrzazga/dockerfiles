@@ -10,7 +10,34 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 public class ConsoleApp {
+
+	private static final Logger LOGGER = Logger.getLogger(ConsoleApp.class.getSimpleName());
+
+	private static BasicWindow createWindow(){
+		// Create window
+        BasicWindow window = new BasicWindow("Console App");
+        Panel contentPanel = new Panel();
+        window.setComponent(contentPanel);
+
+        // Add components to the panel
+        contentPanel.setLayoutManager(new GridLayout(2));
+        contentPanel.addComponent(new Label("Hello, World!"));
+
+        // Create a panel and add buttons
+        Panel panel = new Panel();
+        panel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
+        panel.addComponent(new Button("Button 1", () -> LOGGER.log(Level.INFO, "Button 1 clicked")));
+        panel.addComponent(new Button("Button 2", () -> showMessage("Button 2 clicked!")));
+        panel.addComponent(new Button("Exit", () -> window.close()));
+
+        contentPanel.addComponent(panel);
+		
+		return window;
+	}
 
     public static void main(String[] args) {
         try {
@@ -21,24 +48,7 @@ public class ConsoleApp {
             Screen screen = new TerminalScreen(terminal);
             screen.startScreen();
 
-            // Create window
-            BasicWindow window = new BasicWindow("Console App");
-            Panel contentPanel = new Panel();
-            window.setComponent(contentPanel);
-
-            // Add components to the panel
-            contentPanel.setLayoutManager(new GridLayout(2));
-            contentPanel.addComponent(new Label("Hello, World!"));
-
-            // Create a panel and add buttons
-            Panel panel = new Panel();
-            panel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
-            panel.addComponent(new Button("Button 1", () -> showMessage("Button 1 clicked!")));
-            panel.addComponent(new Button("Button 2", () -> showMessage("Button 2 clicked!")));
-            panel.addComponent(new Button("Exit", () -> window.close()));
-
-            contentPanel.addComponent(panel);
-
+			var window = createWindow();
             // Create GUI and start GUI loop
             MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(),
                     new EmptySpace(TextColor.ANSI.BLUE));
