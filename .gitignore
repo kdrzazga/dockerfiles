@@ -21,6 +21,7 @@ fat-alpine/python/microservices/*.json
 # Dependency directories (remove the comment below to include it)
 # vendor/
 __pycache__/
+/target/
 
 *package.json
 *node_modules/
