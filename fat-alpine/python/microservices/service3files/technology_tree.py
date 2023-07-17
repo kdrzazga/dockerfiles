@@ -67,9 +67,9 @@ class TechnologyTree:
             print(str(i) + ': ' + tech)
 
 
-file_path = 'tech-tree.yml'
-tech_tree = TechnologyTree(file_path)
+#file_path = 'tech-tree.yml'
+#tech_tree = TechnologyTree(file_path)
 
-tech_tree.start_tech_develop('republic')
-tech_tree.print_progress_path()
-tech_tree.get_flatten_progress_path()
+#tech_tree.start_tech_develop('republic')
+#tech_tree.print_progress_path()
+#tech_tree.get_flatten_progress_path()
