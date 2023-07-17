@@ -1,10 +1,10 @@
-from flask import Flask, request, jsonify
-from game import Game
-from drawer import draw
 import sys
 import json
 import logging
+from flask import Flask, request, jsonify
 
+from game import Game
+from drawer import draw
 from gamemap import generate_map, get_map
 
 app = Flask(__name__)

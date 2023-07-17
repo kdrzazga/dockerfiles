@@ -1,3 +1,4 @@
+import logging
 import pygame
 import math
 
@@ -11,10 +12,10 @@ pygame.display.set_caption("Pygame Spiral")
 clock = pygame.time.Clock()
 
 start_radius = 10
-angle_increment = 0.1
-distance_increment = 0.1
-color = (128, 128, 0)
-center_x = window_width // 2
+angle_increment = 0.3
+distance_increment = 0.5
+color = (128, 200, 255)
+center_x = 0
 center_y = window_height // 2
 
 running = True
@@ -36,10 +37,20 @@ while running:
     prev_y = y
 
     angle += angle_increment
+    if angle %  3.14 > 0 and angle % 3.15 < 4:
+        angle_increment = -2 * angle_increment
+
+    if angle > 2*3.14:
+        angle = 0.01
+    
     distance += distance_increment
+    B = abs(int(255 * math.sin(angle)) - 1)
+    center_x += 1
+    center_y += 3.5 * math.sin(angle/10)
+    color = (128, 200, B)
     
     pygame.display.update()
 
-    clock.tick(300)
+    clock.tick(178)
 
 pygame.quit()
