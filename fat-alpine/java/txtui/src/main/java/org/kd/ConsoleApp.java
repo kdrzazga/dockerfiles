@@ -15,10 +15,10 @@ import java.util.logging.Level;
 
 public class ConsoleApp {
 
-	private static final Logger LOGGER = Logger.getLogger(ConsoleApp.class.getSimpleName());
+    private static final Logger LOGGER = Logger.getLogger(ConsoleApp.class.getSimpleName());
 
-	private static BasicWindow createWindow(){
-		// Create window
+    private static BasicWindow createWindow() {
+        // Create window
         BasicWindow window = new BasicWindow("Console App");
         Panel contentPanel = new Panel();
         window.setComponent(contentPanel);
@@ -35,9 +35,9 @@ public class ConsoleApp {
         panel.addComponent(new Button("Exit", () -> window.close()));
 
         contentPanel.addComponent(panel);
-		
-		return window;
-	}
+
+        return window;
+    }
 
     public static void main(String[] args) {
         try {
@@ -48,7 +48,8 @@ public class ConsoleApp {
             Screen screen = new TerminalScreen(terminal);
             screen.startScreen();
 
-			var window = createWindow();
+            var window = createWindow();
+
             // Create GUI and start GUI loop
             MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(),
                     new EmptySpace(TextColor.ANSI.BLUE));
