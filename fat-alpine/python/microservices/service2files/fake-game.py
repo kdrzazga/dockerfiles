@@ -2,7 +2,7 @@ import logging
 import msvcrt
 import os
 
-from gamemap import generate_map, get_map
+from gamemap import gamemap
 from game import Game
 from drawer import draw
 from player import Player
@@ -18,14 +18,14 @@ def clear_screen():
 def process_move(new_x, new_y):
     clear_screen()
     game.move(new_x, new_y)    
-    draw(get_map(), game.player)
+    draw(gamemap.get_map(), game.player)
 
     
 def main():  
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
     
-    generate_map()
-    draw(get_map(), game.player)
+    gamemap.generate_map()
+    draw(gamemap.get_map(), game.player)
     
     key = b''
     
@@ -61,7 +61,7 @@ def main():
             print(help())
             msvcrt.getch()
             clear_screen()
-            draw(get_map(), player)
+            draw(gamemap.get_map(), player)
         
         elif key == b'f':
             found_city('Pythonville')

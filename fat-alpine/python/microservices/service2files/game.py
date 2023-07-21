@@ -2,7 +2,7 @@ import logging
 import msvcrt
 import os
 
-from gamemap import get_map
+from gamemap import gamemap
 from drawer import draw
 from player import Player
 from city import City
@@ -11,14 +11,14 @@ class Game:
     
     def __init__(self):
         self.turn = 1
-        self.player = Player(35, 25)
+        self.player = Player(30, 20)
         self.cities = []
     
     def move(self, new_x, new_y):
         logging.info('Move to (%d, %d)', new_x, new_y)
         
         try:
-            if get_map()[new_x][new_y] != 'sea' and new_x >=0 and new_y >=0:
+            if gamemap.get_map()[new_x][new_y] != 'sea' and new_x >=0 and new_y >=0:
                 self.player.x, self.player.y = new_x, new_y
                 return True
             else:
@@ -46,7 +46,7 @@ class Game:
             + "\n\nPress any key to continue"    
     
     def _checkCell(self, x, y):
-        cell = get_map()[x][y]
+        cell = gamemap.get_map()[x][y]
         logging.info('Terrain is {cell}')
         for city in self.cities:
             if city.x == x and city.y == y:
