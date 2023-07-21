@@ -18,6 +18,7 @@ class TechnologyTree:
     def start_tech_develop(self, technology_name):
         self.progress_path = [technology_name]
         self.progress = 0
+        self.done = False
         
         current_node = self.technology_tree[technology_name]
         while current_node != 'start':
@@ -36,16 +37,16 @@ class TechnologyTree:
     def proceed_tech_develop(self):
         if self.done == True:
             logging.warning("Goal already achieved")
-            return False
+            return "done"
         
-        flatten_path = get_flatten_progress_path()
+        flatten_path = self.get_flatten_progress_path()
         self.progress += 1
         if self.progress >= len(flatten_path):
             self.done = True
-            return True
+            return "done"
         else:
             print("Currently working on " + flatten_path[self.progress])
-            return True
+            return "".join(flatten_path[self.progress]).join(" [").join(str(self.progress)).join("]")
         
     def get_flatten_progress_path(self):
         flat_progress_path = []
@@ -63,8 +64,11 @@ class TechnologyTree:
             return None
     
     def print_progress_path(self):
-        for i, tech in enumerate(self.progress_path):
-            print(str(i) + ': ' + tech)
+        for i, tech in self.get_progress_path():
+            print(str(i) + ': ' + tech)   
+            
+    def get_progress_path(self):
+        return enumerate(self.progress_path)          
 
 
 #file_path = 'tech-tree.yml'
