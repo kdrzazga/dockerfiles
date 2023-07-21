@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "ec8a5364-f8a3-4ebb-aae0-37983ac57e25",
 		"name": "pyvilization",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "28117271",
 		"_collection_link": "https://www.postman.com/botebotebote/workspace/1/collection/28117271-ec8a5364-f8a3-4ebb-aae0-37983ac57e25?action=share&creator=28117271&source=collection_link"
 	},
@@ -12,17 +12,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:9982/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9982",
-					"path": [
-						""
-					]
-				}
+				"url": "http://localhost:9982/"
 			},
 			"response": []
 		},
@@ -31,17 +21,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:9982/help",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9982",
-					"path": [
-						"help"
-					]
-				}
+				"url": "http://localhost:9982/help"
 			},
 			"response": []
 		},
@@ -50,17 +30,16 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:9982/cities",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9982",
-					"path": [
-						"cities"
-					]
-				}
+				"url": "http://localhost:9982/cities"
+			},
+			"response": []
+		},
+		{
+			"name": "player cities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:9982/cities/player"
 			},
 			"response": []
 		},
@@ -69,18 +48,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:9982/city/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9982",
-					"path": [
-						"city",
-						"1"
-					]
-				}
+				"url": "http://localhost:9982/city/2"
 			},
 			"response": []
 		},
@@ -89,17 +57,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:9982/map",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9982",
-					"path": [
-						"map"
-					]
-				}
+				"url": "http://localhost:9982/map"
 			},
 			"response": []
 		},
@@ -108,17 +66,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:9982/start-game",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9982",
-					"path": [
-						"start-game"
-					]
-				}
+				"url": "http://localhost:9982/start-game"
 			},
 			"response": []
 		},
@@ -136,17 +84,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "http://localhost:9982/move",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9982",
-					"path": [
-						"move"
-					]
-				}
+				"url": "http://localhost:9982/move"
 			},
 			"response": []
 		},
@@ -157,24 +95,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"city-name\": \"Pythonville\"\r\n}",
+					"raw": "{\r\n    \"city-name\": \"4\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": {
-					"raw": "http://localhost:9982/found",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9982",
-					"path": [
-						"found"
-					]
-				}
+				"url": "http://localhost:9982/found"
 			},
 			"response": []
 		},
@@ -183,17 +111,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:9982/exit",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9982",
-					"path": [
-						"exit"
-					]
-				}
+				"url": "http://localhost:9982/exit"
 			},
 			"response": []
 		},
@@ -202,17 +120,70 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:9982/quit",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9982",
-					"path": [
-						"quit"
-					]
-				}
+				"url": "http://localhost:9982/quit"
+			},
+			"response": []
+		},
+		{
+			"name": "start-technology-develop",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"technology\": \"republic\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:9983/start-technology-develop"
+			},
+			"response": []
+		},
+		{
+			"name": "start-technology-develop2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"technology\": \"literacy\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:9983/start-technology-develop"
+			},
+			"response": []
+		},
+		{
+			"name": "full-progress-path",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:9983/full-progress-path"
+			},
+			"response": []
+		},
+		{
+			"name": "tech-develop-step",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": "http://127.0.0.1:9983/tech-develop-step"
+			},
+			"response": []
+		},
+		{
+			"name": "current-tech",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:9983/current-tech"
 			},
 			"response": []
 		}

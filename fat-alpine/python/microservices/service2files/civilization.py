@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify
 
 from game import Game
 from drawer import draw
-from gamemap import generate_map, get_map
+from gamemap import gamemap
 
 app = Flask(__name__)
 game = Game()
@@ -18,7 +18,7 @@ def get_info_endpoint():
 
 @app.route('/start-game', methods=['POST'])
 def start_game_endpoint():
-    map = generate_map()
+    map = gamemap.generate_map()
     
     status = 200 if map is not None else 500
     message = 'Done' if map is not None else 'Map generation failed'
@@ -101,7 +101,7 @@ def help_endpoint():
 
 @app.route('/map', methods=['GET'])
 def map_endpoint():
-    map = get_map()
+    map = gamemap.get_map()
     status = 200 if map is not None else 500
     message = json.dumps(map) if map is not None else 'Map generation failed'
     
