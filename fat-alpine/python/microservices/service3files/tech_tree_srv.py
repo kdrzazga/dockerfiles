@@ -10,6 +10,8 @@ app = Flask(__name__)
 file_path = 'tech-tree.yml'
 tech_tree = TechnologyTree(file_path, 'start')
 
+developed_technologies = {}
+previous_step_tech = ''
 
 #curl http://127.0.0.1:9983/
 @app.route('/', methods=['GET'])
@@ -42,8 +44,17 @@ def proceed_tech_develop():
     status = 423 if status == 'done' else 200
     message = jsonify({'message' : message_text})
     
-    logging.info(message_text)
+    logging.info(message_text)    
     return message, status
+
+
+#curl http://127.0.0.1:9983/current_tech
+@app.route('/current_tech', methods=['GET'])
+def get_current_tech():
+    tech = tech_tree.get_current_tech()
+    message = jsonify({'currently developed technology' : tech})
+    
+    return message, 200
 
 
 #curl http://127.0.0.1:9983/full-progress-path

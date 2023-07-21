@@ -307,6 +307,28 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "current-tech",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:9983/current_tech",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9983",
+					"path": [
+						"current_tech"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

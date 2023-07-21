@@ -59,10 +59,12 @@ class TechnologyTree:
         return flat_progress_path        
     
     def get_current_tech(self):
-        if self.current_tech is not None:
-            return self.current_tech
+        path = self.get_flatten_progress_path()
+        
+        if len(path) > 0:
+            return path[self.progress]
         else:
-            return None
+            return ''
     
     def print_progress_path(self):
         for i, tech in self.get_progress_path():
