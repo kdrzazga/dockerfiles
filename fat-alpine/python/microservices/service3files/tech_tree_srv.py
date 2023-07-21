@@ -48,8 +48,8 @@ def proceed_tech_develop():
     return message, status
 
 
-#curl http://127.0.0.1:9983/current_tech
-@app.route('/current_tech', methods=['GET'])
+#curl http://127.0.0.1:9983/current-tech
+@app.route('/current-tech', methods=['GET'])
 def get_current_tech():
     tech = tech_tree.get_current_tech()
     message = jsonify({'currently developed technology' : tech})

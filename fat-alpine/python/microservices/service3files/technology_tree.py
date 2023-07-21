@@ -61,7 +61,7 @@ class TechnologyTree:
     def get_current_tech(self):
         path = self.get_flatten_progress_path()
         
-        if len(path) > 0:
+        if len(path) > 0 and self.progress < len(path):
             return path[self.progress]
         else:
             return ''
