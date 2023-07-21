@@ -20,7 +20,7 @@ class TechnologyTree:
         self.progress_path = [technology_name]
         self.progress = 0
         self.done = False
-        
+
         current_node = self.technology_tree[technology_name]
         while current_node != self.starting_tech:
             for tech_name, tech_data in self.technology_tree.items():
@@ -28,18 +28,18 @@ class TechnologyTree:
                     current_node = tech_data
                     technology_name = tech_name
                     self.progress_path.append(tech_name)
-                    
+
                     if tech_name == self.starting_tech:
                         self.progress_path.reverse()
                         return
-                    
+
                     break
 
     def proceed_tech_develop(self):
         if self.done == True:
             logging.warning("Goal already achieved")
             return "done"
-        
+
         flatten_path = self.get_flatten_progress_path()
         self.progress += 1
         if self.progress >= len(flatten_path):
@@ -48,7 +48,7 @@ class TechnologyTree:
         else:
             print("Currently working on " + flatten_path[self.progress])
             return "".join(flatten_path[self.progress]).join(" [").join(str(self.progress)).join("]")
-        
+
     def get_flatten_progress_path(self):
         flat_progress_path = []
         for path in self.progress_path:
@@ -56,8 +56,8 @@ class TechnologyTree:
             for i in range(count):
                 flat_progress_path.append(path)
                 
-        return flat_progress_path        
-    
+        return flat_progress_path
+
     def get_current_tech(self):
         path = self.get_flatten_progress_path()
         
@@ -65,13 +65,13 @@ class TechnologyTree:
             return path[self.progress]
         else:
             return ''
-    
+
     def print_progress_path(self):
         for i, tech in self.get_progress_path():
-            print(str(i) + ': ' + tech)   
-            
+            print(str(i) + ': ' + tech)
+
     def get_progress_path(self):
-        return enumerate(self.progress_path)          
+        return enumerate(self.progress_path)
 
 
 #file_path = 'tech-tree.yml'

@@ -17,7 +17,7 @@ previous_step_tech = ''
 @app.route('/', methods=['GET'])
 def get_info():
     info = 'Technology Tree service'
-    
+
     logging.info(info)
     return info, 200
 
@@ -31,7 +31,7 @@ def start_tech_develop_srv():
     tech_tree.start_tech_develop(new_technology)
     message_text = 'tech develop started'
     message = jsonify({'message' : message_text})
-    
+
     logging.info(message_text)
     return message, 200
 
@@ -43,7 +43,7 @@ def proceed_tech_develop():
     message_text = 'tech development locked' if status == 'done' else 'tech develop moved by 1 step'
     status = 423 if status == 'done' else 200
     message = jsonify({'message' : message_text})
-    
+
     logging.info(message_text)    
     return message, status
 
@@ -53,7 +53,7 @@ def proceed_tech_develop():
 def get_current_tech():
     tech = tech_tree.get_current_tech()
     message = jsonify({'currently developed technology' : tech})
-    
+
     return message, 200
 
 
@@ -62,16 +62,16 @@ def get_current_tech():
 def get_progress_path_full():
     
     path = []
-    
+
     logging.info("Progress path:")
-    
+
     for i, tech in tech_tree.get_progress_path():
         path.append({i : tech})
         logging.info(str(i) + ": " + tech)
-    
+
     response = json.dumps(path)
     return jsonify(response), 200
-    
+
 
 if __name__ == '__main__':
     file_path = 'tech-tree.yml'
