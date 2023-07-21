@@ -8,12 +8,13 @@ def load_technology_tree(file_path):
 
 class TechnologyTree:
 
-    def __init__(self, file_path):
+    def __init__(self, file_path, starting_technology):
         self.technology_tree = load_technology_tree(file_path)
+        self.starting_tech = starting_technology
         self.current_tech = None
         self.progress_path = []
         self.progress = 0
-        self.done = False
+        self.done = True #at the very beginning, the devloplent is not executed, it needs to be started with start_tech_develop
 
     def start_tech_develop(self, technology_name):
         self.progress_path = [technology_name]
@@ -21,14 +22,14 @@ class TechnologyTree:
         self.done = False
         
         current_node = self.technology_tree[technology_name]
-        while current_node != 'start':
+        while current_node != self.starting_tech:
             for tech_name, tech_data in self.technology_tree.items():
                 if 'next-tech' in tech_data and technology_name in tech_data['next-tech'].split(', '):
                     current_node = tech_data
                     technology_name = tech_name
                     self.progress_path.append(tech_name)
                     
-                    if tech_name == 'start':
+                    if tech_name == self.starting_tech:
                         self.progress_path.reverse()
                         return
                     

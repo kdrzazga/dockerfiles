@@ -65,12 +65,32 @@
 			"response": []
 		},
 		{
+			"name": "player cities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9982/cities/player",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9982",
+					"path": [
+						"cities",
+						"player"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "city",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9982/city/1",
+					"raw": "http://localhost:9982/city/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -78,7 +98,7 @@
 					"port": "9982",
 					"path": [
 						"city",
-						"1"
+						"2"
 					]
 				}
 			},
@@ -157,7 +177,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"city-name\": \"Pythonville\"\r\n}",
+					"raw": "{\r\n    \"city-name\": \"4\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -211,6 +231,78 @@
 					"port": "9982",
 					"path": [
 						"quit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "start-technology-develop",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"technology\": \"republic\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9983/start-technology-develop",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9983",
+					"path": [
+						"start-technology-develop"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "full-progress-path",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:9983/full-progress-path",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9983",
+					"path": [
+						"full-progress-path"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tech-develop-step",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:9983/tech-develop-step",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9983",
+					"path": [
+						"tech-develop-step"
 					]
 				}
 			},

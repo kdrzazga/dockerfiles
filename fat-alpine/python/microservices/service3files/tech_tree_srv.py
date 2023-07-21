@@ -8,7 +8,7 @@ from technology_tree import TechnologyTree
 app = Flask(__name__)
 
 file_path = 'tech-tree.yml'
-tech_tree = TechnologyTree(file_path)
+tech_tree = TechnologyTree(file_path, 'start')
 
 
 #curl http://127.0.0.1:9983/
@@ -64,7 +64,8 @@ def get_progress_path_full():
 
 if __name__ == '__main__':
     file_path = 'tech-tree.yml'
-    tech_tree = TechnologyTree(file_path)
+    starting_technology = 'start'
+    tech_tree = TechnologyTree(file_path, starting_technology)
 
     print("starting service on 9983")
     app.run(port=9983)
