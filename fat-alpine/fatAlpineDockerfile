@@ -23,8 +23,12 @@ RUN apk add vice || true
 RUN ln -s -f /usr/bin/python3 /usr/bin/python && \
     ln -s -f /usr/bin/pip3 /usr/bin/pip
     
+<<<<<<< HEAD
 RUN pip install colorama art pipenv flask gunicorn tinydb
 RUN pip install keyboard pygame pillow PyYAML || true
+=======
+RUN pip install colorama art pipenv flask gunicorn tinydb keyboard pygame pillow PyYAML || true
+>>>>>>> ff920f9 (python-toss)
 RUN pip install numpy || true
 
 RUN addgroup -g 10000 teamX && \
