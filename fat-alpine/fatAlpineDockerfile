@@ -15,14 +15,15 @@ RUN apk add nethack && \
     apk add figlet cmatrix lynx mutt sl cmus newsboat ranger alpine dialog elinks fortune && \
     apk add gnuplot inxi ncdu nyancat sc screen tree units w3m zsh tty-solitaire 
 
-RUN apk add moon-buggy nsnake zangband
+RUN apk add moon-buggy nsnake || true
+RUN apk add zangband || true
 	
 RUN apk add vice || true
 
 RUN ln -s -f /usr/bin/python3 /usr/bin/python && \
     ln -s -f /usr/bin/pip3 /usr/bin/pip
     
-RUN pip install colorama art pipenv	flask gunicorn tinydb keyboard pygame pillow PyYAML
+RUN pip install colorama art pipenv flask gunicorn tinydb keyboard pygame pillow PyYAML || true
 RUN pip install numpy || true
 
 RUN addgroup -g 10000 teamX && \
