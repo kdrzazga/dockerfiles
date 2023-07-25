@@ -22,6 +22,8 @@ fat-alpine/python/microservices/*.json
 # vendor/
 __pycache__/
 fat-alpine/java/txtui*/target/*
+fat-alpine/c64kickass/*.prg
+fat-alpine/c64kickass/*.sym
 
 *package.json
 *node_modules/
