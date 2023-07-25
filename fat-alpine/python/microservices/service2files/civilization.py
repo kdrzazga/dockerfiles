@@ -99,6 +99,22 @@ def help_endpoint():
     return jsonify(response), 200
 
 
+@app.route('/find-route', methods=['POST'])
+def find_route_endpoint():
+    data = request.get_json()
+    x1 = data.get('x1')
+    y1 = data.get('y1')
+    x2 = data.get('x2')
+    y2 = data.get('y2')
+    
+    route = gamemap.find_route(x1, y1, x2, y2)
+    status = 200 if route is not None else 500
+    message = json.dumps(route) if route is not None else 'ERROR !!!'
+    
+    response = {'route' : message}
+    return jsonify(response), status
+
+
 @app.route('/map', methods=['GET'])
 def map_endpoint():
     map = gamemap.get_map()

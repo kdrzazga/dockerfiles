@@ -1,6 +1,13 @@
 import pygame
 import math
 
+print("INNER SOLAR SYSTEM")
+print("\nThe following animation keeps proportions among planet sizes: Venus is slightly smaller than Earth, Moon is 6 times smaller than Earth, and Mercury is slightly bigger than the Moon.")
+print("Satellites of Mars: Phobos (larger and closer) and Deimos (smaller and further) are pretty tiny and  irregularly shaped.")
+print("The Moon rotates around the Eath ca 12 times a year.")
+print("Year on Merury is ca 1/4 of Earth's, Venus - 0.6 and Mars ca 1.8-2 ")
+print("\nThe Sun is in fact much bigger - 110 times the diameter of the Earth")
+
 pygame.init()
 
 window_width = 800
@@ -47,13 +54,13 @@ mars_angle = 0
 mars_speed = 0.006
 
 # Moons for Mars
-moon1_radius = 1
+moon1_radius = 2
 
 moon1_distance = 30
 moon1_angle = 0
 moon1_speed = 0.15
 
-moon2_radius = 2
+moon2_radius = 1
 moon2_distance = 50
 moon2_angle = 0
 moon2_speed = 0.08

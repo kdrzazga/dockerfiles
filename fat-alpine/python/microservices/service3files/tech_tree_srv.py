@@ -24,7 +24,7 @@ def get_info():
 
 #curl --header "Content-Type: application/json" --request POST --data {\"technology\" : \"chilvary\"}  http://127.0.0.1:9983/start-technology-develop
 @app.route('/start-technology-develop', methods=['POST'])
-def start_tech_develop_srv():
+def start_tech_develop_endpoint():
     data = request.get_json()
     new_technology = data.get('technology')
 
@@ -38,7 +38,7 @@ def start_tech_develop_srv():
 
 #curl --header "Content-Type: application/json" --request PUT http://127.0.0.1:9983/tech-develop-step
 @app.route('/tech-develop-step', methods=['PUT'])
-def proceed_tech_develop():
+def tech_develop_endpoint():
     status = tech_tree.proceed_tech_develop()
     message_text = 'tech development locked' if status == 'done' else 'tech develop moved by 1 step'
     status = 423 if status == 'done' else 200
@@ -50,7 +50,7 @@ def proceed_tech_develop():
 
 #curl http://127.0.0.1:9983/current-tech
 @app.route('/current-tech', methods=['GET'])
-def get_current_tech():
+def current_tech_endpoint():
     tech = tech_tree.get_current_tech()
     message = jsonify({'currently developed technology' : tech})
 
@@ -59,7 +59,7 @@ def get_current_tech():
 
 #curl http://127.0.0.1:9983/full-progress-path
 @app.route('/full-progress-path', methods=['GET'])
-def get_progress_path_full():
+def full_progress_path_endpoint():
     
     path = []
 

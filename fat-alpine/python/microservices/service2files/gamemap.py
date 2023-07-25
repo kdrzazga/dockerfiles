@@ -1,4 +1,5 @@
 import random
+import heapq
 
 
 class GameMap:
@@ -56,14 +57,13 @@ class GameMap:
             self.map[4][col] = "snow"
             self.map[self.sizeY - 4][col] = "snow"
         
-        self.island(self.sizeX // 3 + 2, int(self.sizeY/2) + 8, int(self.sizeX/3), int(6 * self.sizeY/5))
-        self.island(int(self.sizeX/3) + 2, int(2 * self.sizeY/3) + 5, int(self.sizeX/3), int(self.sizeY/3))
+        self.island(self.sizeX // 3 + 2, self.sizeY //2 + 8, self.sizeX // 3, 6 * self.sizeY//5)
+        self.island(self.sizeX // 3 + 2, int(2 * self.sizeY/3) + 5, self.sizeX // 3, self.sizeY // 3)
         self.island(int(self.sizeX/3 + 6 * random.random()), int(self.sizeY/12 + 1 + 6 * random.random()), int(self.sizeX/4), int(self.sizeY/3 * random.random()))
         self.island(int(self.sizeX/3 - 6 * random.random()), int(self.sizeY/12 + 1 - 6 * random.random()), int(self.sizeX/ (4 + 3 * random.random())), int(self.sizeY/7))
-        
+
         return self.map
-    
-    
+
     def island(self, x, y, sizeX, sizeY):
         probabilities = {
             "meadow": 0.6,
@@ -82,12 +82,49 @@ class GameMap:
                         if rand_num <= cumulative_prob:
                             self.map[i][j] = tile
                             break
+ 
+    def find_route(self, x1, y1, x2, y2):#Dijkstra algorithm
+        heap = [(0, x1, y1)]
+        visited = set()
+        
+        while heap:
+            total_cost, x, y = heapq.heappop(heap)
+            
+            if x == x2 and y == y2:
+                return total_cost
+            
+            if (x, y) in visited:
+                continue
+            
+            visited.add((x, y))
+            
+            for nx, ny in self.get_neighbors(x, y):
+                cost_to_move = self.get_movement_cost(nx, ny)
+                heapq.heappush(heap, (total_cost + cost_to_move, nx, ny))
+        
+        return None
 
-    
-    
+    def get_neighbors(self, x, y):
+        neighbors = []
+        if x > 0:
+            neighbors.append((x - 1, y))
+        if x < self.sizeX - 1:
+            neighbors.append((x + 1, y))
+        if y > 0:
+            neighbors.append((x, y - 1))
+        if y < self.sizeY - 1:
+            neighbors.append((x, y + 1))
+        return neighbors
+        
+    def get_movement_cost(self, x, y):
+        cost = {"meadow" : 2, "mountain": 7, "desert" : 3, "snow" : 3, "river" : 2, "sea" : 9999, "city" : 1}
+
+        result = cost[self.map[x][y]] if x >= 0 and y >= 0 and x < self.sizeX and y < self.sizeY else -1
+        
+        return result
+
     def get_map(self):
         return self.map
-    
 
 gamemap = GameMap()
     
