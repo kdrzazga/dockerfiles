@@ -150,4 +150,5 @@ WORKDIR /usr/
 EXPOSE 8080 8081 8082 8083 9981 9982 9983 9984 9985
 USER userX
 
-CMD ["python", "info.py", "up"]
+#CMD ["python", "info.py", "up"]
+CMD ["mc"]
