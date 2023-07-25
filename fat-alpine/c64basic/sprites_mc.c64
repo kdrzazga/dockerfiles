@@ -1,0 +1,20 @@
+10 print chr$(147)
+20 print "generated with spritemate"
+30 print "1 of 1 sprites displayed."
+40 poke 53285,5: rem multicolor 1
+50 poke 53286,13: rem multicolor 2
+60 poke 53269,255 : rem set all 8 sprites visible
+70 for x=12800 to 12800+63: read y: poke x,y: next x: rem sprite generation
+80 :: rem sprite_0
+90 poke 53287,7: rem color = 7
+100 poke 2040,200: rem pointer
+110 poke 53248, 44: rem x pos
+120 poke 53249, 120: rem y pos
+130 poke 53276, 1: rem multicolor
+140 poke 53277, 1: rem width
+150 poke 53271, 1: rem height
+1000 :: rem sprite_0 / multicolor / color: 7
+1010 data 0,40,0,0,40,0,0,40,0,0,40,0,0,235,0,0
+1020 data 235,0,1,235,64,1,235,64,5,235,80,21,235,84,85,235
+1030 data 85,85,235,85,85,235,85,85,235,85,85,170,85,85,170,85
+1040 data 85,170,85,0,170,0,0,170,0,0,130,0,0,130,0,135
