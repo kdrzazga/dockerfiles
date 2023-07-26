@@ -1,31 +1,42 @@
+.const rem = $8f
+.const end = $80
+.const newline = $08
+.const sys = $9e00
+.const poke = $9700
+.const signature_basic = $080d
+
 *=$0801
-.byte $0d,$08 //signature
-.byte 10 // (line number 10)
-.byte $00,$9e //sys
-.text "2304:"//   (10 sys2304:end)
-.byte $80
+.word signature_basic
+.byte 10
+.word sys
+.text "2304:"
+.byte end
 .byte $00,$19
-.byte $08,20 //$0814 - address of new line of code (line number 20)
-.byte $00,$9e //sys
+.byte newline
+.byte 20 //$0814 - address of new line of code (line number 20)
+.word sys
 .text "2345:"
-.byte $8f //rem
+.byte rem
 .byte $00,$19 + 16 
-.byte $08,30 //$081e - address of new line of code (line 30)
-.byte $00,$97 //poke 
-.text "2040,129:" //  (30 poke 2040,129)
-.byte $8f //rem
+.byte newline
+.byte 30 //$081e - address of new line of code (line 30)
+.word poke 
+.text "2040,129:"
+.byte rem
 .byte $00,$19 + 16 + 15
-.byte $08,40 //line 40
-.byte $00,$97 //poke 
-.text "53287,5:" //  (40 poke 53287,5)
-.byte $8f //rem
-.byte $00,$19 + 16 + 15 +34 // = $5a 
-.byte $08,50 //line 50
-.byte $00,$97 //poke 
+.byte newline
+.byte 40
+.word poke 
+.text "53287,5:"
+.byte rem
+.byte $00,$19 + 16 + 15 + 34 // = $5a 
+.byte newline
+.byte 50
+.word poke 
 .text "53271,127:"
-.byte $97 //poke 
+.byte $97 //poke on the same line
 .text " 53277,127:"
-.byte $8f //rem
+.byte rem
 .byte $20,$53,$49,$5a,$45
 .byte $00, $00, $00, $ff, $ff, 0,0,0, $ff,$ff,$ff, 0,0,0, $ff,$ff,$ff
 
