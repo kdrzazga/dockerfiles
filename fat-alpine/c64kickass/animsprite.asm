@@ -30,7 +30,7 @@
 .const sprite_width_ptr = $d01d
 
 .const raster_ptr = $d012
-.const counter = $fa // a zeropage address to be used as a counter
+.const counter = $fa			// a zeropage address to be used as a counter
 .const sys = $9e00
 .const init_basic = $080b
 
@@ -43,56 +43,23 @@
 
 *=2061
 
-lda #3
-sta sprite0_color
-lda #7
-sta sprite1_color
-lda #13
-sta sprite2_color
-lda #14
-sta sprite3_color
-sta sprite4_color
-
-lda #%00011111
-sta enable_sprites
-
-lda #99
-sta sprite0_x
-sta sprite0_y
-sta sprite1_y
-sta sprite2_x
-
-lda #130
-sta sprite1_x
-sta sprite2_y
-sta sprite3_x
-sta sprite3_y
-
-lda #150
-sta sprite4_x
-sta sprite4_y
-
-lda #%00001100
-sta sprite_height_ptr
-
-lda #%00011000
-sta sprite_width_ptr
+jsr setup
 
 ldx #$80
 
-delay:  lda #$fb    // wait for vertical retrace
-loop2:  cmp raster_ptr   // until it reaches 251th raster line ($fb)
-        bne loop2   // which is out of the inner screen area
+delay:  lda #$fb			// wait for vertical retrace
+loop2:  cmp raster_ptr		// until it reaches 251th raster line ($fb)
+        bne loop2			// which is out of the inner screen area
 
-        inc counter // increase frame counter
-        lda counter // check if counter
-        cmp #6      // reached 6
-        bne out     // if not, pass the switching routine
+        inc counter			// increase frame counter
+        lda counter			// check if counter
+        cmp #6				// reached 6
+        bne out				// if not, pass the switching routine
 
-        lda #$00    // reset
-        sta counter // counter
+        lda #$00			// reset
+        sta counter			// counter
 
-loop:	
+		//main 
 		stx sprite0_pointer
 		stx sprite1_pointer
 		stx sprite2_pointer
@@ -100,24 +67,65 @@ loop:
 		stx sprite4_pointer
 
 		inx
-	
+		inc sprite4_x
+		inc sprite1_x
+		inc sprite1_x
+		inc sprite1_x
+		
 		cpx #$83
 		beq reset_sprite_loop
-		
+		//end main
 		jmp delay
 
 reset_sprite_loop:
 		ldx #$80
 		jmp delay		
 out:
-        lda raster_ptr // make sure we reached
-loop3:  cmp raster_ptr // the next raster line so next time we
-        beq loop3 // should catch the same line next frame
+        lda raster_ptr		// make sure we reached
+loop3:  cmp raster_ptr		// the next raster line so next time we
+        beq loop3			// should catch the same line next frame
 
         jmp delay
 
+setup:
+		lda #3
+		sta sprite0_color
+		lda #7
+		sta sprite1_color
+		lda #13
+		sta sprite2_color
+		lda #14
+		sta sprite3_color
+		sta sprite4_color
+		
+		lda #%00011111
+		sta enable_sprites
+		
+		lda #99
+		sta sprite0_x
+		sta sprite0_y
+		sta sprite1_y
+		sta sprite2_x
+		
+		lda #130
+		sta sprite1_x
+		sta sprite2_y
+		sta sprite3_x
+		sta sprite3_y
+		
+		lda #150
+		sta sprite4_x
+		sta sprite4_y
+		
+		lda #%00001100
+		sta sprite_height_ptr
+		
+		lda #%00011000
+		sta sprite_width_ptr
+		
+		rts
+
 *=$2000
-// sprite 0 / singlecolor / color: $01
 sprite_0:
 .byte $00,$00,$00,$00,$00,$00,$00,$00
 .byte $00,$00,$f8,$00,$00,$84,$00,$01
@@ -129,7 +137,6 @@ sprite_0:
 .byte $00,$00,$00,$00,$00,$00,$00,$01
 
 *=$2040
-// sprite 1 / singlecolor / color: $01
 sprite_1:
 .byte $00,$00,$00,$00,$00,$00,$00,$00
 .byte $00,$00,$f8,$00,$00,$84,$00,$01
@@ -141,7 +148,6 @@ sprite_1:
 .byte $00,$02,$00,$00,$03,$00,$00,$01
 
 *=$2080
-// sprite 2 / singlecolor / color: $01
 sprite_2:
 .byte $00,$00,$00,$00,$00,$00,$00,$00
 .byte $00,$00,$f8,$00,$00,$84,$00,$01
@@ -153,7 +159,6 @@ sprite_2:
 .byte $00,$02,$00,$00,$03,$00,$00,$01
 
 *=$20c0
-// sprite 3 / singlecolor / color: $01
 sprite_3:
 .byte $00,$00,$00,$00,$00,$00,$00,$00
 .byte $00,$00,$f0,$00,$00,$88,$00,$01
