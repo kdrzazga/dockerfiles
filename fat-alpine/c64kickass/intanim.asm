@@ -5,7 +5,7 @@
 .const poke = $9700
 .const signature_basic = $080d
 
-*=$0801
+*=$0801 "basic loader"
 .word signature_basic
 .byte 10
 .word sys
@@ -40,7 +40,7 @@
 .byte $20,$53,$49,$5a,$45
 .byte $00, $00, $00, $ff, $ff, 0,0,0, $ff,$ff,$ff, 0,0,0, $ff,$ff,$ff
 
-*=2304
+*=2304 "main"
 start:
 	jsr print_info
 	jsr set_sprite_colors
@@ -55,7 +55,7 @@ start:
 	rts
 
 //------------------------
-*=2345
+*=2345 "printing"
 print_info:
 	ldx #$00
 txt_loop:	
@@ -152,7 +152,7 @@ tekst:	.text "animation within interrupt "
 position: .byte $00
 counter:  .byte $00
 
-*=$2000
+*=$2000 "sprite 0 - van"
 sprite_van:
 .byte $88,$61,$10,$88,$91,$90,$50,$91
 .byte $50,$50,$f1,$30,$20,$91,$10,$00
@@ -163,7 +163,7 @@ sprite_van:
 .byte $52,$fe,$96,$12,$00,$90,$0c,$00
 .byte $60,$00,$00,$00,$00,$00,$00,$01
 
-*=$2000 + 8*8
+*=$2000 + 8*8 "sprite 1 - rocket"
 sprite_rocket:
 .byte $00,$00,$00,$00,$00,$00,$00,$00
 .byte $00,$78,$00,$00,$7e,$00,$00,$7f
