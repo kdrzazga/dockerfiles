@@ -7,6 +7,9 @@
 *=$080d
 // Start of the program
 
+	    //enable collision interrupts
+		lda #%00000110 // Bit #1: 1 = Sprite-background collision interrupt enabled, Bit #2: 1 = Sprite-sprite collision
+		ora $d01a
 		lda #$00
 		sta $d021
 		jsr set_sprite_colors
@@ -41,7 +44,7 @@
         lda #$00    // reset
         sta counter // counter
 
-        sei         // enable interrupts
+        sei         // disable interrupts
 
 delay:  lda #$fb    // wait for vertical retrace
 loop2:  cmp $d012   // until it reaches 251th raster line ($fb)
@@ -50,7 +53,7 @@ loop2:  cmp $d012   // until it reaches 251th raster line ($fb)
         inc counter // increase frame counter
         lda counter // check if counter
         cmp #6      // reached 6
-        bne out     // if not, pass the color changing routine
+        bne out     // if not, pass the switching routine
 
         lda #$00    // reset
         sta counter // counter
@@ -59,9 +62,14 @@ loop2:  cmp $d012   // until it reaches 251th raster line ($fb)
 		dec $d002
 		dec $d002
 
-		lda #$d0  //HI byte of address $D019 - collision detection
-		ldx #$19  //LO byte 
+		jsr $E544  //clear screen
+
+		jsr place_mines
+
+		lda #$00  //HI byte of address $D019 - collision detection
+		ldx $d019  //LO byte 
 		jsr $bdcd // KERNEL function to print
+		
 out:
         lda $d012 // make sure we reached
 loop3:  cmp $d012 // the next raster line so next time we
@@ -97,6 +105,12 @@ petla2:
 
 message:
 .text "tanks                                                ." 
+
+place_mines:
+	ldy #$af
+	sta $0596
+	sta $059e
+	rts
 
 *=$2000
 sprite0:
