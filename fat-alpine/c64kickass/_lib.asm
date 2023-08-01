@@ -16,9 +16,38 @@
 .const frame = $d020
 .const background = $d021
 
+.const screen_mem = $400
+.const color_mem = $d800
+
 .pseudocommand poke address:value {
 	pha
 	lda value
 	sta address
+	pla
+}
+
+.pseudocommand copy_cell src:target {
+	pha
+	lda src
+	sta target
+	pla
+}
+
+.pseudocommand wait tm {
+delay:
+	pha
+	tya
+	pha
+	ldy #0
+delay_loop:
+
+	.for(var d=0; d<123; d++){
+		nop
+	}
+	iny
+	cpy tm
+	bne delay_loop
+	pla
+	tay
 	pla
 }

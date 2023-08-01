@@ -13,7 +13,7 @@
 loop:
 	jsr move_sprite0
 	jsr move_sprite1
-	jsr delay
+	wait #80
 
 	inx
 	inc sprite0_color
@@ -41,24 +41,6 @@ move_sprite1:
 	stx sprite1_x
 	lda zigzag, x
 	sta sprite1_y
-	rts
-
-delay:
-	pha
-	tya
-	pha
-	ldy #0
-delay_loop:
-
-	.for(var d=0; d<123; d++){
-		nop
-	}
-	iny
-	cpy #$70
-	bne delay_loop
-	pla
-	tay
-	pla
 	rts
 
 *=$1500	"sine wave data"
