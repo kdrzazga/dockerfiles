@@ -18,6 +18,7 @@
 
 .const screen_mem = $400
 .const color_mem = $d800
+.const reset = $ff48
 
 .pseudocommand poke address:value {
 	pha
