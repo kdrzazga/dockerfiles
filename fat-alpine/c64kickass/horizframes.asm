@@ -71,6 +71,7 @@ loop:
 		dec $d002
 		dec $d004
 		dec $d005
+		inc $d029
 		wait 1
 		jmp loop
 
@@ -81,13 +82,13 @@ txt_loop:
 	lda message, x
 	sta $0400 + 14*40, x
 	inx
-	cpx #83
+	cpx #(24 + 16 + 65)
 	bne txt_loop
 	rts
 
 message:
 .text "displayed are 3 sprites."
 .fill 16, 32
-.text "now you know that frame is necessary forc64" 
+.text "now you know that frame is necessary forc64 to avoid twin-sprites" 
 
 #import "default-sprites.asm"
