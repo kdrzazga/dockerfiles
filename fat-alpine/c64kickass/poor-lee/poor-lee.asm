@@ -28,7 +28,7 @@ load_screen:
 		.var src1 = start1 + i
 		.var target1 = screen_mem + i
 		copy_cell src1:target1
-		
+
 		.var src2 = start2 + i
 		.var target2 = color_mem + i
 		copy_cell src2:target2 

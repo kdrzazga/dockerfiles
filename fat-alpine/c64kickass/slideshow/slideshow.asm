@@ -1,14 +1,19 @@
+#import "../_lib.asm"
 BasicUpstart2(start)
 
-// 			Graphic conversion with FloydSteinberg
+//Graphic conversion with FloydSteinberg
+
+.const SCREEN_CTRL_REG = $d011
+.const MEM_SETUP_REG = $d018
+.const FRAME_COLOR = $d020
 
 start:	sei
 		lda #%00111011 //Bits #0-#2: Vertical raster scroll. Bit #3: Screen height; 0 = 24 rows; 1 = 25 rows. Bit #4: 0 = Screen off, complete screen is covered by border; 1 = Screen on, normal screen contents are visible. Bit #5: 0 = Text mode; 1 = Bitmap mode.
-		sta $d011
-		lda #%00011000
-		sta $d018
+		sta SCREEN_CTRL_REG
+		lda #%00011000 //Bits #1-#3: In text mode, pointer to character memory (bits #11-#13) %100, 4: $2000-$27FF, 8192-10239., %101, 5: $2800-$2FFF, 10240-12287. %110, 6: $3000-$37FF, 12288-14335
+		sta MEM_SETUP_REG
 		lda #BLACK
-		sta $d020
+		sta FRAME_COLOR
 		ldx #0
 		lda #BLACK | (WHITE<<4)
 loop:	sta $0400,x
@@ -17,11 +22,27 @@ loop:	sta $0400,x
 		sta $0700,x
 		inx
 		bne loop
-		jmp *
+end:
+		.var src = $6000
+		.var target = $2000
+			
+		.for(i=0 ; i< 40*200; i++){
+			
+		}
+	
+		jmp end
 
-		*=$2000 "Picture"
-		.var pic1 = floydSteinberg("camel.jpg")
+		*=$2000 "Picture 1"
+		.var pic1 = floydSteinberg("jez3.jpg")
 		.fill 40*200, pic1.get(i)
+		
+		*=$6000 "Picture 2"
+		.var pic2 = floydSteinberg("cycki3.jpg")
+		.fill 40*200, pic2.get(i)
+		
+		*=$8000 "Picture 3"
+		.var pic3 = floydSteinberg("camel.jpg")
+		.fill 40*200, pic3.get(i)
 
 
 //--------------------------------------------------------------------------
