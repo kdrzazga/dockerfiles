@@ -15,6 +15,7 @@
 
 .const frame = $d020
 .const background = $d021
+.const text_color = $0286
 
 .const screen_mem = $400
 .const color_mem = $d800
