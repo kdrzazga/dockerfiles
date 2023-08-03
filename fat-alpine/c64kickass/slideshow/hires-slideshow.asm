@@ -4,6 +4,7 @@ BasicUpstart2(start)
 .const SCREEN_CTRL_REG = $d011
 .const MEM_SETUP_REG = $d018
 .const FRAME_COLOR = $d020
+.var counter = 0
 
 start:	sei
 		lda #%00110000 //Bit #4: 0 = Screen off, complete screen is covered by border; 1 = Screen on, Bit #5: 0 = Text mode; 1 = Bitmap mode.
@@ -21,14 +22,30 @@ loop:	sta $0400,x
 		inx
 		bne loop
 
+		wait 30
+		
+copy:
+		.var src = $4000 + counter
+		.var dst = $2000 + counter
+		
+		lda src
+		sta dst
+		inc counter
+
+		.if (counter > 7999) jmp end
+		jmp copy
+		
 end:	
 		jmp end
 
-		*=$2000 "Picture 1"
-		.import c64 "cyc.prg" //320x200 hi-res picture occupies 320x200=64000 pixels / 8 bits per byte = 8000 bytes = $1f40
+		*=$4000 "Picture 1"
+		.import c64 "kingsajz.prg" //320x200 hi-res picture occupies 320x200=64000 pixels / 8 bits per byte = 8000 bytes = $1f40
 		
-		*=$4000 "Picture 2"
+		*=$2000 "Picture 2"
 		.import c64 "jezpic.prg"
 		
 		*=$6000 "Picture 3"
 		.import c64 "camelpic.prg"
+		
+		*=$8000 "Picture 4"
+		.import c64 "cyc.prg"

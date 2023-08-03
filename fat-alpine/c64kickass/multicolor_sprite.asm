@@ -1,9 +1,42 @@
+#import "_lib.asm"
 
-lda #$00 // sprite multicolor 1
-sta $d025
-lda #$02 // sprite multicolor 2
-sta $d026
+.const sprite0_ptr = $07f8
+.const multicolor = $d01c
+.const height = $d01d
+.const width = $d017
 
+*=$0801 "basic start"
+    .word init_basic
+	.byte 100
+	.word sys
+	.text " 10000"
+	.byte $00, $00
+
+*=10000 "main"
+	lda #BLACK // sprite multicolor 1 - trunks
+	sta $d025
+	lda #2 // sprite multicolor 2 - mouth
+	sta $d026
+	poke enable_sprites:#$ff
+	
+	ldy #$00
+	
+loop:
+	lda sprite_0, y
+	sta 12800, y
+	iny
+	cpy #(8*8)
+	bne loop
+	
+	poke sprite0_color:#7 //body
+	poke sprite0_ptr:#200
+	poke sprite0_x:#44
+	poke sprite0_y:#200
+	poke multicolor:#1
+	poke height:#1
+	poke width:#1
+	
+	rts
 
 // sprite 0 / multicolor / color: $07
 sprite_0:
