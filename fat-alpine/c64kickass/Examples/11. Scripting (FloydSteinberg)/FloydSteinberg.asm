@@ -1,14 +1,11 @@
 BasicUpstart2(start)
-//--------------------------------------------------------------------------
-//--------------------------------------------------------------------------
+
 // 			Graphic conversion with FloydSteinberg
-//--------------------------------------------------------------------------
-//--------------------------------------------------------------------------
 
 start:	sei
-		lda #$3b
+		lda #%00111011 //Bits #0-#2: Vertical raster scroll. Bit #3: Screen height; 0 = 24 rows; 1 = 25 rows. Bit #4: 0 = Screen off, complete screen is covered by border; 1 = Screen on, normal screen contents are visible. Bit #5: 0 = Text mode; 1 = Bitmap mode.
 		sta $d011
-		lda #$18
+		lda #%00011000
 		sta $d018
 		lda #BLACK
 		sta $d020
@@ -23,7 +20,7 @@ loop:	sta $0400,x
 		jmp *
 
 		*=$2000 "Picture"
-		.var pic1 = floydSteinberg("camel.jpg")
+		.var pic1 = floydSteinberg("board.jpg")
 		.fill 40*200, pic1.get(i)
 
 

@@ -25,6 +25,7 @@ RUN ln -s -f /usr/bin/python3 /usr/bin/python && \
     
 RUN pip install colorama art pipenv flask gunicorn tinydb
 RUN pip install keyboard pygame pillow PyYAML || true
+
 RUN pip install numpy || true
 
 RUN addgroup -g 10000 teamX && \

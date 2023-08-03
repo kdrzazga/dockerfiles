@@ -4,6 +4,7 @@ gui/*
 jsff/*
 fat-alpine/python/*.json
 fat-alpine/python/microservices/*.json
+fat-alpine/python/voyager/.idea/
 
 # Binaries for programs and plugins
 *.exe
@@ -24,6 +25,8 @@ __pycache__/
 fat-alpine/java/txtui*/target/*
 fat-alpine/c64kickass/*.prg
 fat-alpine/c64kickass/*.sym
+fat-alpine/c64kickass/poor-lee/*.prg
+fat-alpine/c64kickass/poor-lee/*.sym
 
 *package.json
 *node_modules/
