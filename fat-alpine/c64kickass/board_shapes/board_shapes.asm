@@ -4,6 +4,10 @@ BasicUpstart2(start)
 .const SCREEN_CTRL_REG = $d011
 .const MEM_SETUP_REG = $d018
 .const FRAME_COLOR = $d020
+.const sprite0_ptr = $07f8
+.const multicolor = $d01c
+.const height = $d01d
+.const width = $d017
 .var counter = 0
 
 start:	sei
@@ -15,12 +19,12 @@ start:	sei
 		sta FRAME_COLOR
 		ldx #0
 		lda #BLACK | (WHITE<<4)
-loop:	sta $0400,x
+!loop:	sta $0400,x
 		sta $0500,x
 		sta $0600,x
 		sta $0700,x
 		inx
-		bne loop
+		bne !loop-
 
 		wait 30
 		
@@ -36,15 +40,37 @@ copy:
 		jmp copy
 		
 end:	
-		jmp end
+		jsr setup_sprites
+		jmp *
 
 setup_sprites:
 
-LDA #$04 // sprite multicolor 1
-STA $D025
-LDA #$07 // sprite multicolor 2
-STA $D026		
-		
+lda #$04 // sprite multicolor 1
+sta $d025
+lda #$07 // sprite multicolor 2
+sta $d026		
+
+	poke enable_sprites:#$ff
+	
+	ldy #$00
+	
+!loop:
+	lda sprite_triange, y
+	sta 12800, y
+	iny
+	cpy #(8*8)
+	bne !loop-
+	
+	poke sprite0_color:#7 //body
+	poke sprite0_ptr:#200
+	poke sprite0_x:#44
+	poke sprite0_y:#200
+	poke multicolor:#1
+	poke height:#1
+	poke width:#1
+	
+	rts
+
 // sprite 0 / multicolor / color: $01
 sprite_triange:
 .byte $00,$3c,$00,$00,$14,$00,$00,$d7
@@ -78,5 +104,5 @@ sprite_rect:
 .byte $a5,$65,$5a,$a9,$59,$5a,$a9,$56
 .byte $5a,$aa,$55,$5a,$aa,$aa,$aa,$81
 
-		*=$2000 "Picture 1"
-		.import c64 "board.prg" //320x200 hi-res picture occupies 320x200=64000 pixels / 8 bits per byte = 8000 bytes = $1f40
+*=$2000 "Picture 1"
+.import c64 "board.prg" //320x200 hi-res picture occupies 320x200=64000 pixels / 8 bits per byte = 8000 bytes = $1f40

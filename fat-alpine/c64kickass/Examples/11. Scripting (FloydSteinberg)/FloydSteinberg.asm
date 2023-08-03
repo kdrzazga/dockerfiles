@@ -20,7 +20,7 @@ loop:	sta $0400,x
 		jmp *
 
 		*=$2000 "Picture"
-		.var pic1 = floydSteinberg("board2.jpg")
+		.var pic1 = floydSteinberg("board.jpg")
 		.fill 40*200, pic1.get(i)
 
 
