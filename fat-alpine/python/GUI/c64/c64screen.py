@@ -5,6 +5,7 @@ import pygame
 from PIL import Image, ImageDraw, ImageFont
 
 from screen_mem import TextScreenMemory
+from factory import create_start_screen
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
 parent_directory = os.path.abspath(os.path.join(current_directory, ".."))
@@ -27,12 +28,16 @@ class C64Screen:
         self.window = pygame.display.set_mode((width, height))
         self.font_path = os.path.join("..", "C64_Pro_Mono-STYLE.ttf")
         self.caption_font = ImageFont.truetype(self.font_path, 8)
-        self.caption_text = "\n    **** COMMODORE 64 BASIC V2 ****\n\n 64K RAM SYSTEM  38911 BASIC BYTES FREE\n\nREADY"
+
         self.caption_text_color = LIGHT_BLUE
         self.caption_text_background = BLUE
-        self.caption_text_height = 64
+
 
     def write_out_banner(self):
+        self.caption_text_height = 64 #height of whole segment, not single line
+        
+        self.caption_text = "\n    **** COMMODORE 64 BASIC V2 ****\n\n 64K RAM SYSTEM  38911 BASIC BYTES FREE\n\nREADY"
+        
         caption_image = Image.new("RGB", (WINDOW_WIDTH - 2 * FRAME_THICKNESS, self.caption_text_height), self.caption_text_background)
         draw = ImageDraw.Draw(caption_image)
         draw.text((0, 0), self.caption_text, font=self.caption_font, fill=self.caption_text_color)
@@ -42,6 +47,22 @@ class C64Screen:
 
     def draw_frame(self):
         pygame.draw.rect(self.window, BLUE, (FRAME_THICKNESS, FRAME_THICKNESS, WINDOW_WIDTH - 2 * FRAME_THICKNESS, WINDOW_HEIGHT - 2 * FRAME_THICKNESS))
+    
+    def draw_screen(self, text_screen_memory):
+        self.caption_text_height = 8 * TextScreenMemory.sizeY
+        
+        caption_text = ""
+        for i in range(TextScreenMemory.sizeY):
+            caption_text += text_screen_memory.get_row(i)
+            caption_text += "\n"
+        
+        caption_image = Image.new("RGB", (WINDOW_WIDTH - 2 * FRAME_THICKNESS, self.caption_text_height), self.caption_text_background)
+        
+        draw = ImageDraw.Draw(caption_image)
+        draw.text((0, 0), caption_text, font=self.caption_font, fill=self.caption_text_color)
+
+        caption_surface = pygame.image.fromstring(caption_image.tobytes(), caption_image.size, caption_image.mode)
+        self.window.blit(caption_surface, (FRAME_THICKNESS, FRAME_THICKNESS))
     
     def clear(self):
         self.draw_frame(self)
@@ -55,7 +76,8 @@ class C64Screen:
 
             self.window.fill(LIGHT_BLUE)
             self.draw_frame()
-            self.write_out_banner()
+            #self.write_out_banner()
+            self.draw_screen(create_start_screen())
             pygame.display.flip()
 
         pygame.quit()

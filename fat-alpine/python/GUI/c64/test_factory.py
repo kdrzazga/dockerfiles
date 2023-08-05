@@ -13,3 +13,5 @@ for y in range (screen.sizeY):
     print("#")
     
 print("#" * (screen.sizeX + 2))
+
+print("\nLine 3\n", screen.get_row(3), "\n")

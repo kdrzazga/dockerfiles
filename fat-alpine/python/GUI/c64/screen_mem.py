@@ -22,10 +22,16 @@ class TextScreenMemory:
     def set_value(self, value, index):
         logging.error("not implemented")
 
-    def set_row(self, line_index, text):
-        start_index = line_index * TextScreenMemory.sizeX
+    def set_row(self, row_index, text):
+        start_index = row_index * TextScreenMemory.sizeX
         for i in range(0, len(text)):
             self.mem[start_index + i] = text[i]
+    
+    def get_row(self, row_index):
+        mem_index = row_index * self.sizeX
+        char_list = self.mem[mem_index : mem_index + self.sizeX]
+        
+        return "".join(char_list)
 
     def reset(self):
         logging.error("not implemented")
