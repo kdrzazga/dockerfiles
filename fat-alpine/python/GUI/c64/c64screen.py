@@ -26,24 +26,15 @@ class C64Screen:
     def __init__(self, width, height):
         pygame.init()
         self.window = pygame.display.set_mode((width, height))
+        pygame.display.set_caption("Commodore 64")
+        icon = pygame.image.load("c64.ico")
+        pygame.display.set_icon(icon)
+        
         self.font_path = os.path.join("..", "C64_Pro_Mono-STYLE.ttf")
         self.caption_font = ImageFont.truetype(self.font_path, 8)
 
         self.caption_text_color = LIGHT_BLUE
         self.caption_text_background = BLUE
-
-
-    def write_out_banner(self):
-        self.caption_text_height = 64 #height of whole segment, not single line
-        
-        self.caption_text = "\n    **** COMMODORE 64 BASIC V2 ****\n\n 64K RAM SYSTEM  38911 BASIC BYTES FREE\n\nREADY"
-        
-        caption_image = Image.new("RGB", (WINDOW_WIDTH - 2 * FRAME_THICKNESS, self.caption_text_height), self.caption_text_background)
-        draw = ImageDraw.Draw(caption_image)
-        draw.text((0, 0), self.caption_text, font=self.caption_font, fill=self.caption_text_color)
-
-        caption_surface = pygame.image.fromstring(caption_image.tobytes(), caption_image.size, caption_image.mode)
-        self.window.blit(caption_surface, (FRAME_THICKNESS, FRAME_THICKNESS))
 
     def draw_frame(self):
         pygame.draw.rect(self.window, BLUE, (FRAME_THICKNESS, FRAME_THICKNESS, WINDOW_WIDTH - 2 * FRAME_THICKNESS, WINDOW_HEIGHT - 2 * FRAME_THICKNESS))
