@@ -59,6 +59,8 @@ class C64Screen:
             pygame.display.flip()
 
         pygame.quit()
+    
+    
 
 if __name__ == "__main__":
     c64_screen = C64Screen(WINDOW_WIDTH, WINDOW_HEIGHT)
