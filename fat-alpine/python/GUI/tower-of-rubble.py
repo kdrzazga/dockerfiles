@@ -7,7 +7,7 @@ pygame.init()
 canvas_width = 800
 canvas_height = 600
 
-WHITE = (255, 255, 255)
+GREY = (180, 180, 180)
 BLACK = (0, 0, 0)
 TRASH_COLOR = (150, 75, 0)
 
@@ -52,7 +52,7 @@ class Board:
         for trash in self.falling_trash:
             trash.update()
             if trash.y >= self.pile.y - trash_height:
-                slot = (trash.x - self.pile.x) // slot_width
+                slot = min(range(num_slots), key=lambda i: abs(trash.x - self.pile.slots[i]))
                 self.pile.accumulate(slot)
             else:
                 new_falling_trash.append(trash)
@@ -63,7 +63,7 @@ class Board:
         screen.fill(BLACK)
 
         for slot_x, pile_height in zip(self.pile.slots, self.pile.heights):
-            pygame.draw.rect(screen, WHITE, (slot_x, self.pile.y - pile_height, trash_width, pile_height))
+            pygame.draw.rect(screen, GREY, (slot_x, self.pile.y - pile_height, trash_width, pile_height))
 
         for trash in self.falling_trash:
             pygame.draw.rect(screen, TRASH_COLOR, (trash.x, trash.y, trash_width, trash_height))
