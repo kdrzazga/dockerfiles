@@ -3,7 +3,7 @@ import pygame
 pygame.init()
 
 canvas_width = 800
-canvas_height = 370
+canvas_height = 368
 screen = pygame.display.set_mode((canvas_width, canvas_height))
 pygame.display.set_caption("GIANA SISTERS")
 
@@ -12,6 +12,7 @@ background_bitmap = pygame.image.load("giana_scroll.png")
 double_bitmap_width = background_bitmap.get_width() * 2
 double_bitmap = pygame.Surface((double_bitmap_width, background_bitmap.get_height()))
 double_bitmap.blit(background_bitmap, (0, 0))
+double_bitmap.blit(background_bitmap, (background_bitmap.get_width(), 0))
 
 background_x = 0
 
