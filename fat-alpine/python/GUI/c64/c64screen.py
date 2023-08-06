@@ -6,6 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 from screen_mem import TextScreenMemory
 from factory import create_start_screen
+from sprites import Sprite
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
 parent_directory = os.path.abspath(os.path.join(current_directory, ".."))
@@ -16,11 +17,9 @@ from c64colors import get_color
 LIGHT_BLUE = ast.literal_eval(get_color("light blue")['rgb'])
 BLUE = ast.literal_eval(get_color("blue")['rgb'])
 
-# Screen dimensions
 FRAME_THICKNESS = 30
 WINDOW_WIDTH = 320 + 2 *FRAME_THICKNESS
 WINDOW_HEIGHT = 200 + 2 * FRAME_THICKNESS
-
 
 class C64Screen:
     def __init__(self, width, height):
@@ -57,6 +56,13 @@ class C64Screen:
     
     def clear(self):
         self.draw_frame(self)
+        
+    def draw_sprite(self, screen, sprite):
+
+        active_pixels = sprite.convert_to_points()
+        for x, y in active_pixels:
+            print(x, ",", y, end="| ")
+            pygame.draw.line(screen, (255, 0, 0), (x,y), (x+1, y+1))
 
     def run(self):
         running = True
@@ -67,12 +73,15 @@ class C64Screen:
 
             self.window.fill(LIGHT_BLUE)
             self.draw_frame()
-            #self.write_out_banner()
-            self.draw_screen(create_start_screen())
+            screen = create_start_screen()
+            self.draw_screen(screen)
+
+            square_sprite = Sprite(100, 100, "white")
+            self.draw_sprite(pygame.Surface((Sprite.width, Sprite.height)), square_sprite)
+            
             pygame.display.flip()
 
         pygame.quit()
-    
     
 
 if __name__ == "__main__":

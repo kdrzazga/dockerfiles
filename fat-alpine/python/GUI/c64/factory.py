@@ -8,3 +8,6 @@ def create_start_screen():
     
     return screen
     
+def create_solid_sprite():
+    pass
+    
