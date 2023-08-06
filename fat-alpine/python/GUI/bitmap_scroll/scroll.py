@@ -16,7 +16,7 @@ double_bitmap.blit(background_bitmap, (background_bitmap.get_width(), 0))
 
 background_x = 0
 
-soldier_frames = [pygame.image.load(f"soldier_frame{i}.png").convert_alpha() for i in range(1, 5)]
+soldier_frames = [pygame.image.load(f"soldier_frame{i}.png").convert_alpha() for i in range(1, 6)]
 
 soldier_x = 20
 soldier_y = 98
