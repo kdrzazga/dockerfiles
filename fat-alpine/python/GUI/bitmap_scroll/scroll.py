@@ -29,6 +29,7 @@ animation_speed = 8  # Adjust this value to control the animation speed
 running = True
 clock = pygame.time.Clock()
 scroll_speed = 5  # Adjust this value to control the scrolling speed
+soldier_anim_counter = 0
 
 while running:
     for event in pygame.event.get():
@@ -49,8 +50,13 @@ while running:
         background_x = 0
 
     # Update the animated soldier frame
-    current_frame = (current_frame + 1) % len(soldier_frames)
-
+    
+    if soldier_anim_counter > 7:
+        current_frame = (current_frame + 1) % len(soldier_frames)
+        soldier_anim_counter = 0
+    else:
+        soldier_anim_counter += 1
+    
     pygame.display.flip()
     clock.tick(60)
 
