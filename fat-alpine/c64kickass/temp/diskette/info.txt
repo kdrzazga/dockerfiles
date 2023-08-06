@@ -1,0 +1,30 @@
+c1541 -attach disk.d64 8 -read program program.prg
+
+It would save the c64 "program" to the hard drive named program.prg
+
+You could then write the files to another d64 image using
+
+c1541 -attach disk2.d64 8 -write program.prg program
+
+example:
+
+E:\GTK3VICE-3.7-win64\bin\c1541.exe -attach hirespics2.d64 8 -write jez.prg jez
+
+There is also a program called C64Copy and I think it may do what you want as well. I have not played with it much, but I think you can copy certain files from 1 disk image to another
+
+Here is the link
+
+http://ist.uwaterloo.ca/~schepers/personal.html
+
+------------------------------
+monitor:
+
+Invoking the monitor
+
+This works differently depending on what target platform you are running VICE on. In Windows, you press Alt+M. In Linux, the keyboard shortcut is instead, for some elusive reason unbeknownst to any but the VICE developers, Alt+H.
+Loading/dumping memory from/to a local file
+
+  l "<path>" 0 [<start address>]
+  s "<path>" 0 [<start address>] [<end address>]
+  
+  s "kingsajz.prg" 0 $2000 $3f3f
