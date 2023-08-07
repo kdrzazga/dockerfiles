@@ -7,7 +7,7 @@ canvas_height = 200
 screen = pygame.display.set_mode((canvas_width, canvas_height))
 pygame.display.set_caption("Seemingly Infinite Scrolling with Animated Soldier")
 
-background_bitmap = pygame.image.load("background_image.png")
+background_bitmap = pygame.image.load("background_image.png").convert_alpha()
 
 double_bitmap_width = background_bitmap.get_width() * 2
 double_bitmap = pygame.Surface((double_bitmap_width, background_bitmap.get_height()))
