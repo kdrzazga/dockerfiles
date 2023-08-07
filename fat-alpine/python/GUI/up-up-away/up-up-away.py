@@ -16,11 +16,10 @@ window_width, window_height = 320, 200
 
 
 def load_hot_air_baloon():
-    gif_image = Image.open("uua.gif")
-    gif_image = gif_image.convert("RGB")
-    gif_image_width, gif_image_height = gif_image.size
+    image = pygame.image.load("uua.png").convert_alpha()
+    image_width, image_height = image.get_size()
     
-    return gif_image_width, gif_image_height, pygame.image.fromstring(gif_image.tobytes(), gif_image.size, gif_image.mode)    
+    return image_width, image_height, image    
 
 def write_out_banner(window):
     font_path = os.path.join("..", "C64_Pro_Mono-STYLE.ttf")

@@ -10,7 +10,7 @@ window_height = 600
 window = pygame.display.set_mode((window_width, window_height))
 pygame.display.set_caption("Pygame Animation")
 
-image = pygame.image.load("tts.jpg")
+image = pygame.image.load("tts.png").convert_alpha()
 image_width, image_height = image.get_size()
 
 # Define font properties
