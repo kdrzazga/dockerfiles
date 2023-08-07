@@ -2,10 +2,14 @@ import pygame
 import sys
 import math
 
+from _3d import rotate_point_x, rotate_point_y
+
 print("Use arrow keys or WSAD to rotate the cube")
 print("+ . > =   increase anim speed")
 print("- , < _   decrease")
-print("r - reset")
+print("i o   zoom in/out")
+print("r   reset")
+print("e x   exit")
 
 pygame.init()
 
@@ -21,18 +25,6 @@ angle_y = 0
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Cube Animation")
 clock = pygame.time.Clock()
-
-def rotate_point_x(x, y, z, angle):
-    angle_rad = math.radians(angle)
-    new_y = y * math.cos(angle_rad) - z * math.sin(angle_rad)
-    new_z = y * math.sin(angle_rad) + z * math.cos(angle_rad)
-    return x, new_y, new_z
-
-def rotate_point_y(x, y, z, angle):
-    angle_rad = math.radians(angle)
-    new_x = x * math.cos(angle_rad) - z * math.sin(angle_rad)
-    new_z = x * math.sin(angle_rad) + z * math.cos(angle_rad)
-    return new_x, y, new_z
 
 def draw_cube(surface, angle_x, angle_y):
     vertices = [
@@ -63,11 +55,17 @@ def draw_cube(surface, angle_x, angle_y):
         (3, 7),
     ]
 
+    zoomed_vertices = [(int(vertex[0] * zoom_level), int(vertex[1] * zoom_level), int(vertex[2] * zoom_level))
+                       for vertex in rotated_vertices]
+
     for edge in edges:
-        start_x, start_y, start_z = rotated_vertices[edge[0]]
-        end_x, end_y, end_z = rotated_vertices[edge[1]]
+        start_x, start_y, start_z = zoomed_vertices[edge[0]]
+        end_x, end_y, end_z = zoomed_vertices[edge[1]]
         pygame.draw.line(surface, WHITE, (start_x + SCREEN_WIDTH // 2, start_y + SCREEN_HEIGHT // 2),
                          (end_x + SCREEN_WIDTH // 2, end_y + SCREEN_HEIGHT // 2), 2)
+
+zoom_level = 1.0
+zoom_step = 0.03
 
 while True:
     for event in pygame.event.get():
@@ -76,6 +74,11 @@ while True:
             sys.exit()
 
     keys = pygame.key.get_pressed()
+
+    if keys[ord('q')] or keys[ord('x')]:
+        pygame.quit()
+        sys.exit()
+        print("BYE !")
     if keys[pygame.K_LEFT] or keys[ord('a')]:
         angle_x -= 2
     if keys[pygame.K_RIGHT] or keys[ord('d')]:
@@ -96,6 +99,14 @@ while True:
         angle_y = 0
         FPS = 60
         print("Resetted. FPS:", FPS)
+    if keys[ord('i')]:
+        zoom_level += zoom_step
+        print("Zoom IN. ZOOM = ", zoom_level)
+    if keys[ord('o')]:
+        zoom_level -= zoom_step
+        if zoom_level < 3 * zoom_step:  # Make sure zoom_level doesn't go negative
+            zoom_level = 3 * zoom_step
+        print("Zoom OUT. ZOOM = ", zoom_level)
 
     screen.fill(BLACK)
     draw_cube(screen, angle_x, angle_y)
