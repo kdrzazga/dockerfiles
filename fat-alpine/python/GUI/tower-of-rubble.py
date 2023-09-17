@@ -72,7 +72,7 @@ screen = pygame.display.set_mode((canvas_width, canvas_height))
 pygame.display.set_caption("Tower of Rubble")
 
 clock = pygame.time.Clock()
-fall_interval = 1000
+fall_interval = 400
 
 board = Board(pile_x, pile_y)
 

@@ -87,4 +87,3 @@ class C64Screen:
 if __name__ == "__main__":
     c64_screen = C64Screen(WINDOW_WIDTH, WINDOW_HEIGHT)
     c64_screen.run()
-
