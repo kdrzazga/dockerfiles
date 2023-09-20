@@ -18,8 +18,9 @@ window_width, window_height = 320, 200
 def load_hot_air_baloon():
     image = pygame.image.load("uua.png").convert_alpha()
     image_width, image_height = image.get_size()
+    stretched_image = pygame.transform.scale(image, (2*34, 2*39))
     
-    return image_width, image_height, image    
+    return image_width, image_height, stretched_image    
 
 def write_out_banner(window):
     font_path = os.path.join("..", "C64_Pro_Mono-STYLE.ttf")
@@ -34,12 +35,14 @@ def write_out_banner(window):
     draw.text((0, 0), caption_text, font=caption_font, fill=caption_text_color)
 
     caption_surface = pygame.image.fromstring(caption_image.tobytes(), caption_image.size, caption_image.mode)
-    window.blit(caption_surface, (0, 0))    
+    stretched_image = pygame.transform.scale(caption_surface, (640, 150))
+    window.blit(stretched_image, (0, 0))    
+
 
 def main():
     pygame.init()        
     
-    window = pygame.display.set_mode((window_width, window_height))
+    window = pygame.display.set_mode((window_width, window_height), pygame.FULLSCREEN)
     pygame.display.set_caption("UP UP AWAY - C64")
     
     gif_image_width, gif_image_height, gif_data = load_hot_air_baloon()
@@ -60,7 +63,7 @@ def main():
             obj["x"] += obj["velocity_x"]
             obj["y"] += obj["velocity_y"]
     
-            if obj["x"] <= 0 or obj["x"] >= window_width - gif_image_width or obj["y"] <= 0 or obj["y"] >= window_height - gif_image_height:
+            if obj["x"] <= 0 or obj["x"] >= 640/320 * window_width - gif_image_width or obj["y"] <= 0 or obj["y"] >=  640/320 * window_height - gif_image_height:
                 obj["x"] = 0
                 obj["y"] = 0
             
@@ -74,6 +77,10 @@ def main():
             
         pygame.display.update()
     
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE] - keys[ord('q')] != 0:
+            running = False
+        
         clock.tick(60)
     
     pygame.quit()
