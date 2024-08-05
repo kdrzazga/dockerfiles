@@ -1,0 +1,42 @@
+5 pw(0)=1: pw(1)=2: pw(2)=4: pw(3)=8: pw(4)=16: pw(5)=32: pw(6)=64: pw(7)=128
+10 s=54272
+11 fort=0to24: poke s+t,0: next: poke s+24,15
+12 a=2^(1/12): tm=700
+15 poke s+5,3*16+7: poke s+6,10*16+9
+20 wf=16
+25 reada$,lt: if a$="stop" then end
+30 no$=left$(a$,1): oc=val(mid$(a$,3,1)): 
+sh$=mid$(a$,2,1): n=(2*(asc(no$)-65))-1
+35 if no$="p"then dr=int(tm/lt): goto 90
+36 if no$="f" then n=n-1: goto 40
+37 if no$="g" then n=n-1: goto 40
+38 if no$="a" then n=12: goto 40
+39 if no$="b" then n=14
+40 if sh$ ="#" then n=n+1
+50 fs=int((466*a^n)*pw(oc))
+55 fh=int(fs/256): fl=fs-256*fh
+60 poke s,fl: poke s+1,fh
+65 dr=int(tm/lt)
+80 poke s+4,wf+1: for t=1todr: next: poke s+4,wf: goto 25
+90 for t=1todr: next: goto 25
+
+100 data a 3, 4, a 3, 4 , a#3, 4
+110 data c 4, 4, c 4, 4 , a#3, 4
+120 data a 3, 4, g 3, 4 , f 3, 4,f 3, 4
+140 data g 3, 4, a 3, 4 , a 3, 2
+150 data g 3, 16,g 3, 2 , p  , 8
+160 data a 3, 4, a 3, 4 , a#3, 4
+170 data c 4, 4, c 4, 4 , a#3, 4
+180 data a 3, 4, g 3, 4 , f 3, 4,f 3, 4
+190 data g 3, 4, a 3, 4, g 3, 2
+200 data f 3, 16,f 3, 2
+205 data p  ,1
+210 data a 2, 8, a 3, 8, a 2, 8, a 3, 8
+220 data a 2, 8, a 3, 8, a 2, 8, a 3, 8
+230 data f 2, 8, f 3, 8, f 2, 8, f 3, 8
+240 data g 2, 8, g 3, 8, g 2, 8, g 3, 8
+250 data a 2, 8, a 3, 8, a 2, 8, a 3, 8
+260 data a 2, 8, a 3, 8, a 2, 8, a 3, 8
+270 data f 2, 8, f 3, 8, f 2, 8, f 3, 8
+280 data g 2, 8, g 3, 8, g 2, 8, g 3, 8
+999 data "stop",0
