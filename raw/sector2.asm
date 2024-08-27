@@ -1,5 +1,8 @@
 [org 0x7e00]
 
+TELETYPE_OUT	equ 0x0E
+RED		equ 4
+
     xor ax, ax              ; Clear AX
     mov ds, ax              ; Set data segment to 0
     mov es, ax              ; Set extra segment to 0
@@ -8,15 +11,14 @@
 print:
     lodsb                   ; Load character from SI into AL
     or al, al               ; Check for null terminator
-    jz done         ; If null terminator, jump to wait_for_key
-
-    ; Set color attribute (0x0A means light green text on black background)
-    mov ah, 0x0E           ; Teletype output function
+    jz done
+	
+	mov ah, TELETYPE_OUT
     mov bh, 0              ; Page number (usually 0)
-    mov bl, 0x0A           ; Light green text on black background
-    int 0x10               ; Call BIOS interrupt to print character
+    mov bl, RED
+    int 0x10
 
-    jmp print               ; Loop back to print the next character
+    jmp print
 
 done:
     jmp $                  ; Infinite loop to exit
