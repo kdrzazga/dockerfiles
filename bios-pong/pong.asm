@@ -7,7 +7,7 @@ LIGHT_GREEN	equ 0x0A
 LIGHT_BLUE   		equ 9
 PAGE_NUM	equ 0
 
-mov ax, 0x0012        
+mov ax, 0x000e       
 int 0x10
 
 loop:
@@ -28,7 +28,7 @@ clrscr:
     mov cx, 64000         ; Number of bytes to fill (320 * 200)
 
 private:
-    mov al, 0b10101010           ; Set AL to 0 (to fill black)
+    mov al, 255           ; Set AL to 0 (to fill black)
 	black_fill:    
 		mov [es:di], al ; Fill the byte with black
 		inc di               ; Move to the next pixel

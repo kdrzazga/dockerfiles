@@ -10,7 +10,7 @@ BIOS_READ_KEYBOARD	equ 0x00
 BIOS_RESET	equ 0x0000
 
 ; Set graphical mode 320x200, 16 colors
-mov ax, 0x0008      
+mov ax, 0x0004 
 int 0x10
 
 xor ax, ax              ; Clear AX
