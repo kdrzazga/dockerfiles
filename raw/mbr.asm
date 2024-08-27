@@ -1,6 +1,6 @@
 [org 0x7C00]
 
-TELETYPE	equ 0x0E
+BIOS_TELETYPE	equ 0x0E
 ENTER_KEY	equ 0x0D
 ESC_KEY	equ 0x1B
 LIGHT_GREEN   		equ 0x0A
@@ -23,7 +23,7 @@ print:
     or al, al          ; Check for null terminator
     jz wait_for_key
 
-    mov ah, TELETYPE
+    mov ah, BIOS_TELETYPE
     mov bh, PAGE_NUM
     mov bl, LIGHT_GREEN
     int 0x10
@@ -46,7 +46,7 @@ wait_for_key:
 read_second_sector:
     ; Read the second sector (cylinder 0, head 0, sector 2)
     mov ah, BIOS_READ_SECTOR
-    mov al, 1          ; Number of sectors to read
+    mov al, 10          ; Number of sectors to read
     mov ch, 0          ; Cylinder 0
     mov cl, 2          ; Sector 2
     mov dh, 0          ; Head 0
@@ -76,7 +76,7 @@ error_print:
     lodsb              ; Load character from error message into AL
     or al, al         ; Check for null terminator
     jz done_error      ; If null terminator, jump to done
-    mov ah, TELETYPE;
+    mov ah, BIOS_TELETYPE;
     int 0x10          ; Print character
     jmp error_print    ; Loop back to print next character
 
