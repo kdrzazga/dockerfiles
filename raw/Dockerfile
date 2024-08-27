@@ -2,13 +2,13 @@
 #docker run -it boot2
 FROM alpine:latest
 
-RUN apk add --no-cache nasm qemu bash qemu-img qemu-system-i386 curl
+RUN apk add --no-cache nasm bash
 
 WORKDIR /usr/src/bootloader
 
-COPY bootloader.asm .
+COPY *.asm .
 
-RUN nasm -f bin bootloader.asm -o mbr.img
+RUN nasm -f bin mbr.asm -o mbr.img
 RUN nasm -f bin sector2.asm -o sector2.img
 RUN cat mbr.img sector2.img > bootloader.bin
 
