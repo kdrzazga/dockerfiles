@@ -84,7 +84,7 @@ done_error:
     jmp $              ; Infinite loop to exit
 
 msg:
-    db "This program will present all the graphical and text modes of BIOS available for 10h interrrupt. Enjoy!", 10, 10, 13, "Press ENTER to continue.", 10, 13, 0; Null-terminated message string
+    db "This program will present all the graphical and text modes of BIOS available for 10h interrrupt. Enjoy!", 10, 10, 13, "Press ENTER to continue.", 10, 13, 0
 
 error_msg:
     db "Error reading sector.", 10, 0 ; Null-terminated error message string
