@@ -84,7 +84,7 @@ done_error:
     jmp $              ; Infinite loop to exit
 
 msg:
-    db "Welcome to BIOS_PONG game.", 10, 10, 13, "Press ENTER to continue.", 10, 13, 0; Null-terminated message string
+    db "Welcome to BIOS_PONG game.", 10, 10, 13, "During game, press ESC to reset.", 10,13, "Press ENTER now to continue.", 10, 13, 0; Null-terminated message string
 
 error_msg:
     db "Error reading sector.", 10, 0 ; Null-terminated error message string
