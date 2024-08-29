@@ -14,10 +14,10 @@
 
 System -> Motherboard -> Boot Order  = (only) Floppy
 
-![Boot Order](VirtualBox.bootorder.PNG)
+![Boot Order](info/VirtualBox.bootorder.PNG)
 
 Storage -> Storage Devices Controller Floppy with 'bootloader.img'
 
-![Storage](VirtualBox.storage.PNG)
+![Storage](info/VirtualBox.storage.PNG)
 
 5. Start VirtualBox image
