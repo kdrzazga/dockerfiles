@@ -1,0 +1,28 @@
+#docker build -t custom-scripts -f Dockerfile_python .
+#docker run -it custom-scripts
+
+FROM python:3.11-slim
+
+RUN ln -s -f /usr/bin/python3 /usr/bin/python && \
+    ln -s -f /usr/bin/pip3 /usr/bin/pip
+    
+RUN mkdir -p /usr/bin/scripts
+
+RUN pip install colorama art keyboard
+
+COPY python_scripts/program1.py /usr/bin/scripts/program1
+COPY python_scripts/program2.py /usr/bin/scripts/program2
+COPY python_scripts/intro.py /usr/bin/scripts/intro
+COPY python_scripts/comic.py /usr/bin/scripts/comic
+COPY python_scripts/data/*.txt /usr/bin/scripts/data/
+
+RUN sed -i 's/\r$//' /usr/bin/scripts/program1
+RUN sed -i 's/\r$//' /usr/bin/scripts/program2
+RUN sed -i 's/\r$//' /usr/bin/scripts/intro
+RUN sed -i 's/\r$//' /usr/bin/scripts/comic
+
+RUN chmod 777 /usr/bin/scripts/program1 /usr/bin/scripts/program2 /usr/bin/scripts/intro /usr/bin/scripts/comic /usr/bin/scripts/data/1.txt
+
+ENV PATH="/usr/bin/scripts:${PATH}"
+
+CMD ["python", "/usr/bin/scripts/intro", "up"]
