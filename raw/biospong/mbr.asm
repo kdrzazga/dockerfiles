@@ -23,7 +23,7 @@ mov cx, 50
 read_second_sector:
     ; Read the second sector (cylinder 0, head 0, sector 2)
     mov ah, BIOS_READ_SECTOR
-    mov al, 3          ; Number of sectors to read
+    mov al, 2          ; Number of sectors to read
     mov ch, 0          ; Cylinder 0
     mov cl, 2          ; Sector 2
     mov dh, 0          ; Head 0

@@ -1,4 +1,4 @@
-[org 0x7e00]
+[org 0x8200]
 
 BIOS_READ_KEYBOARD	equ 0x00
 BIOS_READ_SECTOR	equ 0x02
@@ -6,69 +6,36 @@ ESC_KEY	equ 0x1B
 
 %include 'biospong/macros.inc'
 
-text_mode6
-clrscr
 print_msg
+;clr_bottom_scr
 single_delay
 	
 loop:
     clr_bottom_scr
-	mov al, 'o'             ; Character to display
-    mov ah, 0x0E            ; Function to write character
-    int 0x10                ; Call BIOS interrupt
-    mov ah, 0x02            ; Function to set cursor position
-    mov bh, 0               ; Page number (typically 0)
+	mov al, 'o'
+    mov ah, 0x0E
+    int 0x10
+    mov ah, 0x02
+    mov bh, 0
     
-    ; Load positions into DL and DH
     mov dl, [pos_x + bx]    ; Column (X position)
     mov dh, [pos_y + bx]    ; Row (Y position)
     
-    int 0x10                ; Call BIOS interrupt to set cursor position
+    int 0x10
 
     delay0xffff
 
-    ; Increment the index and wrap around
     inc bx
     cmp bx, [pos_count]      ; Compare index with number of positions
-    jl loop                ; If index < pos_count, continue loop
-    xor bx, bx              ; Else, reset index to 0
-	
-	mov al,[execution_count]
-	inc al
-	mov [execution_count], al
-	test al, 2
-	jz done
-	
-	cmp al, 7
-	je nxt_sector
-	
+    jl loop
+    xor bx, bx              ; reset index to 0
     jmp loop               ; Repeat the loop
-	
-done:
-	clrscr
-    jmp loop
-
-nxt_sector:
-    ; Read the second sector (cylinder 0, head 0, sector 2)
-    mov ah, BIOS_READ_SECTOR
-    mov al, 2          ; Number of sectors to read
-    mov ch, 0          ; Cylinder 0
-    mov cl, 4          ; Sector 4
-    mov dh, 0          ; Head 0
-    mov bx, 0x8200     ; Buffer to read data into (0x8000)
-    int 0x13           ; Call BIOS interrupt to read the sector
 
 
-    ; Jump to the loaded code at 0x8000
-    jmp 0x8200         ; Execute code from the second sector
-
-msg:
-    db 10, 10, 10, 13, "      PONG !", 10, 13, 0 ; Null-terminated message string
-
-pos_x: 	db 13, 12, 11, 10, 09, 08, 07, 06, 05   ;9 data
-		db 05, 05, 05, 05, 05, 05, 05, 05, 06, 07, 08, 09, 10, 11, 12, 13, 13, 13, 13, 12, 11, 10, 09, 08, 07, 06, 05, 05, 05, 05, 05, 05, 05, 05   ;34 data - letter P
+pos_x: 	db 03, 04, 05, 06, 07, 08, 09, 10, 11   ;9 data
+		db 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 13, 12, 11, 10, 09, 08, 07, 06, 05, 05, 05, 05, 05, 05, 05, 05
 		db 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18 ;14
-		db 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 28, 28, 28, 28, 28, 28, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 18, 18, 18, 18, 18, 18, 18 ;34 - letter O
+		db 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 28, 28, 28, 28, 28, 28, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 18, 18, 18, 18, 18, 18, 18
 		db 18, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38 ;22
 		
 		db 37, 36, 35, 35, 35, 36, 37, 38, 38, 39, 39, 38, 37, 36, 35, 35, 35, 36, 37, 38, 38, 39, 39, 38 ;24 - 2 circles
@@ -83,8 +50,8 @@ pos_x: 	db 13, 12, 11, 10, 09, 08, 07, 06, 05   ;9 data
 buffer:
 		db 5 dup(0)
 		
-pos_y: 	db 18, 17, 16, 15, 14, 13, 12, 11, 10 ;9
-		db 09, 08, 07, 06, 05, 04, 03, 02, 02, 02, 02, 02, 02, 02, 02, 02, 03, 04, 05, 06, 06, 06, 06, 06, 06, 06, 06, 06, 07, 08, 09, 10, 11, 12; letter P
+pos_y: 	db 11, 12, 13, 14, 15, 16, 17, 18, 19 ;9
+		db 20, 21, 22, 23, 24, 23, 22, 21, 20, 21, 22, 23, 24, 23, 22, 21, 20, 21, 22, 23, 24, 23, 22, 21, 20, 21
 		db 13, 14, 15, 16, 15, 14, 13, 12, 13, 12, 11, 11, 11, 11 ;14
 		db 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 09, 08, 07, 06, 05, 04, 03, 02, 02, 02, 02, 02, 02, 02, 02, 02, 03, 04, 05, 06, 07, 08, 09, 10  ;letter O
 		db 11, 12, 13, 14, 15, 14, 13, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 24, 24 ;22
@@ -101,8 +68,9 @@ pos_y: 	db 18, 17, 16, 15, 14, 13, 12, 11, 10 ;9
 buffer2:
 		db 5 dup(0)
 
-execution_count db 0
-		
-pos_count: dw 9 + 34 + 14 + 34 + 22 + 24 + 12 + 25 + 19 + 9 + 15 + 38            ; Number of positions in pos_x and pos_y
+pos_count: dw 255
 
+msg:
+    db 10, 10, 10, 13, "3rd part", 10, 13, 0 ; Null-terminated message string
+	
 times 2*512-($-$$) db 0     ; Fill the rest of 3 sectors with NULLs

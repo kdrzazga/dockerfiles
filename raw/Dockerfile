@@ -25,8 +25,9 @@ RUN nasm -f bin raw-bios-modes/sector2plus.asm -o sector2.bin
 RUN cat mbr.bin sector2.bin > bin/raw-bios-modes.img
 
 RUN nasm -f bin biospong/mbr.asm -o mbr.bin
-RUN nasm -f bin biospong/pong.asm -o sector2.bin
-RUN cat mbr.bin sector2.bin > bin/biospong.img
+RUN nasm -f bin biospong/pong.asm -o sectors23.bin
+RUN nasm -f bin biospong/pong2.asm -o sectors45.bin
+RUN cat mbr.bin sectors23.bin sectors45.bin > bin/biospong.img
 
 RUN nasm -f bin edu/mbr.asm -o mbr.bin
 RUN nasm -f bin edu/sector2.asm -o sector2.bin

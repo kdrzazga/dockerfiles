@@ -1,0 +1,3 @@
+mbr.asm -> sector 1  (RAM: 0x7c00)
+pong.asm -> sectors 2-3 (RAM: 0x7e00)
+pong2.asm -> sectors 4-5 (RAM: 0x8200)
