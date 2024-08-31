@@ -13,7 +13,7 @@ RUN mkdir edu
 
 COPY sector2/*.asm sector2/.
 COPY raw-bios-modes/*.asm raw-bios-modes/.
-COPY bios-pong/*.asm biospong/.
+COPY biospong/*.asm biospong/.
 COPY edu/*.asm edu/.
 
 RUN nasm -f bin sector2/mbr.asm -o mbr.bin

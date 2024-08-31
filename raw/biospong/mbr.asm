@@ -9,44 +9,21 @@ BIOS_READ_SECTOR	equ 0x02
 BIOS_READ_KEYBOARD	equ 0x00
 BIOS_RESET	equ 0x0000
 
-; Set graphical mode 320x200, 16 colors
-mov ax, 0x0004 
-int 0x10
+%include 'biospong/macros.inc'
 
-xor ax, ax              ; Clear AX
-mov ds, ax              ; Set data segment to 0
-mov es, ax              ; Set extra segment to 0
-mov si, msg             ; Set SI to point to the message
+clrscr
+print_msg
 
-print:
-    lodsb               ; Load character from SI into AL
-    or al, al          ; Check for null terminator
-    jz wait_for_key
-
-    mov ah, BIOS_TELETYPE
-    mov bh, PAGE_NUM
-    mov bl, LIGHT_GREEN
-    int 0x10
-
-    jmp print
-
-wait_for_key:
-    ; Wait for a key press
-    mov ah, BIOS_READ_KEYBOARD
-    int 0x16
-
-    cmp al, ENTER_KEY
-    je read_second_sector
-
-    cmp al, ESC_KEY 
-    je reset 
-
-    jmp wait_for_key
+mov cx, 50 
+.mbr_delay_loop:
+		nop
+		delay0xffff
+		loop .mbr_delay_loop
 
 read_second_sector:
     ; Read the second sector (cylinder 0, head 0, sector 2)
     mov ah, BIOS_READ_SECTOR
-    mov al, 10          ; Number of sectors to read
+    mov al, 3          ; Number of sectors to read
     mov ch, 0          ; Cylinder 0
     mov cl, 2          ; Sector 2
     mov dh, 0          ; Head 0
@@ -84,10 +61,11 @@ done_error:
     jmp $              ; Infinite loop to exit
 
 msg:
-    db "Welcome to BIOS_PONG game.", 10, 10, 13, "During game, press ESC to reset.", 10,13, "Press ENTER now to continue.", 10, 13, 0; Null-terminated message string
+    db 10,10,13,"This is a PONG-style animation. ", 10, 10, 13, "Written in ASSEMBLY. The program runs in 16-bit REAL mode and uses pure-BIOS interrupts.", 10, 10, 13, "Enjoy!",0
 
 error_msg:
-    db "Error reading sector.", 10, 0 ; Null-terminated error message string
+    db "Error reading sector.", 10, 0
 
-times 510-($-$$) db 0     ; Fill the rest of the sector with zeros
-dw 0xAA55                 ; Boot signature END OF MASTER BOOT RECORD
+times 510-($-$$) db 0
+dw 0xAA55
+
