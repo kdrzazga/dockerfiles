@@ -13,23 +13,10 @@ BIOS_RESET	equ 0x0000
 
 print_msg
 
-wait_for_key:
-    ; Wait for a key press
-    mov ah, BIOS_READ_KEYBOARD
-    int 0x16
-
-    cmp al, ENTER_KEY
-    je read_second_sector
-
-    cmp al, ESC_KEY 
-    je reset 
-
-    jmp wait_for_key
-
 read_second_sector:
     ; Read the second sector (cylinder 0, head 0, sector 2)
     mov ah, BIOS_READ_SECTOR
-    mov al, 10          ; Number of sectors to read
+    mov al, 2          ; Number of sectors to read
     mov ch, 0          ; Cylinder 0
     mov cl, 2          ; Sector 2
     mov dh, 0          ; Head 0
@@ -67,7 +54,7 @@ done_error:
     jmp $              ; Infinite loop to exit
 
 msg:
-    db "Press:", 10, 13, " ENTER to continue.", 10, 13, 0
+    db "This is data from sector 1 (Master Boot Record).", 10, 13, 0
 
 error_msg:
     db "Error reading sector.", 10, 0
