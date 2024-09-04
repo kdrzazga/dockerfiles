@@ -11,14 +11,10 @@ RUN mkdir biospong
 RUN mkdir bin
 RUN mkdir edu
 
-COPY sector2/*.asm sector2/.
+COPY compile_edu.sh compile_edu.sh
 COPY raw-bios-modes/*.asm raw-bios-modes/.
-COPY biospong/*.asm biospong/.
-COPY edu/*.asm edu/.
-
-RUN nasm -f bin sector2/mbr.asm -o mbr.bin
-RUN nasm -f bin sector2/sector2.asm -o sector2.bin
-RUN cat mbr.bin sector2.bin > bin/sector2.img
+COPY biospong/. biospong/.
+COPY edu/. edu/.
 
 RUN nasm -f bin raw-bios-modes/mbr.asm -o mbr.bin
 RUN nasm -f bin raw-bios-modes/sector2plus.asm -o sector2.bin
@@ -29,10 +25,5 @@ RUN nasm -f bin biospong/pong.asm -o sectors23.bin
 RUN nasm -f bin biospong/pong2.asm -o sectors45.bin
 RUN cat mbr.bin sectors23.bin sectors45.bin > bin/biospong.img
 
-RUN nasm -f bin edu/mbr.asm -o mbr.bin
-RUN nasm -f bin edu/sector23.asm -o sector23.bin
-RUN nasm -f bin edu/sector45.asm -o sector45.bin
-RUN nasm -f bin edu/sector67.asm -o sector67.bin
-RUN nasm -f bin edu/sector89.asm -o sector89.bin
-RUN cat mbr.bin sector23.bin sector45.bin sector67.bin sector89.bin > bin/edu.img
+RUN source compile_edu.sh
 CMD ["bash"]
