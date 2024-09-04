@@ -1,5 +1,10 @@
 BIOS_TELETYPE_OUT	equ 0x0E
 
+STAT1				equ 0xfdff
+STAT2				equ 0xfe00
+STAT3				equ 0xfe01
+STAT4				equ 0xfe02
+
 %macro delay0xffff 0
 		push cx
 		mov cx, 0x10         ; Adjust this value for longer/shorter delays
