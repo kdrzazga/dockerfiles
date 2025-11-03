@@ -16,8 +16,9 @@ irq2:	ldx #$00
 petla:	lda tekst, x
 		sta $0400, x
 		inx
-		cpx #$0a
+		cpx #(end-tekst)
 		bne petla
 		jmp $ea31
 
 tekst:	.text "robin hood"
+end:	.byte 0

@@ -7,8 +7,10 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 			.var picture = LoadBinary("nicecouple2.kla", BF_KOALA)
-
-start:  	lda #$38
+			.var picture2 = LoadBinary("nicecoupleClosed.kla", BF_KOALA)
+			
+start:  	
+			lda #$38
 			sta $d018
 			lda #$d8
 			sta $d016
@@ -26,16 +28,32 @@ loop1:		.for (var i=0; i<4; i++) {
 			}
 			inx
 			bne loop1
-			
+
 WAIT_KEY:
 			jsr $FFE4        // Calling KERNAL GETIN 
 			beq WAIT_KEY
+			
+			ldx #0
+loop2:		.for (var i=0; i<4; i++) {
+				lda colorRam2+i*$100,x
+				sta $d800+i*$100,x
+			}
+			inx
+			bne loop2
 			rts
 
+			
+.print "End Program code: " + *
+
 *=$0c00	"ScreenRam"; 			.fill picture.getScreenRamSize(), picture.getScreenRam(i)
-*=$1c00	"ColorRam:"; colorRam: 	.fill picture.getColorRamSize(), picture.getColorRam(i)
-*=$2000	"Bitmap";				.fill picture.getBitmapSize(), picture.getBitmap(i)
-
-
+.print "End ScreenRam 1: " + *
+*=$1c00	"ColorRam:"; colorRam: 	.fill picture2.getColorRamSize(), picture2.getColorRam(i)
+.print "End ColorRam 1: " + *
+*=$2000	"Bitmap";				.fill picture2.getBitmapSize(), picture2.getBitmap(i)
+.print "End bitmap 1: " + *
+*=16200 "ColorRam2:"; colorRam2: 	.fill picture.getColorRamSize(), picture.getColorRam(i)
+.print "End ColorRam 2: " + *
+*=$4400	"Bitmap2";				.fill picture.getBitmapSize(), picture.getBitmap(i)
+.print "End bitmap 2: " + *
 
 

@@ -6,7 +6,8 @@
 //This code displays the Koala picture in the file picture.prg
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
-			.var picture = LoadBinary("nicecouple2.kla", BF_KOALA)
+			.var picture = LoadBinary("picture.prg", BF_KOALA)
+			.print picture.getBitmapSize()
 
 start:  	lda #$38
 			sta $d018
@@ -26,16 +27,28 @@ loop1:		.for (var i=0; i<4; i++) {
 			}
 			inx
 			bne loop1
-			
-WAIT_KEY:
-			jsr $FFE4        // Calling KERNAL GETIN 
-			beq WAIT_KEY
-			rts
+			jmp *
 
 *=$0c00	"ScreenRam"; 			.fill picture.getScreenRamSize(), picture.getScreenRam(i)
-*=$1c00	"ColorRam:"; colorRam: 	.fill picture.getColorRamSize(), picture.getColorRam(i)
-*=$2000	"Bitmap";				.fill picture.getBitmapSize(), picture.getBitmap(i)
+*=$1c00	"ColorRam:"	; colorRam: .fill picture.getColorRamSize(), picture.getColorRam(i) //1024 bytes
 
+*=$2000	"Bitmap";				//.fill picture.getBitmapSize(), picture.getBitmap(i)
+.fill 00,32
+.fill 01,32
+.fill 02,32
+.fill 03,32
+.fill 04,32
+.fill 05,32
+.fill 06,32
+.fill 07,32
+.fill 08,32
+.fill 09,32
+.fill 10,32
+.fill 11,32
+.fill 12,32
+.fill 13,32
+.fill 14,32
+.fill 15,32
 
 
 
