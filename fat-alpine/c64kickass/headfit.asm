@@ -227,15 +227,15 @@ reset_middle_bars:
 // Sprite bitmaps 6 x 64 .bytes
 *=$0A00
 // sprite #0 - cover
-	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+	.byte $0a, $FE, $01, $0B, $FC, $03, $1F, $FC, $01, $1F, $F8, $02, $0F, $FB, $80, $07, $FE, $00, $17, $F8, $00
+	.byte $1F, $F9, $02, $06, $Fe, $03, $0e, $FC, $00, $08, $F8, $00, $0F, $FE, $00, $07, $F8, $00, $03, $F0, $00
+	.byte $07, $FC, $03, $0F, $F0, $03, $0F, $F8, $03, $07, $FC, $00, $03, $F8, $00, $07, $F8, $00, $07, $FC, $00
 	.byte 0
 
 // sprite #1 - another cover
-	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+	.byte $0a, $FE, $01, $0B, $FC, %10000000, $1F, $FC, $00, $1F, $F8, $00, $0F, $FB, $80, $07, $FE, $00, $17, $F8, $00
+	.byte $1F, $F9, $01, $06, $Fe, %10000000, $0e, $FC, $00, $08, $F8, $00, $0F, $FE, $00, $07, $F8, $00, $03, $F0, $00
+	.byte $07, $FC, $01, $0F, $F0, %10000000, $0F, $F8, $00, $07, $FC, $00, $03, $F8, $00, $07, $F8, $00, $07, $FC, $00
 	.byte 0
 
 // sprite #2
