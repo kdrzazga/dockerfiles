@@ -6,8 +6,8 @@
 *=$0801
 
 .byte $0d,$08 //signature
-.byte 10 // (line number 10)
-.byte $00,$9e //sys
+.word 2061 // (line number 2061)
+.byte $9e //sys
 .text "2061"
 .byte 0,0,0
 
