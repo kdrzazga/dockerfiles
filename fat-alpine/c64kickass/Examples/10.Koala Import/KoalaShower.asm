@@ -6,13 +6,21 @@
 //This code displays the Koala picture in the file picture.prg
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
+//KOA file (size 10003 bytes) has:
+//
+//1) 2 byte header
+//2) 8000 bytes pixel data - half byte for each pixel 200x160 = 32000 pixels * 0.5 byte = 8000 B 
+//3) 1000 byte character data (that I ignore)
+//4) 1000 byte color data
+//5) 1 byte background color
+
 			.var picture = LoadBinary("nicecouple.kla", BF_KOALA)
 
 start:  	lda #$38
 			sta $d018
 			lda #$d8
 			sta $d016
-			lda #$3b
+			lda #$3b   
 			sta $d011
 			lda #BLACK
 			sta $d020

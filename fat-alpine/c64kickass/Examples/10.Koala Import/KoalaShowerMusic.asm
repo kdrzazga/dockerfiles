@@ -7,10 +7,11 @@
 			.var picture = LoadBinary("cwaniaczki.kla", BF_KOALA)
 			//.var picture = LoadBinary("brownnoble.kla", BF_KOALA)
 
-start:  	lda #$38
-			sta $d018
-			lda #$d8
-			sta $d016
+start:  	lda #%00111000
+			sta $d018 //Memory setup register
+			lda #%11011000
+			sta $d016 //Screen control register #2. Bits #0-#2: Horizontal raster scroll. Bit #3: Screen width; 0 = 38 columns; 1 = 40 columns. Bit #4: 1 = Multicolor mode on.
+
 			lda #%00111011
 			sta $d011
 			lda #BLACK
