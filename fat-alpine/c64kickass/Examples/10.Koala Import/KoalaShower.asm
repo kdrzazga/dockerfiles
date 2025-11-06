@@ -6,7 +6,7 @@
 //This code displays the Koala picture in the file picture.prg
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
-			.var picture = LoadBinary("nicecouple2.kla", BF_KOALA)
+			.var picture = LoadBinary("nicecouple.kla", BF_KOALA)
 
 start:  	lda #$38
 			sta $d018

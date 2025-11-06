@@ -4,7 +4,8 @@ BasicUpstart2(start)
 //			SID Player (Single speed)
 //---------------------------------------------------------
 //---------------------------------------------------------
-			.var music = LoadSid("Nightshift.sid")		//<- Here we load the sid file
+			//.var music = LoadSid("Nightshift.sid")		//<- Here we load the sid file
+			.var music = LoadSid("Warrior_of_Ras_II-Kaiv.sid")
 
 start:		lda #$00
 			sta $d020
