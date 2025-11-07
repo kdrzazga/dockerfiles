@@ -1,3 +1,4 @@
+//used by 3sprites
 init_sprites:
 	ldx #$00
 petla:	lda sprite_colors, x
@@ -20,8 +21,8 @@ petla:	lda sprite_colors, x
     sta $07f9
 
 	//sprite2:
-    // $82 * $40 = $2080
-    lda #$82
+    // $87 * $40
+    lda #$87
     sta $07fa
 	
 	rts
@@ -53,7 +54,7 @@ sprite1:
 .byte $30,$00,$04,$1f,$ff,$f8,$00,$00
 .byte $00,$00,$00,$00,$00,$00,$00,$01
 
-*=$2080 "sprite 2 monster"
+*=($87 * $40) "sprite 2 monster"
 sprite2:
 
 .byte $00,$00,$00,$00,$1f,$80,$01,$ff
