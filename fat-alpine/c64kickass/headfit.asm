@@ -1,9 +1,9 @@
 .const counter = $fa
-// 10 SYS2061
-*=$0801
-	.byte $0B, $08, $0A, $00, $9E, $32, $30, $36, $31, $00, $00, $00
+//#import "basic-code-hf-load.asm"
+BasicUpstart2(main)
 
-*=$080d
+*=2286-$6a "main"
+main:
 	// set to 25 line text mode and turn on the screen
 	lda #$1B
 	sta $D011
@@ -60,12 +60,6 @@
 	inx
 	cpx #$04
 	bne *-24
-
-	// set sprite multicolors
-	lda #$02
-	sta $d025
-	lda #$06
-	sta $d026
 
 	// colorize sprites
 	lda #$0
@@ -238,7 +232,7 @@ reset_middle_bars:
 	
 
 // Sprite bitmaps 6 x 64 .bytes
-*=$0A00
+*=$0A00 "sprite bitmaps"
 // sprite #0 - bar1
 	.byte $0a, $FE, $01, $0B, $FC, $03, $1F, $FC, $01, $1F, $F8, $02, $0F, $FB, $80, $07, $FE, $00, $17, $F8, $00
 	.byte $1F, $F9, $02, $06, $Fe, $03, $0e, $FC, $00, $08, $F8, $00, $0F, $FE, $00, $07, $F8, $00, $03, $F0, $00
@@ -288,8 +282,8 @@ reset_middle_bars:
 	.byte 0
 
 
-// Character bitmap definitions 2k
-*=$2000
+*=$2000 "Character bitmap definitions 2k"
+
 	.byte	$3C, $66, $6E, $6E, $60, $62, $3C, $00
 	.byte	$18, $3C, $66, $7E, $66, $66, $66, $00
 	.byte	$7C, $66, $66, $7C, $66, $66, $7C, $00
@@ -547,8 +541,7 @@ reset_middle_bars:
 	.byte	$0F, $0F, $0F, $0F, $FF, $FF, $FF, $FF
 	.byte	$0F, $0F, $0F, $0F, $F0, $F0, $F0, $F0
 
-// screen character data
-*=$2800
+*=$2800 "screen character data"
 	.byte	$e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0
 	.byte	$e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0
 	.byte	$e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $a0, $a0, $aa, $a0, $88, $85, $81, $84, $e0, $93, $88, $89, $94, $e0, $aa, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0, $e0
@@ -575,8 +568,7 @@ reset_middle_bars:
 	.byte	$20, $20, $20, $20, $6d, $20, $20, $5d, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20
 	.byte	$20, $20, $20, $20, $6d, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20, $20
 
-// screen color data
-*=$2be8
+*=$2be8 "screen color data"
 	.byte	$0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b
 	.byte	$0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b
 	.byte	$0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b, $0b

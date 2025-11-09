@@ -24,7 +24,7 @@
 
 .byte 246, 0
 .byte  print,32, quote
-.text ""
+.text "TRIBUTE TO BLACKBOX CART"
 .byte quote
 .byte $00,0,$19
 
@@ -36,13 +36,13 @@
 
 .byte 248, 0
 .byte  print,32, quote, left_arrow
-.text ""
+.text "HF IS THE FAMOUS BLACK BOX COMMAND TO "
 .byte quote
 .byte $00,0,$19
 
 .byte 249, 0
 .byte  print,32, quote
-.text ""
+.text "MANIPULATE DATASSETE HEADER"
 .byte quote
 .byte $00,0,$19
 
@@ -54,7 +54,7 @@
 
 .byte 251, 0
 .byte  print,32, quote
-.text ""
+.text "LET'S RUN IT NOW"
 .byte quote
 .byte $00,0,$19
 
@@ -65,8 +65,8 @@
 .byte $00,0,$19
 
 .byte 253, 0
-.byte  print,32, quote
-.text ""
+.byte  print,32, quote, left_arrow
+.text "HF"
 .byte quote
 .byte $00,0,$19
 
@@ -80,7 +80,7 @@
 
 .byte 255, 0
 .byte sys
-.text " 2188"
+.text " 2286"
 .byte $00,$19
 .byte $00, $00
 
