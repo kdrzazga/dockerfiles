@@ -93,6 +93,7 @@
 
 	lda #120
 	sta $d001	// #0. sprite Y
+	lda #122
 	sta $d003	// #1. sprite Y
 
 	lda #162
@@ -122,7 +123,7 @@
 	sta $d01c
 
 	// set screen-sprite priority flags
-	lda #%00111111
+	lda #%11111111
 	sta $d01b
 
 	// set sprite pointers
@@ -178,7 +179,7 @@ loop3:  cmp $d012 // the next raster line so next time we
 main1:
 
 move_bars:
-	
+
 	inc $d001
 	inc $d003
 	inc $d005
@@ -223,14 +224,14 @@ reset_top_bars:
 	
 reset_bottom_bars:
 
-	lda #(162-43)
+	lda #(162-42)
 	sta $d007	// #3. sprite Y
 	sta $d00b	// #5. sprite Y
 	jmp move_bars
 
 reset_middle_bars:
 
-	lda #(162-43)
+	lda #(162-42)
 	sta $d00d	// #6. sprite Y
 	sta $d00f	// #7. sprite Y
 	jmp move_bars
