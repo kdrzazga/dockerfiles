@@ -17,7 +17,7 @@
 			.var picture1 = LoadBinary("nice-couple.kla", BF_KOALA)
 			.var picture2 = LoadBinary("tuffguy.kla", BF_KOALA)
 
-start:  	lda #%00111000
+start:  	lda #%00111000 // old nibble %0011 * 1024 = $c00 -> ScreenRam //young nibble %1000 * 1024 = $2000 -> Bitmap 
 			sta $d018
 			lda #%11011000
 			sta $d016 //Screen control register #2. Bits #0-#2: Horizontal raster scroll. Bit #3: Screen width; 0 = 38 columns; 1 = 40 columns. Bit #4: 1 = Multicolor mode on.
