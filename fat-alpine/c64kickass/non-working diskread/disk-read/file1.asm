@@ -4,9 +4,9 @@
 .const KernalLOAD = $ffd5
 
 //file
-.const logicalNumber = 1
+.const logicalNumber = 2
 .const deviceNumber = 8
-.const secondaryAddres = 0
+.const secondaryAddress = 0
 .const KernalSETLFS = $ffba
 .const KernalSETNAM = $ffbd
 :BasicUpstart2(start)
@@ -32,29 +32,29 @@ start:
 
     lda #logicalNumber
     ldx #deviceNumber
-    ldy #81
+    ldy #secondaryAddress
     jsr KernalSETLFS
 
-    lda #(end_filename - filename)
+    lda #4
     ldx #<filename
     ldy #>filename
     jsr KernalSETNAM
 
     lda #0
     ldx #$00
-    ldy #$0a
+    ldy #$04
     jsr KernalLOAD
 
 WAIT_KEY2:
             jsr KernalGetInput
             beq WAIT_KEY2
-    jmp $0a00
+    rts
 
     tekst:	.text "Manfred said prayers. As usual they were addressed to the Holy Lady. Who else than the Virgin Mary, his order took the name from, could help him? He was a northern crusader, a Teutonic Knight. His cape was white and as clean the Holy Virgin."
             .fill 14, 32
     end:	.byte 0
     filename:
-        .text "file2"
+        .text "text"
     end_filename: .byte 0
 
     .print "End file1: $" + toHexString(*) + " [" + * +"]"

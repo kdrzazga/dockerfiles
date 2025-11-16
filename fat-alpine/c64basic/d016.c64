@@ -1,5 +1,6 @@
 0 rem program from commodore & amiga(11) Nov 1992, page 19
 1 rem (c) robert kuna
+2 rem $D016 - Screen control register #2. Bits:  #0-#2: Horizontal raster scroll.
 100 for a=0 to 31: read d: poke 49408+a, d: next
 105 a=49152
 110 read d: if d=999 then 120
