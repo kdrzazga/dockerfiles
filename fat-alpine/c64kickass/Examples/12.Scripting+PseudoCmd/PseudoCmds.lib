@@ -1,0 +1,59 @@
+#importonce
+
+//------------------------------------
+// Basic commands
+//------------------------------------
+.pseudocommand poke arg1:arg2 {
+	lda arg2
+	sta arg1
+}
+
+.pseudocommand incLim tar:lim {
+	inc tar
+	lda tar
+	cmp lim
+	bne exit
+	lda #0
+	sta tar	
+exit:
+}
+
+
+
+.pseudocommand mov16 src:tar {
+	lda src
+	sta tar
+	lda _16bit_nextArgument(src)
+	sta _16bit_nextArgument(tar)
+}
+
+.function _16bit_nextArgument(arg) {
+	.if (arg.getType()==AT_IMMEDIATE) .return CmdArgument(arg.getType(),>arg.getValue())
+	.return CmdArgument(arg.getType(),arg.getValue()+1)
+}
+
+
+
+
+//------------------------------------
+// Irq commands
+//------------------------------------
+.pseudocommand irqStart {
+		pha
+		txa
+		pha
+		tya
+		pha
+		poke $d019, 255
+}
+
+.pseudocommand irqEnd line : addr {
+		.if (line.getType()!=AT_NONE) 	poke $d012 : line
+		.if (addr.getType()!=AT_NONE) 	poke $fffe : addr
+		pla
+		tay
+		pla
+		tax
+		pla
+		rti
+}
