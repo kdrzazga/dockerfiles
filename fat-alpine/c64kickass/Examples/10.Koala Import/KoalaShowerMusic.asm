@@ -1,9 +1,14 @@
-.var music = LoadSid("Everlasting_Love.sid")
+// does not work.var music = LoadSid("IgnacioBergarecheCamelot_Warriors.sid")
+// does not work.var music = LoadSid("Dragon_Ninja.sid")
+.var music = LoadSid("Danger_Castle_64.sid")
+//.var music = LoadSid("Popcorn.sid")
 //.var music = LoadSid("Bach.sid")
 //.var music = LoadSid("Warrior_of_Ras_II-Kaiv.sid")
 :BasicUpstart2(start)
 
-			.var picture = LoadBinary("nice-couple.kla", BF_KOALA)
+			.var picture = LoadBinary("smokeu4.prg", BF_KOALA)
+			//.var picture = LoadBinary("RetroSfera19.kla", BF_KOALA)
+			//.var picture = LoadBinary("nice-couple.kla", BF_KOALA)
 			//.var picture = LoadBinary("cwaniaczki.kla", BF_KOALA)
 			//.var picture = LoadBinary("brownnoble.kla", BF_KOALA)
 

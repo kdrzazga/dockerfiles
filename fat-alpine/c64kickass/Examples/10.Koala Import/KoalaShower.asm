@@ -14,7 +14,7 @@
 //4) 1000 byte color data
 //5) 1 byte background color
 
-			.var picture = LoadBinary("nicecouple.kla", BF_KOALA)
+			.var picture = LoadBinary("skom.kla", BF_KOALA)
 
 start:  	lda #$38
 			sta $d018
