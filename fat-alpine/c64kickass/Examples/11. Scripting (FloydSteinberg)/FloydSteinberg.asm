@@ -1,15 +1,24 @@
 BasicUpstart2(start)
 
+
+		.var picRS = floydSteinberg("RetroSfera19.jpg")
+		.var picCamel = floydSteinberg("camel.jpg")
+		
+
 // 			Graphic conversion with FloydSteinberg
 
-start:	sei
+start:	
+		lda #(%10010100 + 3) // 3 -> VIC-bank = $0000 - $3fff
+		sta $dd00
 		lda #%00111011 //Bits #0-#2: Vertical raster scroll. Bit #3: Screen height; 0 = 24 rows; 1 = 25 rows. Bit #4: 0 = Screen off, complete screen is covered by border; 1 = Screen on, normal screen contents are visible. Bit #5: 0 = Text mode; 1 = Bitmap mode.
-		sta $d011
-		lda #%00011000
-		sta $d018
+		sta $d011 //enable bitmap mode
+		
+		lda #$1a //  1-> screen memory at $400-$7fff, a -> charset address = $2800-$2fff
+		sta $d018 //point to bitmap memory
+
 		lda #BLACK
 		sta $d020
-		ldx #0
+		ldx #0	//memcopy counter
 		lda #BLACK | (WHITE<<4)
 loop:	sta $0400,x
 		sta $0500,x
@@ -19,9 +28,14 @@ loop:	sta $0400,x
 		bne loop
 		jmp *
 
-		*=$2000 "Picture"
-		.var pic1 = floydSteinberg("camel2.jpg")
-		.fill 40*200, pic1.get(i)
+		.print "End code $" + toHexString(*)
+
+		*=$3f40 "Picutre camel"
+		.fill 40*200, picCamel.get(i)
+		
+		*=$2000 "Picture RetroSfera"
+		.fill 40*200, picRS.get(i)
+		
 
 
 //--------------------------------------------------------------------------
