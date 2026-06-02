@@ -1,6 +1,6 @@
 // does not work.var music = LoadSid("IgnacioBergarecheCamelot_Warriors.sid")
 // does not work.var music = LoadSid("Dragon_Ninja.sid")
-.var music = LoadSid("Danger_Castle_64.sid")
+.var music = LoadSid("Przybiezeli.sid")
 //.var music = LoadSid("Popcorn.sid")
 //.var music = LoadSid("Bach.sid")
 //.var music = LoadSid("Warrior_of_Ras_II-Kaiv.sid")
